@@ -1,14 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {Text} from 'react-native-elements';
+import * as S from './styles';
 
 const SignIn = () => {
-  return (
-    <View>
-      <Text>SignIn</Text>
-    </View>
-  );
+  return <S.Wrapper></S.Wrapper>;
 };
-
-const styles = StyleSheet.create({});
 
 export default SignIn;
