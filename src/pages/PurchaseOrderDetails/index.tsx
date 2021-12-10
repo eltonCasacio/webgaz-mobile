@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-const RecoveryPasswordDetails = () => {
+const PurchaseOrderDetails = () => {
   return (
     <View>
-      <Text>RecoveryPasswordDetails</Text>
+      <Text>PurchaseOrderDetails</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({});
 
-export default RecoveryPasswordDetails;
+export default PurchaseOrderDetails;

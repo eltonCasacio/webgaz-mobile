@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
+import * as S from './styles';
 
 const RecoveryPassword = () => {
   return (
-    <View>
+    <S.Wrapper>
       <Text>RecoveryPassword</Text>
-    </View>
+    </S.Wrapper>
   );
 };
 
