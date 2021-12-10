@@ -16,9 +16,17 @@ export default function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SingIn">
-        <Stack.Screen name="Home" component={Main} />
-        <Stack.Screen name="SingIn" component={SingIn} />
-        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen
+          name="SingIn"
+          component={SingIn}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="ProfileUser" component={ProfileUser} />
         <Stack.Screen name="PurchaseOrder" component={PurchaseOrder} />
         <Stack.Screen name="RecoveryPassword" component={RecoveryPassword} />
