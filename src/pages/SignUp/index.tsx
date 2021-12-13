@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import * as S from './styles';
 import {Input} from 'react-native-elements';
 import Buttom from '../../components/Buttom';
+import {useNavigation} from '@react-navigation/native';
 
-const SignUp = ({navigation}) => {
+const SignUp: React.FC = () => {
+  const navigation = useNavigation();
+
   const [name, setName] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [telephone, setTelephone] = useState('');
@@ -86,7 +89,7 @@ const SignUp = ({navigation}) => {
 
       <S.Footer>
         <Buttom title="Confirmar" callback={() => alert('Cadastrar')} />
-        <S.GoBack onPress={() => navigation.navigate('SingIn')}>
+        <S.GoBack onPress={() => navigation.goBack()}>
           <S.GoBackText>Voltar</S.GoBackText>
         </S.GoBack>
       </S.Footer>

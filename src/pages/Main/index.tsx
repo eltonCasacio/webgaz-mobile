@@ -1,14 +1,20 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import Button from '../../components/Buttom';
+import * as S from './styles';
+import {useAuth} from '../../contexts/auth';
+import {View, Text} from 'react-native';
 
 const Main = () => {
+  const {signOut, user} = useAuth();
   return (
-    <View>
-      <Text>Main</Text>
-    </View>
+    <S.Wrapper>
+      <View>
+        <Text>{user.name}</Text>
+        <Text>{user.email}</Text>
+      </View>
+      <Button title="Sair" callback={signOut} />
+    </S.Wrapper>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default Main;
