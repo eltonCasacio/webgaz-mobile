@@ -33,10 +33,7 @@ export const AuthProvider: React.FC = ({children}) => {
 
     api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
-    await AsyncStorage.setItem(
-      '@webgaz:user',
-      JSON.stringify(response.user),
-    );
+    await AsyncStorage.setItem('@webgaz:user', JSON.stringify(response.user));
     await AsyncStorage.setItem('@webgaz:token', response.token);
   }
 
@@ -51,12 +48,12 @@ export const AuthProvider: React.FC = ({children}) => {
         '@webgaz:token',
       ]);
 
-      const storageUse = storageData[0][1];
+      const storageUser = storageData[0][1];
       const storageToken = storageData[0][1];
 
-      if (storageUse && storageToken) {
+      if (storageUser && storageToken) {
         api.defaults.headers['Authorizarion'] = `Bearer ${storageToken}`;
-        setUser(JSON.parse(storageUse));
+        setUser(JSON.parse(storageUser));
         setLoading(false);
       }
     }

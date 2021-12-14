@@ -9,10 +9,8 @@ import Loading from '../components/Loading';
 const Routes: React.FC = () => {
   const {signed, loading} = useAuth();
 
-  if (loading) {
-    return <Loading size="small" color="#f00" />;
-  }
-  
+  if (loading) return <Loading size="small" color="#f00" />;
+
   return signed ? <AppRoutes /> : <AuthRoutes />;
 };
 

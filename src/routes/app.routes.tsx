@@ -12,8 +12,8 @@ const AppRoutes: React.FC = () => (
   <AppStack.Navigator
     screenOptions={{
       headerStyle: {backgroundColor: '#ff0'},
-      headerTintColor: '#f00',
-      headerTitleStyle: {fontWeight: 'bold'},
+      headerTintColor: '#383838',
+      // headerTitleStyle: {fontWeight: 'bold'},
       headerTitleAlign: 'center',
     }}>
     <AppStack.Screen name="Main" component={Main} />

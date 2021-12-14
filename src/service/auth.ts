@@ -9,24 +9,21 @@ interface Response {
 }
 
 export async function signIn({username, password}): Promise<Response> {
-  return {
-    token: 'jfhedjgrj45kgjdnfig78',
-    user: {
-      name: 'Elton',
-      email: username,
-    },
-  };
+  console.log('INICIO funcao LOGIN::', username, password);
 
-  // try {
-  //   const res = await api.post('signing', {username, password});
-  //   return {
-  //     token: res.data.token || 'token',
-  //     user: res.data.user || {
-  //       name: 'Elton',
-  //       email: 'ton@mail',
-  //     },
-  //   };
-  // } catch (error) {
-  //   console.error('Erro ao tentar realizar signIn');
-  // }
+  try {
+    const {data} = await api.post('signin', {
+      email: 'teste@teste.com',
+      password: '123',
+    });
+    return {
+      token: data?.token,
+      user: {
+        name: username,
+        email: username,
+      },
+    };
+  } catch (error) {
+    console.error('Erro ao tentar realizar signIn');
+  }
 }

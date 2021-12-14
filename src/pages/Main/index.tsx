@@ -6,13 +6,18 @@ import {View, Text} from 'react-native';
 
 const Main = () => {
   const {signOut, user} = useAuth();
+
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
     <S.Wrapper>
       <View>
-        <Text>{user.name}</Text>
-        <Text>{user.email}</Text>
+        <Text>Usuário: {user.name}</Text>
+        <Text>E-mail: {user.email}</Text>
       </View>
-      <Button title="Sair" callback={signOut} />
+      <Button title="Sair" callback={handleSignOut} />
     </S.Wrapper>
   );
 };
