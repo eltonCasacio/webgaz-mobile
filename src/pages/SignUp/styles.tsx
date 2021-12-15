@@ -1,4 +1,7 @@
 import styled from 'styled-components/native';
+import {Form as Unform} from '@unform/mobile'
+
+export const Form = styled(Unform)``
 
 export const Wrapper = styled.ScrollView`
   flex: 1;

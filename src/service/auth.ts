@@ -1,4 +1,5 @@
-import api from '../service/api';
+import API from '../service/api';
+import {responseMessage} from '../utils';
 
 interface Response {
   token: string;
@@ -9,12 +10,10 @@ interface Response {
 }
 
 export async function signIn({username, password}): Promise<Response> {
-  console.log('INICIO funcao LOGIN::', username, password);
-
   try {
-    const {data} = await api.post('signin', {
-      email: 'teste@teste.com',
-      password: '123',
+    const {data} = await API.post('signin', {
+      email: username,
+      password: password,
     });
     return {
       token: data?.token,
@@ -24,6 +23,6 @@ export async function signIn({username, password}): Promise<Response> {
       },
     };
   } catch (error) {
-    console.error('Erro ao tentar realizar signIn');
+    responseMessage('Erro ao tentar realizar Login', 'error');
   }
 }
