@@ -4,7 +4,7 @@ export const Wrapper = styled.TouchableOpacity`
   width: 100%;
   background-color: #f9fc42;
   border-radius: 10px;
-  border: solid 2px #c2c50049;
+  border: solid 2px #05000028;
   padding: 5px;
   margin: 10px 0;
 `;

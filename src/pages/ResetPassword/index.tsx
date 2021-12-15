@@ -1,18 +1,28 @@
 import React from 'react';
 import {useState} from 'react';
 import {Input} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Buttom from '../../components/Buttom';
 import MyLink from '../../components/MyLink';
 import {useNavigation} from '@react-navigation/native';
 import * as S from './styles';
+import {resetPassword} from '../../service/resetPassword';
 
-const RecoveryPassword: React.FC = () => {
+const ResetPassword: React.FC = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
+  const [validated, setValidated] = useState(false);
 
-  const handleResetPassword = () => {
-    alert(email);
+  const handleResetPassword = async () => {
+    if (isValid()) {
+      const res = await resetPassword({email});
+      console.log('reset senha', res);
+      alert(JSON.stringify(res));
+    }
+  };
+
+  const isValid = () => {
+    setValidated(true);
+    return !!email;
   };
 
   return (
@@ -24,8 +34,10 @@ const RecoveryPassword: React.FC = () => {
           autoCompleteType={false}
           keyboardType="email-address"
           placeholder="E-mail"
-          leftIcon={<Icon name="at" size={18} color="#9d9d9d" />}
           onChangeText={text => setEmail(text)}
+          style={
+            validated && email === '' && {borderWidth: 1, borderColor: 'red'}
+          }
         />
 
         <S.Info>Será enviada uma nova senha para seu email</S.Info>
@@ -39,4 +51,4 @@ const RecoveryPassword: React.FC = () => {
   );
 };
 
-export default RecoveryPassword;
+export default ResetPassword;

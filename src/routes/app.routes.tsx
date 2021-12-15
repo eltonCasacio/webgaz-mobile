@@ -9,14 +9,12 @@ import PurchaseOrderDetails from '../pages/PurchaseOrderDetails';
 const AppStack = createNativeStackNavigator();
 
 const AppRoutes: React.FC = () => (
-  <AppStack.Navigator
-    screenOptions={{
-      headerStyle: {backgroundColor: '#ff0'},
-      headerTintColor: '#383838',
-      // headerTitleStyle: {fontWeight: 'bold'},
-      headerTitleAlign: 'center',
-    }}>
-    <AppStack.Screen name="Main" component={Main} />
+  <AppStack.Navigator screenOptions={{headerShown: false}}>
+    <AppStack.Screen
+      name="Main"
+      component={Main}
+      options={{title: 'Tabela de Preços'}}
+    />
     <AppStack.Screen name="ProfileUser" component={ProfileUser} />
     <AppStack.Screen name="PurchaseOrder" component={PurchaseOrder} />
     <AppStack.Screen

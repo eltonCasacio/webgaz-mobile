@@ -6,6 +6,7 @@ import {Input} from 'react-native-elements';
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
 import {useAuth} from '../../contexts/auth';
+import { Alert } from 'react-native';
 
 const SignIn: React.FC = () => {
   const navigation = useNavigation();
@@ -21,7 +22,10 @@ const SignIn: React.FC = () => {
     setUsernameError(username ? '' : 'Campo obrigatório');
     setPasswordError(password ? '' : 'Campo obrigatório');
 
-    if (username && password) await signIn({username, password});
+    if (username && password) {
+      const res = await signIn({username, password});
+      Alert.alert('login', JSON.stringify(res))
+    }
   };
 
   return (
@@ -46,7 +50,7 @@ const SignIn: React.FC = () => {
         />
 
         <MyLink
-          screen="RecoveryPassword"
+          screen="ResetPassword"
           title="Esqueci minha senha"
           navigation={navigation}
         />

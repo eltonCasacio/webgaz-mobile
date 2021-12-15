@@ -29,7 +29,7 @@ type ResponseProps = {
 
 export async function signup(params: SignUpProps): Promise<ResponseProps> {
   try {
-    const res = await API.post('signup', params);
+    await API.post('signup', params);
     return responseMessage('Empresa cadastrada com sucesso', 'success');
   } catch (error) {
     return responseMessage('Erro ao cadastrar empresa', 'error');

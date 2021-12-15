@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import * as S from './styles';
-import {Input, Text} from 'react-native-elements';
+import {Input} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import Buttom from '../../components/Buttom';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {signup} from '../../service/signup';
 
 const SignUp: React.FC = () => {

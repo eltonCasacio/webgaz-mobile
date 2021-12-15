@@ -2,6 +2,7 @@ import React, {createContext, useEffect, useState, useContext} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as auth from '../service/auth';
 import api from '../service/api';
+import {responseMessage} from '../utils';
 
 type User = {
   name: string;
@@ -27,14 +28,18 @@ export const AuthProvider: React.FC = ({children}) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
-  async function signIn({username, password}) {
+  async function signIn({username, password}): Promise<any> {
     const response = await auth.signIn({username, password});
-    setUser(response.user);
 
-    api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
+    if (response) {
+      setUser(response.user);
+      api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
-    await AsyncStorage.setItem('@webgaz:user', JSON.stringify(response.user));
-    await AsyncStorage.setItem('@webgaz:token', response.token);
+      await AsyncStorage.setItem('@webgaz:user', JSON.stringify(response.user));
+      await AsyncStorage.setItem('@webgaz:token', response.token);
+    } else {
+      return responseMessage('Usuário não encontrado', 'error');
+    }
   }
 
   function signOut() {

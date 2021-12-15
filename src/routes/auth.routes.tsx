@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
-import RecoveryPassword from '../pages/RecoveryPassword';
+import ResetPassword from '../pages/ResetPassword';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -20,8 +20,8 @@ const AuthRoutes: React.FC = () => (
       options={{title: 'Criar Conta'}}
     />
     <AuthStack.Screen
-      name="RecoveryPassword"
-      component={RecoveryPassword}
+      name="ResetPassword"
+      component={ResetPassword}
       options={{title: 'Nova Senha'}}
     />
   </AuthStack.Navigator>
