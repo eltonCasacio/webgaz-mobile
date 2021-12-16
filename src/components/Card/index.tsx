@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import {CheckBox, Divider} from 'react-native-elements';
+import {StyleSheet} from 'react-native';
+import Button from '../../components/Buttom';
 import * as S from './styles';
-import {StyleSheet, View} from 'react-native';
-import {CheckBox, Divider, Input} from 'react-native-elements';
 
-type shippingProps = {
-  type: 'removal' | 'colocada';
-};
+import {purchaseOrder} from '../../service/Main';
 
 export default function Card({type, priceRemoval = 0, priceColocada = 0}) {
   const [shippingType, setShippingType] = useState('colocada');
@@ -22,9 +21,20 @@ export default function Card({type, priceRemoval = 0, priceColocada = 0}) {
     setTotal(sum);
   };
 
+  const handlePurchaseOrder = async () => {
+    const res = await purchaseOrder({
+      type,
+      shippingType,
+      liters,
+      total,
+    });
+
+    alert(JSON.stringify(res))
+  };
+
   useEffect(() => {
     calculateTotal();
-  }, [liters, removalChecked]);
+  }, [liters, removalChecked, priceRemoval, priceColocada]);
 
   return (
     <S.Wrapper style={styles.containerStyle}>
@@ -79,23 +89,23 @@ export default function Card({type, priceRemoval = 0, priceColocada = 0}) {
           />
         </S.ShippingType>
       </S.WrapperShippinType>
-      <Divider style={styles.Divider} />
+      <Button title="Realizar Pedido" callback={handlePurchaseOrder} />
     </S.Wrapper>
   );
 }
 
 const styles = StyleSheet.create({
   containerStyle: {
-    borderBottomWidth: 0,
-    elevation: 3,
+    borderStartWidth: 4,
+    borderColor: '#ff0000',
   },
   containeShippingStyle: {
-    backgroundColor: '#ff0',
+    backgroundColor: '#ede9e90',
     borderWidth: 0,
   },
   Divider: {
     backgroundColor: '#000',
     width: '100%',
-    marginBottom: 15,
+    marginBottom: 10,
   },
 });

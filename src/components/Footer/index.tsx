@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
   Wrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: 10,
+    paddingTop: 10,
     paddingRight: 10,
     paddingBottom: 10,
+    paddingLeft: 10,
+    backgroundColor: '#ffff009a',
   },
   Text: {
     fontSize: 18,
-    color: '#000',
+    color: '#0c0000',
   },
 });

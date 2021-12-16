@@ -1,29 +1,40 @@
-import React from 'react';
-import Button from '../../components/Buttom';
+import React, {useEffect, useState} from 'react';
 import * as S from './styles';
-import {useAuth} from '../../contexts/auth';
-
-import Card from '../../components/Card';
 import Footer from '../../components/Footer';
+import Card from '../../components/Card';
+import Title from '../../components/Title';
 
 const Main = ({navigation}) => {
-  const {signOut, user} = useAuth();
+  const [priceRemovalEtanol, setPriceRemovalEtanol] = useState(0);
+  const [priceColocadaEtanol, setPriceColocadaEtanol] = useState(0);
 
-  const handleSignOut = () => {
-    signOut();
-  };
+  const [priceRemovalGasComum, setPriceRemovalGasComum] = useState(0);
+  const [priceColocadaGasComum, setPriceColocadaGasComum] = useState(0);
 
-  const handlePurchaseOrder = () => {
-    signOut();
-  };
+  useEffect(() => {
+    setPriceRemovalEtanol(3.87);
+    setPriceColocadaEtanol(4.87);
+
+    setPriceRemovalGasComum(6.0);
+    setPriceColocadaGasComum(5.7);
+  }, []);
 
   return (
     <S.Wrapper>
+      <Title>TABELA DE PREÇOS</Title>
       <S.Cards>
-        <Card type="Etanol" priceRemoval={3.87} priceColocada={4} />
-        <Card type="Gasolina Comum" priceRemoval={4.87} priceColocada={4} />
+        <Card
+          type="Etanol"
+          priceRemoval={priceRemovalEtanol}
+          priceColocada={priceColocadaEtanol}
+        />
+        <Card
+          type="Gasolina Comum"
+          priceRemoval={priceRemovalGasComum}
+          priceColocada={priceColocadaGasComum}
+        />
       </S.Cards>
-      <Button title="Realizar Pedido" callback={handlePurchaseOrder} />
+
       <Footer navigation={navigation} />
     </S.Wrapper>
   );

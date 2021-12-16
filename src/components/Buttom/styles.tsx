@@ -2,15 +2,15 @@ import styled from 'styled-components/native';
 
 export const Wrapper = styled.TouchableOpacity`
   width: 100%;
-  background-color: #f9fc42;
-  border-radius: 10px;
-  border: solid 2px #05000028;
+  background-color: #ff0000;
+  border-radius: 15px;
+  border: solid 5px #ffffff55;
   padding: 5px;
-  margin: 10px 0;
 `;
 
 export const Text = styled.Text`
-  color: #505050;
+  color: #fdfdfc;
   font-size: 18px;
+  font-weight: bold;
   text-align: center;
 `;

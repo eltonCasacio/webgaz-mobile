@@ -2,13 +2,16 @@ import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
   align-items: center;
-  background-color: #ff0;
+  background-color: #ffff009a;
   padding: 5px 15px;
-  margin: 5px 0;
+  margin-bottom: 15px;
+  border-radius: 5px;
 `;
 
 export const Type = styled.Text`
   font-weight: bold;
+  color: #000;
+  font-size: 18px;
 `;
 
 export const WrapperLiters = styled.View`
@@ -20,6 +23,7 @@ export const WrapperLiters = styled.View`
 
 export const LitersText = styled.Text`
   font-weight: bold;
+  color: #000;
 `;
 
 export const Liters = styled.TextInput`
