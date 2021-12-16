@@ -2,18 +2,24 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {useAuth} from '../../contexts/auth';
 
-export default function Footer({navigation}) {
+export default function Footer({navigation, setBorder = ''}) {
   const {signOut} = useAuth();
 
   return (
     <View style={styles.Wrapper}>
-      <TouchableOpacity onPress={() => navigation.push('ProfileUser')}>
+      <TouchableOpacity
+        style={setBorder === 'ProfileUser' && styles.OnFocused}
+        onPress={() => navigation.push('ProfileUser')}>
         <Text style={styles.Text}>PERFIL</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.push('Main')}>
+      <TouchableOpacity
+        style={setBorder === 'Main' && styles.OnFocused}
+        onPress={() => navigation.push('Main')}>
         <Text style={styles.Text}>HOME</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.push('PurchaseOrder')}>
+      <TouchableOpacity
+        style={setBorder === 'PurchaseOrder' && styles.OnFocused}
+        onPress={() => navigation.push('PurchaseOrder')}>
         <Text style={styles.Text}>PEDIDOS</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={signOut}>
@@ -25,16 +31,21 @@ export default function Footer({navigation}) {
 
 const styles = StyleSheet.create({
   Wrapper: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 10,
+    paddingTop: 15,
     paddingRight: 10,
-    paddingBottom: 10,
+    paddingBottom: 15,
     paddingLeft: 10,
     backgroundColor: '#ffff009a',
   },
   Text: {
     fontSize: 18,
     color: '#0c0000',
+  },
+  OnFocused: {
+    borderBottomColor: '#f00',
+    borderBottomWidth: 3,
   },
 });

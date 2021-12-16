@@ -2,8 +2,9 @@ import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
   align-items: center;
-  background-color: #ffff009a;
+  background-color: #ffffcd;
   padding: 5px 15px;
+  margin: 0 3px;
   margin-bottom: 15px;
   border-radius: 5px;
 `;

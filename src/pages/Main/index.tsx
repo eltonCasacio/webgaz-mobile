@@ -11,6 +11,14 @@ const Main = ({navigation}) => {
   const [priceRemovalGasComum, setPriceRemovalGasComum] = useState(0);
   const [priceColocadaGasComum, setPriceColocadaGasComum] = useState(0);
 
+  const [purchaseEtanol, setPurchaseEtanol] = useState()
+  const [purchaseGas, setPurchaseGas] = useState()
+
+
+  useEffect(() => {
+    console.log("seila", purchaseGas, purchaseEtanol)
+  },[purchaseGas,purchaseEtanol ])
+
   useEffect(() => {
     setPriceRemovalEtanol(3.87);
     setPriceColocadaEtanol(4.87);
@@ -27,15 +35,17 @@ const Main = ({navigation}) => {
           type="Etanol"
           priceRemoval={priceRemovalEtanol}
           priceColocada={priceColocadaEtanol}
+          setPurchase={setPurchaseEtanol}
         />
         <Card
           type="Gasolina Comum"
           priceRemoval={priceRemovalGasComum}
           priceColocada={priceColocadaGasComum}
+          setPurchase={setPurchaseGas}
         />
       </S.Cards>
 
-      <Footer navigation={navigation} />
+      <Footer navigation={navigation} setBorder="Main" />
     </S.Wrapper>
   );
 };
