@@ -4,7 +4,7 @@ import * as S from './styles';
 
 export default function CardPurchase({data, navigation}) {
   function openDetails() {
-    navigation.navigate('PurchaseOrderDetails');
+    navigation.navigate('PurchaseOrderDetails', {data: data});
   }
 
   return (

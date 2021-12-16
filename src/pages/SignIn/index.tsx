@@ -6,7 +6,7 @@ import {Input} from 'react-native-elements';
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
 import {useAuth} from '../../contexts/auth';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 
 const SignIn: React.FC = () => {
   const navigation = useNavigation();
@@ -24,7 +24,6 @@ const SignIn: React.FC = () => {
 
     if (username && password) {
       const res = await signIn({username, password});
-      Alert.alert('login', JSON.stringify(res))
     }
   };
 

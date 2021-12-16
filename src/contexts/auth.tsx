@@ -29,17 +29,18 @@ export const AuthProvider: React.FC = ({children}) => {
   const [user, setUser] = useState<User | null>(null);
 
   async function signIn({username, password}): Promise<any> {
-    const response = await auth.signIn({username, password});
+    setUser({name: 'adm', email: username});
+    // const response = await auth.signIn({username, password});
 
-    if (response) {
-      setUser(response.user);
-      api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
+    // if (response) {
+    //   setUser(response.user);
+    //   api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
-      await AsyncStorage.setItem('@webgaz:user', JSON.stringify(response.user));
-      await AsyncStorage.setItem('@webgaz:token', response.token);
-    } else {
-      return responseMessage('Usuário não encontrado', 'error');
-    }
+    //   await AsyncStorage.setItem('@webgaz:user', JSON.stringify(response.user));
+    //   await AsyncStorage.setItem('@webgaz:token', response.token);
+    // } else {
+    //   return responseMessage('Usuário não encontrado', 'error');
+    // }
   }
 
   function signOut() {

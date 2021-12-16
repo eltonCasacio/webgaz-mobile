@@ -12,8 +12,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 10,
-    borderBottomColor: '#ff0000',
+    borderBottomColor: '#c7c7c7',
     borderBottomWidth: 1,
     paddingBottom: 5,
+    backgroundColor: '#fdfd7f',
+    paddingTop: 5,
   },
 });

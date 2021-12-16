@@ -13,14 +13,14 @@ const pedidos = [
     total: 25.0,
   },
   {
-    order: 1,
+    order: 2,
     date: '01-01-2022',
     status: 'Pedido entregue',
     type: 'Etanol',
     total: 19.0,
   },
   {
-    order: 1,
+    order: 3,
     date: '01-01-2021',
     status: 'Em analise',
     type: 'Etanol-Gasolina',
@@ -34,7 +34,7 @@ const PurchaseOrder = ({navigation}) => {
       <Title>PEDIDOS</Title>
       <ScrollView>
         {pedidos.map(item => (
-          <CardPurchase data={item} navigation={navigation}/>
+          <CardPurchase key={item.order} data={item} navigation={navigation}/>
         ))}
       </ScrollView>
       <Footer navigation={navigation} setBorder="PurchaseOrder" />

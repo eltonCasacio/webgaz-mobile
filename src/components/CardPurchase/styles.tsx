@@ -8,7 +8,7 @@ export const Wrapper = styled.View`
   margin-bottom: 10px;
   border-radius: 5px;
 
-  border-bottom-color: #07070753;
+  border-bottom-color: #dfdfdf;
   border-bottom-width: 3px;
 
   border-left-color: #0707077a;
