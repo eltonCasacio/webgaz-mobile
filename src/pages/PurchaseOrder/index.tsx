@@ -1,14 +1,51 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import Title from '../../components/Title';
+import CardPurchase from '../../components/CardPurchase';
+import Footer from '../../components/Footer';
 
-const PurchaseOrder = () => {
+const pedidos = [
+  {
+    order: 1,
+    date: '01-01-2022',
+    status: 'Em analise',
+    type: 'Gasolina',
+    total: 25.0,
+  },
+  {
+    order: 1,
+    date: '01-01-2022',
+    status: 'Pedido entregue',
+    type: 'Etanol',
+    total: 19.0,
+  },
+  {
+    order: 1,
+    date: '01-01-2021',
+    status: 'Em analise',
+    type: 'Etanol-Gasolina',
+    total: 55.0,
+  },
+];
+
+const PurchaseOrder = ({navigation}) => {
   return (
-    <View>
-      <Text>PurchaseOrder</Text>
+    <View style={styles.Wrapper}>
+      <Title>PEDIDOS</Title>
+      <ScrollView>
+        {pedidos.map(item => (
+          <CardPurchase data={item} navigation={navigation}/>
+        ))}
+      </ScrollView>
+      <Footer navigation={navigation} setBorder="PurchaseOrder" />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  Wrapper: {
+    flex: 1,
+  },
+});
 
 export default PurchaseOrder;

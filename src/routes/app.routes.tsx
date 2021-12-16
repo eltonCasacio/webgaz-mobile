@@ -21,11 +21,16 @@ const AppRoutes: React.FC = () => {
         component={ProfileUser}
         options={{title: 'Perfil', animation: 'none'}}
       />
-      <AppStack.Screen name="PurchaseOrder" component={PurchaseOrder} />
+      <AppStack.Screen
+        name="PurchaseOrder"
+        component={PurchaseOrder}
+        options={{title: 'Pedidos', animation: 'none'}}
+      />
+
       <AppStack.Screen
         name="PurchaseOrderDetails"
         component={PurchaseOrderDetails}
-        options={{title: 'Pedidos', animation: 'none'}}
+        options={{title: 'Detalhes do Pedido', animation: 'none'}}
       />
     </AppStack.Navigator>
   );
