@@ -4,6 +4,7 @@ import Title from '../../components/Title';
 import Footer from '../../components/Footer';
 import Buttom from '../../components/Buttom';
 import {ScrollView} from 'react-native-gesture-handler';
+import * as S from './styles'
 
 const PurchaseOrderDetails = ({route, navigation}) => {
   const {data} = route.params;
@@ -18,11 +19,11 @@ const PurchaseOrderDetails = ({route, navigation}) => {
     <View style={styles.Wrapper}>
       <Title>DETALHES DO PEDIDO</Title>
       <ScrollView>
-        <Text>{data?.order}</Text>
-        <Text>{data?.date}</Text>
-        <Text>{data?.status}</Text>
-        <Text>{data?.type}</Text>
-        <Text>{data?.total}</Text>
+        <S.Text>Pedido: {data?.order}</S.Text>
+        <S.Text>Data do Pedido: {data?.date}</S.Text>
+        <S.Text>Status do Pedido: {data?.status}</S.Text>
+        <S.Text>Tipo de Combustivel: {data?.type}</S.Text>
+        <S.Text>Valor Total:{data?.total}</S.Text>
       </ScrollView>
 
       <Buttom title="CANCELAR PEDIDO" callback={cancel} />

@@ -2,7 +2,7 @@ import styled, {css} from 'styled-components/native';
 
 export const Wrapper = styled.View`
   align-items: center;
-  background-color: #ffffcd;
+  /* background-color: #ffffcd; */
   padding: 5px 15px;
   margin: 0 3px;
   margin-bottom: 10px;
@@ -54,5 +54,14 @@ export const Text = styled.Text`
   ${() => css`
     font-weight: bold;
     color: #000;
+  `}
+`;
+
+export const Details = styled.Text`
+  ${() => css`
+    font-weight: bold;
+    color: #000;
+    border-bottom-color: #080808;
+    border-bottom-width: 2px;
   `}
 `;

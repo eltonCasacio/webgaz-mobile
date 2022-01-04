@@ -13,7 +13,7 @@ export default function CardPurchase({data, navigation}) {
         <S.Text>{data?.order}</S.Text>
         <S.Text>{data?.date}</S.Text>
         <TouchableOpacity onPress={openDetails}>
-          <S.Text>Ver mais</S.Text>
+          <S.Details>Ver mais</S.Details>
         </TouchableOpacity>
       </S.Header>
       <S.Status>

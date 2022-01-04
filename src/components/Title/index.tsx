@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#c7c7c7',
     borderBottomWidth: 1,
     paddingBottom: 5,
-    backgroundColor: '#fdfd7f',
+    backgroundColor: '#fff',
     paddingTop: 5,
   },
 });
