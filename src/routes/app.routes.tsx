@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import Main from '../pages/Main';
+import Home from '../pages/Home';
 import ProfileUser from '../pages/ProfileUser';
 import PurchaseOrder from '../pages/PurchaseOrder';
 import PurchaseOrderDetails from '../pages/PurchaseOrderDetails';
@@ -12,8 +12,8 @@ const AppRoutes: React.FC = () => {
   return (
     <AppStack.Navigator screenOptions={{headerShown: false}}>
       <AppStack.Screen
-        name="Main"
-        component={Main}
+        name="Home"
+        component={Home}
         options={{title: 'Tabela de Preços', animation: 'none'}}
       />
       <AppStack.Screen

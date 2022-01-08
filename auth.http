@@ -1,0 +1,41 @@
+POST http://api.devmaykinho.click/api/signin
+Content-Type: application/json
+
+{
+    "email": "5@teste.com",
+    "password": "123"
+}
+
+###
+POST http://api.devmaykinho.click/api/signup
+Content-Type: application/json
+
+{
+  "userAuth": {
+    "email": "5@teste.com",
+    "password": "123",
+    "passwordConfirmation": "123"
+  },
+  "info": {
+    "name": "valid_name",
+    "cnpj": "valid_cnpj",
+    "telephone": "valid_cnpj"
+  },
+  "address": {
+    "cep": "any_cep",
+    "city": "any_city",
+    "state": "any_state",
+    "street": "any_street",
+    "number": "any_number",
+    "complement": "any_complament"
+  }
+}
+
+
+###
+PATCH http://api.devmaykinho.click/api/reset-password
+Content-Type: application/json
+
+{
+  "email": "5@teste.com"
+}

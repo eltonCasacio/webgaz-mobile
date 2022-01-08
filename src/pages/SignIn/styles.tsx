@@ -18,3 +18,7 @@ export const Footer = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const Info = styled.Text`
+  color: red;
+`;

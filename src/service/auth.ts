@@ -1,28 +1,35 @@
 import API from '../service/api';
-import {responseMessage} from '../utils';
+import {CompanyType} from '../types/Company';
+import {SignInProps, ResponseSignInProps} from '../types/Auth';
 
-interface Response {
-  token: string;
-  user: {
-    name: string;
-    email: string;
-  };
-}
-
-export async function signIn({username, password}): Promise<Response> {
+export async function signIn({
+  email,
+  password,
+}: SignInProps): Promise<ResponseSignInProps> {
   try {
     const {data} = await API.post('signin', {
-      email: username,
-      password: password,
+      email,
+      password,
     });
+    console.log('SERVICE::SIGNIN::', data);
     return {
-      token: data?.token,
+      token: data.token,
       user: {
-        name: username,
-        email: username,
+        name: email,
+        email: email,
       },
     };
   } catch (error) {
-    responseMessage('Erro ao tentar realizar Login', 'error');
+    console.log('SERVICE::SIGNIN::Erro', error);
+  }
+}
+
+export async function signup(params: CompanyType): Promise<CompanyType> {
+  try {
+    const data = await API.post('signup', params);
+    console.log('SERVICE::SIGNUP::', data);
+    return params;
+  } catch (error) {
+    console.log('SERVICE::SIGNIN::Erro', error);
   }
 }

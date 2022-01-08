@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
 import * as S from './styles';
-import {Input} from 'react-native-elements';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {Input} from 'react-native-elements';
 import Buttom from '../../components/Buttom';
-import {signup} from '../../service/signup';
+import {signup} from '../../service/auth';
+
+import {CompanyMocks} from '../../mocks/Company';
 
 const SignUp: React.FC = () => {
   const navigation = useNavigation();
@@ -28,24 +30,25 @@ const SignUp: React.FC = () => {
   const handleConfirm = () => {
     const data = {
       userAuth: {
-        email,
-        password,
-        passwordConfirmation,
+        email: email,
+        password: password,
+        passwordConfirmation: passwordConfirmation,
       },
       info: {
-        name,
-        cnpj,
-        telephone,
+        name: name,
+        cnpj: cnpj,
+        telephone: telephone,
       },
       address: {
-        cep,
-        city,
-        state,
-        street,
-        number,
-        complement,
+        cep: cep,
+        city: city,
+        state: state,
+        street: street,
+        number: number,
+        complement: complement,
       },
     };
+
     setValidated(true);
 
     if (isValid()) {
@@ -96,7 +99,7 @@ const SignUp: React.FC = () => {
         <Input
           autoCompleteType={false}
           placeholder="Telefone"
-          keyboardType="phone-pad"
+          keyboardType="numeric"
           onChangeText={value => setTelephone(value)}
           style={
             validated &&
@@ -171,7 +174,7 @@ const SignUp: React.FC = () => {
       <Input
         autoCompleteType={false}
         placeholder="Email"
-        secureTextEntry={true}
+        textContentType="emailAddress"
         onChangeText={value => setEmail(value)}
         style={
           validated && email === '' && {borderWidth: 1, borderColor: 'red'}

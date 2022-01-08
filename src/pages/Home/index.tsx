@@ -1,29 +1,29 @@
 import React, {useEffect} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 import * as S from './styles';
 import Footer from '../../components/Footer';
-import {Button} from 'react-native-elements/dist/buttons/Button';
 
 const data = [
   {image: require('../../assets/combustivel1.jpeg')},
   {image: require('../../assets/combustivel2.jpeg')},
   {image: require('../../assets/combustivel3.jpeg')},
 ];
-const Main = ({navigation}) => {
+
+const Home = ({navigation}) => {
   function renderItem({item}) {
     return (
-      <View style={styles.carousel}>
-        <Image style={{width: '100%', height: '100%'}} source={item.image} />
-      </View>
+      <S.View>
+        <S.Image source={item.image} />
+      </S.View>
     );
   }
 
   useEffect(() => {}, []);
   return (
     <S.Wrapper>
-      <View style={styles.carouselContainer}>
+      <S.WrapperCarousel>
         <Carousel
           data={data}
           sliderWidth={500}
@@ -36,31 +36,19 @@ const Main = ({navigation}) => {
           autoplayInterval={10000}
           loop
         />
-      </View>
-      <View style={styles.cardPrice}>
-        <Text>Gasolina R$12,00</Text>
-        <Text>Etanol R$12,00</Text>
-        <Button onPress={() => alert('merda')} title={'merda'}>
-          Teste
-        </Button>
-      </View>
+      </S.WrapperCarousel>
+      <S.CardPrice>
+        <S.GasText>Gasolina R$12,00</S.GasText>
+        <S.EtanolText>Etanol R$12,00</S.EtanolText>
+      </S.CardPrice>
 
-      <Footer navigation={navigation} setBorder="Main" />
+      <Footer navigation={navigation} setBorder="Home" />
     </S.Wrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  carouselContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 10,
-    paddingTop: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    height: 180,
-  },
-  carousel: {},
+ 
   cardPrice: {
     backgroundColor: '#ffffff',
     marginBottom: 20,
@@ -73,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main;
+export default Home;

@@ -20,8 +20,8 @@ export default function Footer({navigation, setBorder = ''}) {
           <Text style={styles.Text}>PERFIL</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={setBorder === 'Main' && styles.OnFocused}
-          onPress={() => navigation.push('Main')}>
+          style={setBorder === 'Home' && styles.OnFocused}
+          onPress={() => navigation.push('Home')}>
           <Text style={styles.Text}>HOME</Text>
         </TouchableOpacity>
         <TouchableOpacity

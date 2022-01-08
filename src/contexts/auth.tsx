@@ -2,49 +2,50 @@ import React, {createContext, useEffect, useState, useContext} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as auth from '../service/auth';
 import api from '../service/api';
-import {responseMessage} from '../utils';
+import {responseMessage, ResponseProps} from '../utils';
 
-type User = {
-  name: string;
-  email: string;
-};
-
-type SignInProps = {
-  username: string;
-  password: string;
-};
+import {UserProps, SignInProps as SignInProps} from '../types/Auth';
 
 interface AuthContextData {
   signed: boolean;
-  user: User | null;
+  user: UserProps | null;
   loading: boolean;
-  signIn({}: SignInProps): Promise<void>;
+  signIn({}: SignInProps): Promise<ResponseProps>;
   signOut(): void;
 }
 
-const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({children}) => {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserProps | null>(null);
 
-  async function signIn({username, password}): Promise<any> {
-    setUser({name: 'adm', email: username});
-    // const response = await auth.signIn({username, password});
+  async function signIn({
+    email,
+    password,
+  }: SignInProps): Promise<ResponseProps> {
+    const response = await auth.signIn({email, password});
+    if (response) {
+      setUser(response.user);
+      api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
-    // if (response) {
-    //   setUser(response.user);
-    //   api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
-
-    //   await AsyncStorage.setItem('@webgaz:user', JSON.stringify(response.user));
-    //   await AsyncStorage.setItem('@webgaz:token', response.token);
-    // } else {
-    //   return responseMessage('Usuário não encontrado', 'error');
-    // }
+      await AsyncStorage.setItem('@webgaz:user', JSON.stringify(response.user));
+      await AsyncStorage.setItem('@webgaz:token', response.token);
+      return responseMessage({
+        msg: 'Usuário Logado',
+        severity: 'success',
+      });
+    } else {
+      return responseMessage({
+        msg: 'Usuário ou Senha Inválido',
+        severity: 'error',
+      });
+    }
   }
 
-  function signOut() {
-    AsyncStorage.clear().then(() => setUser(null));
+  async function signOut() {
+    await AsyncStorage.clear();
+    setUser(null);
   }
 
   useEffect(() => {
@@ -69,7 +70,7 @@ export const AuthProvider: React.FC = ({children}) => {
 
   return (
     <AuthContext.Provider
-      value={{signed: !!user, user, loading, signIn, signOut}}>
+      value={{signed: !!user, user, loading, signOut, signIn}}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,12 +1,11 @@
 import * as S from './styles';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Input} from 'react-native-elements';
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
 import {useAuth} from '../../contexts/auth';
-import {Alert} from 'react-native';
 
 const SignIn: React.FC = () => {
   const navigation = useNavigation();
@@ -16,6 +15,8 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
+  const [info, setInfo] = useState('');
+
   const {signIn} = useAuth();
 
   const handleSignIn = async () => {
@@ -23,7 +24,10 @@ const SignIn: React.FC = () => {
     setPasswordError(password ? '' : 'Campo obrigatório');
 
     if (username && password) {
-      const res = await signIn({username, password});
+      const {msg, severity} = await signIn({email: username, password});
+      if (severity === 'error') {
+        setInfo(msg);
+      }
     }
   };
 
@@ -47,6 +51,8 @@ const SignIn: React.FC = () => {
           onChangeText={text => setPassword(text)}
           errorMessage={passwordError}
         />
+
+        <S.Info>{info}</S.Info>
 
         <MyLink
           screen="ResetPassword"
