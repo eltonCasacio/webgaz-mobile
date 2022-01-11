@@ -1,58 +1,58 @@
 import * as S from './styles';
 import React, {useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
 import {Input} from 'react-native-elements';
 import Buttom from '../../components/Buttom';
 import {signup} from '../../service/auth';
 
 import {CompanyMocks} from '../../mocks/Company';
 
-const SignUp: React.FC = () => {
-  const navigation = useNavigation();
-
+const SignUp: React.FC = ({navigation}: any) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [password, setPassword] = useState('123');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('123');
 
-  const [name, setName] = useState('');
-  const [cnpj, setCnpj] = useState('');
-  const [telephone, setTelephone] = useState('');
+  const [name, setName] = useState(CompanyMocks.info.name);
+  const [cnpj, setCnpj] = useState(CompanyMocks.info.cnpj);
+  const [telephone, setTelephone] = useState(CompanyMocks.info.telephone);
 
-  const [cep, setCep] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [street, setStreet] = useState('');
-  const [number, setNumber] = useState('');
-  const [complement, setComplement] = useState('');
+  const [cep, setCep] = useState(CompanyMocks.address.cep);
+  const [city, setCity] = useState(CompanyMocks.address.city);
+  const [state, setState] = useState(CompanyMocks.address.state);
+  const [street, setStreet] = useState(CompanyMocks.address.street);
+  const [number, setNumber] = useState(CompanyMocks.address.number);
+  const [complement, setComplement] = useState(CompanyMocks.address.complement);
 
   const [validated, setValidated] = useState(false);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const data = {
       userAuth: {
         email: email,
-        password: password,
-        passwordConfirmation: passwordConfirmation,
+        password: CompanyMocks.userAuth.password,
+        passwordConfirmation: CompanyMocks.userAuth.passwordConfirmation,
       },
       info: {
-        name: name,
-        cnpj: cnpj,
-        telephone: telephone,
+        name: CompanyMocks.info.name,
+        cnpj: CompanyMocks.info.cnpj,
+        telephone: CompanyMocks.info.telephone,
       },
       address: {
-        cep: cep,
-        city: city,
-        state: state,
-        street: street,
-        number: number,
-        complement: complement,
+        cep: CompanyMocks.address.cep,
+        city: CompanyMocks.address.city,
+        state: CompanyMocks.address.state,
+        street: CompanyMocks.address.street,
+        number: CompanyMocks.address.number,
+        complement: CompanyMocks.address.complement,
       },
     };
 
     setValidated(true);
 
     if (isValid()) {
-      signup(data);
+      const res = await signup(data);
+      if (res.status === 201) {
+        navigation.navigate('SignIn');
+      }
     }
   };
 
@@ -68,7 +68,8 @@ const SignUp: React.FC = () => {
       !!state &&
       !!street &&
       !!number &&
-      !!complement
+      !!complement &&
+      !!email
     );
   };
 
@@ -81,6 +82,7 @@ const SignUp: React.FC = () => {
           placeholder="Nome"
           textContentType="name"
           onChangeText={value => setName(value)}
+          value={name}
           style={
             validated && name === '' && {borderWidth: 1, borderColor: 'red'}
           }
@@ -91,6 +93,7 @@ const SignUp: React.FC = () => {
           placeholder="CNPJ"
           keyboardType="numeric"
           onChangeText={value => setCnpj(value)}
+          value={cnpj}
           style={
             validated && cnpj === '' && {borderWidth: 1, borderColor: 'red'}
           }
@@ -101,6 +104,7 @@ const SignUp: React.FC = () => {
           placeholder="Telefone"
           keyboardType="numeric"
           onChangeText={value => setTelephone(value)}
+          value={telephone}
           style={
             validated &&
             telephone === '' && {borderWidth: 1, borderColor: 'red'}
@@ -114,6 +118,7 @@ const SignUp: React.FC = () => {
           placeholder="Rua"
           textContentType="streetAddressLine1"
           onChangeText={value => setStreet(value)}
+          value={street}
           style={
             validated && street === '' && {borderWidth: 1, borderColor: 'red'}
           }
@@ -125,6 +130,7 @@ const SignUp: React.FC = () => {
           keyboardType="numeric"
           textContentType="postalCode"
           onChangeText={value => setCep(value)}
+          value={cep}
           style={
             validated && cep === '' && {borderWidth: 1, borderColor: 'red'}
           }
@@ -135,6 +141,7 @@ const SignUp: React.FC = () => {
           placeholder="Número"
           keyboardType="numeric"
           onChangeText={value => setNumber(value)}
+          value={number}
           style={
             validated && number === '' && {borderWidth: 1, borderColor: 'red'}
           }
@@ -145,6 +152,7 @@ const SignUp: React.FC = () => {
           placeholder="Cidade"
           textContentType="addressCity"
           onChangeText={value => setCity(value)}
+          value={city}
           style={
             validated && city === '' && {borderWidth: 1, borderColor: 'red'}
           }
@@ -155,6 +163,7 @@ const SignUp: React.FC = () => {
           placeholder="UF"
           textContentType="addressCityAndState"
           onChangeText={value => setState(value)}
+          value={state}
           style={
             validated && state === '' && {borderWidth: 1, borderColor: 'red'}
           }
@@ -164,6 +173,7 @@ const SignUp: React.FC = () => {
           autoCompleteType={false}
           placeholder="Complemento"
           onChangeText={value => setComplement(value)}
+          value={complement}
           style={
             validated &&
             complement === '' && {borderWidth: 1, borderColor: 'red'}
@@ -176,6 +186,7 @@ const SignUp: React.FC = () => {
         placeholder="Email"
         textContentType="emailAddress"
         onChangeText={value => setEmail(value)}
+        value={email}
         style={
           validated && email === '' && {borderWidth: 1, borderColor: 'red'}
         }
@@ -186,6 +197,7 @@ const SignUp: React.FC = () => {
         placeholder="senha"
         secureTextEntry={true}
         onChangeText={value => setPassword(value)}
+        value={password}
         style={
           validated && password === '' && {borderWidth: 1, borderColor: 'red'}
         }
@@ -196,6 +208,7 @@ const SignUp: React.FC = () => {
         placeholder="confirmar senha"
         secureTextEntry={true}
         onChangeText={value => setPasswordConfirmation(value)}
+        value={passwordConfirmation}
         style={
           validated &&
           passwordConfirmation === '' && {borderWidth: 1, borderColor: 'red'}

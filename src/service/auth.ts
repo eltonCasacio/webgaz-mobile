@@ -24,11 +24,10 @@ export async function signIn({
   }
 }
 
-export async function signup(params: CompanyType): Promise<CompanyType> {
+export async function signup(params: CompanyType): Promise<any> {
   try {
-    const data = await API.post('signup', params);
-    console.log('SERVICE::SIGNUP::', data);
-    return params;
+    const res = await API.post('signup', params);
+    return res;
   } catch (error) {
     console.log('SERVICE::SIGNIN::Erro', error);
   }

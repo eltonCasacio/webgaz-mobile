@@ -7,7 +7,7 @@ export const CompanyMocks = {
   info: {
     name: 'valid_name',
     cnpj: 'valid_cnpj',
-    telephone: 'valid_cnpj',
+    telephone: 'valid_telephone',
   },
   address: {
     cep: 'any_cep',
