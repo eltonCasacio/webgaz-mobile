@@ -1,64 +1,46 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 import * as S from './styles';
-import Footer from '../../components/Footer';
+import Base from '../../components/Base';
 
-const data = [
+const images = [
   {image: require('../../assets/combustivel1.jpeg')},
   {image: require('../../assets/combustivel2.jpeg')},
   {image: require('../../assets/combustivel3.jpeg')},
 ];
 
-const Home = ({navigation}) => {
-  function renderItem({item}) {
-    return (
-      <S.View>
-        <S.Image source={item.image} />
-      </S.View>
-    );
-  }
+function renderItem({item}) {
+  return <S.Image source={item.image} />;
+}
 
-  useEffect(() => {}, []);
+const Home: React.FC = () => {
   return (
-    <S.Wrapper>
-      <S.WrapperCarousel>
-        <Carousel
-          data={data}
-          sliderWidth={500}
-          itemWidth={300}
-          renderItem={renderItem}
-          autoplay={true}
-          enableMomentum={false}
-          lockScrollWhileSnapping={true}
-          autoplayDelay={100}
-          autoplayInterval={10000}
-          loop
-        />
-      </S.WrapperCarousel>
-      <S.CardPrice>
-        <S.GasText>Gasolina R$12,00</S.GasText>
-        <S.EtanolText>Etanol R$12,00</S.EtanolText>
-      </S.CardPrice>
-
-      <Footer navigation={navigation} setBorder="Home" />
-    </S.Wrapper>
+    <Base name="Home">
+      <S.Wrapper>
+        <S.WrapperCarousel>
+          <Carousel
+            data={images}
+            sliderWidth={650}
+            itemWidth={300}
+            renderItem={renderItem}
+            autoplay={true}
+            enableMomentum={false}
+            lockScrollWhileSnapping={true}
+            autoplayDelay={100}
+            autoplayInterval={10000}
+            loop
+          />
+        </S.WrapperCarousel>
+        <S.CardPrice>
+          <S.GasText>Gasolina R$12,00</S.GasText>
+          <S.EtanolText>Etanol R$12,00</S.EtanolText>
+        </S.CardPrice>
+      </S.Wrapper>
+    </Base>
   );
 };
 
-const styles = StyleSheet.create({
- 
-  cardPrice: {
-    backgroundColor: '#ffffff',
-    marginBottom: 20,
-    marginLeft: 5,
-    marginRight: 5,
-    borderRadius: 10,
-    padding: 20,
-    borderColor: '#00000060',
-    borderWidth:2,
-  },
-});
 
 export default Home;

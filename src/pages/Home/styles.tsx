@@ -1,33 +1,36 @@
-import styled from 'styled-components/native';
+import styled, {css} from 'styled-components/native';
 
 export const Wrapper = styled.View`
-  flex: 1;
-  justify-content: space-between;
-  background-color: #f3f3f3;
-  padding: 10px;
+  /* background-color: #ffffff; */
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 40%;
 `;
 
 export const WrapperCarousel = styled.View`
-  height: 200px;
-  margin: 40px 0 0 0;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  margin-top: 20px;
 `;
 
-export const CardPrice = styled.View`
-  background-color: '#d51414';
-
-  border-radius: 10px;
-  padding: 20px;
-  border-color: '#00000060';
-  border-width: 2px;
+export const CardPrice = styled.Text`
+  ${() => css`
+    height: 100%;
+    bottom: -10px;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 10px;
+    border-width: 3px;
+    border-color: #07070763;
+    background-color: #ffffff;
+  `}
 `;
 
 export const Image = styled.Image`
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: 90%;
 `;
 
-export const View = styled.View``;
 export const GasText = styled.Text``;
 export const EtanolText = styled.Text``;

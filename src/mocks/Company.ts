@@ -1,8 +1,8 @@
 export const CompanyMocks = {
   userAuth: {
-    email: '2@teste.com',
-    password: 'Maycon123',
-    passwordConfirmation: 'Maycon123',
+    email: 'adm@adm.com',
+    password: '123',
+    passwordConfirmation: '123',
   },
   info: {
     name: 'valid_name',

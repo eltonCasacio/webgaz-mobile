@@ -8,25 +8,27 @@ import {
 } from 'react-native';
 import {useAuth} from '../../contexts/auth';
 
-export default function Footer({navigation, setBorder = ''}) {
-  const {signOut} = useAuth();
+import {useLinkTo} from '@react-navigation/native';
 
+export default function Footer({setBorder = ''}) {
+  const {signOut} = useAuth();
+  const linkTo = useLinkTo();
   return (
     <View style={styles.Wrapper}>
       <ScrollView horizontal>
         <TouchableOpacity
           style={setBorder === 'ProfileUser' && styles.OnFocused}
-          onPress={() => navigation.push('ProfileUser')}>
+          onPress={() => linkTo('/ProfileUser')}>
           <Text style={styles.Text}>PERFIL</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={setBorder === 'Home' && styles.OnFocused}
-          onPress={() => navigation.push('Home')}>
+          onPress={() => linkTo('/Home')}>
           <Text style={styles.Text}>HOME</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={setBorder === 'PurchaseOrder' && styles.OnFocused}
-          onPress={() => navigation.push('PurchaseOrder')}>
+          onPress={() => linkTo('/PurchaseOrder')}>
           <Text style={styles.Text}>PEDIDOS</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={signOut}>

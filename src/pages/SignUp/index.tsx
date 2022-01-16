@@ -8,8 +8,8 @@ import {CompanyMocks} from '../../mocks/Company';
 
 const SignUp: React.FC = ({navigation}: any) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('123');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('123');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   const [name, setName] = useState(CompanyMocks.info.name);
   const [cnpj, setCnpj] = useState(CompanyMocks.info.cnpj);
@@ -51,8 +51,12 @@ const SignUp: React.FC = ({navigation}: any) => {
     if (isValid()) {
       const res = await signup(data);
       if (res.status === 201) {
+        console.debug('CRIADO', res.status);
         navigation.navigate('SignIn');
       }
+
+      console.error('NÃO CRIADO', res);
+
     }
   };
 
