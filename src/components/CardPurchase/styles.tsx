@@ -1,18 +1,20 @@
 import styled, {css} from 'styled-components/native';
+import Theme from '../../styles/theme'
 
 export const Wrapper = styled.View`
-  align-items: center;
-  /* background-color: #ffffcd; */
-  padding: 5px 15px;
-  margin: 0 3px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  ${() => css`
+    align-items: center;
+    background-color: #ffffff;
+    padding: 5px 15px;
+    margin: 0 3px;
+    margin-bottom: 10px;
+    border-radius: 5px;
 
-  border-bottom-color: #dfdfdf;
-  border-bottom-width: 3px;
-
-  border-left-color: #0707077a;
-  border-left-width: 2px;
+    border-bottom-color: ${Theme.colors.border};
+    border-bottom-width: 2px;
+    border-left-color: #0707077a;
+    border-left-width: 2px;
+  `}
 `;
 
 export const Header = styled.View`

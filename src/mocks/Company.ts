@@ -10,11 +10,11 @@ export const CompanyMocks = {
     telephone: 'valid_telephone',
   },
   address: {
-    cep: 'any_cep',
+    street: 'Rua Antonio Edson Furlan Edson Furlan ',
     city: 'any_city',
-    state: 'any_state',
-    street: 'any_street',
-    number: 'any_number',
+    state: 'uf',
+    number: '0000',
+    cep: 'any_cep',
     complement: 'any_complament',
   },
 };

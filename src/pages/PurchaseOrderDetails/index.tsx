@@ -27,7 +27,6 @@ const PurchaseOrderDetails = ({route, navigation}) => {
       </ScrollView>
 
       <Buttom title="CANCELAR PEDIDO" callback={cancel} />
-      <Footer navigation={navigation} setBorder="PurchaseOrder" />
     </View>
   );
 };

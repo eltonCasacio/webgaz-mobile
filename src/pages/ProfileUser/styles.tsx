@@ -1,46 +1,47 @@
 import styled from 'styled-components/native';
-import {Form as Unform} from '@unform/mobile';
-
-export const Form = styled(Unform)``;
+import Theme from '../../styles/theme';
 
 export const Wrapper = styled.View`
   flex: 1;
+  background-color: #ffffff;
+  margin: 0 10px;
+  padding: 0 5px;
+  border-radius: 2px;
 `;
-
 
 export const ScrollView = styled.ScrollView`
   flex: 1;
 `;
 
-export const Title = styled.Text`
+export const WrapperLine = styled.View`
   width: 100%;
-  text-align: center;
-  font-size: 20px;
+  padding: 5px;
 `;
 
-export const WrapperCompany = styled.View`
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+export const LabelKey = styled.Text`
+  margin-right: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  color: ${Theme.colors.primary};
 `;
 
-export const WrapperAddress = styled.View`
-  flex: 1;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Footer = styled.View`
-  flex: 1;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const GoBack = styled.TouchableOpacity``;
-
-export const GoBackText = styled.Text`
-  color: #505050;
+export const LabelValue = styled.Text`
+  border-bottom-color: #dfdfdf;
+  border-bottom-width: 2px;
   font-size: 18px;
+  padding-bottom: 5px;
+`;
+
+export const WrapperPhoneCnpj = styled(WrapperLine)`
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const ViewWrapper = styled.View`
+  flex: 1;
+`;
+
+export const Editar = styled.Button`
+  flex: 1;
 `;

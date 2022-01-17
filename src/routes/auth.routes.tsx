@@ -8,7 +8,11 @@ import ResetPassword from '../pages/ResetPassword';
 const AuthStack = createNativeStackNavigator();
 
 const AuthRoutes: React.FC = () => (
-  <AuthStack.Navigator screenOptions={{headerShown: false}}>
+  <AuthStack.Navigator
+    screenOptions={{
+      headerShown: false,
+      contentStyle: {backgroundColor: 'transparent'},
+    }}>
     <AuthStack.Screen
       name="SignIn"
       component={SignIn}

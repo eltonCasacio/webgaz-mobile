@@ -10,25 +10,29 @@ const AppStack = createNativeStackNavigator();
 
 const AppRoutes: React.FC = () => {
   return (
-    <AppStack.Navigator screenOptions={{headerShown: false}}>
+    <AppStack.Navigator
+      screenOptions={{
+        headerShown: false,
+        contentStyle: {backgroundColor: 'transparent'},
+      }}>
       <AppStack.Screen
-        name="Home"
+        name="Inicio"
         component={Home}
         options={{title: 'Tabela de Preços', animation: 'none'}}
       />
       <AppStack.Screen
-        name="ProfileUser"
+        name="Perfil"
         component={ProfileUser}
         options={{title: 'Perfil', animation: 'none'}}
       />
       <AppStack.Screen
-        name="PurchaseOrder"
+        name="Pedidos"
         component={PurchaseOrder}
         options={{title: 'Pedidos', animation: 'none'}}
       />
 
       <AppStack.Screen
-        name="PurchaseOrderDetails"
+        name="Detalhes"
         component={PurchaseOrderDetails}
         options={{title: 'Detalhes do Pedido', animation: 'none'}}
       />

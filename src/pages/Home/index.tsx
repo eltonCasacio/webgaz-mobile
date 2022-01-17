@@ -1,9 +1,8 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {useLinkTo} from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
-
+import Buttom from '../../components/Buttom';
 import * as S from './styles';
-import Base from '../../components/Base';
 
 const images = [
   {image: require('../../assets/combustivel1.jpeg')},
@@ -16,31 +15,38 @@ function renderItem({item}) {
 }
 
 const Home: React.FC = () => {
+  const linkTo = useLinkTo()
+
   return (
-    <Base name="Home">
-      <S.Wrapper>
-        <S.WrapperCarousel>
-          <Carousel
-            data={images}
-            sliderWidth={650}
-            itemWidth={300}
-            renderItem={renderItem}
-            autoplay={true}
-            enableMomentum={false}
-            lockScrollWhileSnapping={true}
-            autoplayDelay={100}
-            autoplayInterval={10000}
-            loop
-          />
-        </S.WrapperCarousel>
-        <S.CardPrice>
-          <S.GasText>Gasolina R$12,00</S.GasText>
-          <S.EtanolText>Etanol R$12,00</S.EtanolText>
-        </S.CardPrice>
-      </S.Wrapper>
-    </Base>
+    <S.Wrapper>
+      <S.WrapperCarousel>
+        <Carousel
+          data={images}
+          sliderWidth={650}
+          itemWidth={300}
+          renderItem={renderItem}
+          autoplay={true}
+          enableMomentum={false}
+          lockScrollWhileSnapping={true}
+          autoplayDelay={100}
+          autoplayInterval={10000}
+          loop
+        />
+      </S.WrapperCarousel>
+      <S.CardPrice>
+        <S.WrapperFuelText>
+          <S.FuelText>Gasolina </S.FuelText>
+          <S.FuelPrice>R$12,00</S.FuelPrice>
+        </S.WrapperFuelText>
+
+        <S.WrapperFuelText>
+          <S.FuelText>Etanol </S.FuelText>
+          <S.FuelPrice>R$12,00</S.FuelPrice>
+        </S.WrapperFuelText>
+      <Buttom callback={() => linkTo('/Home')} title="Fazer Pedido" />
+      </S.CardPrice>
+    </S.Wrapper>
   );
 };
-
 
 export default Home;

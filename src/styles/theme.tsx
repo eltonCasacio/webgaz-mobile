@@ -23,14 +23,14 @@ export default {
   },
   colors: {
     primary: '#033E8C',
-    secondary: '#F2CB05',
+    secondary: '#2e9aff',
     mainBg: '#00227e',
     white: '#FAFAFA',
     black: '#030517',
     lightGray: '#EAEAEA',
     gray: '#8F8F8F',
     darkGray: '#2E2F42',
-    border: '#f2cb05d8',
+    border: '#2e9aff',
   },
   spacings: {
     xxsmall: '0.5%',

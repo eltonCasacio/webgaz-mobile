@@ -1,16 +1,19 @@
-import styled from 'styled-components/native';
+import styled, {css} from 'styled-components/native';
+import Theme from '../../styles/theme';
 
 export const Wrapper = styled.TouchableOpacity`
-  width: 100%;
-  /* background-color: #ff0000; */
-  border-radius: 15px;
-  /* border: solid 1px #5e5e5eb9; */
-  padding: 5px;
+  ${() => css`
+    width: 100%;
+    background-color: ${Theme.colors.secondary};
+    border-radius: 2px;
+    padding: 5px;
+  `}
 `;
 
 export const Text = styled.Text`
-  color: #030303;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
+  ${() => css`
+    color: ${Theme.colors.white};
+    font-size: 20px;
+    text-align: center;
+  `}
 `;

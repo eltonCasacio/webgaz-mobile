@@ -1,36 +1,54 @@
 import styled, {css} from 'styled-components/native';
+import Theme from '../../styles/theme';
 
 export const Wrapper = styled.View`
-  /* background-color: #ffffff; */
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  height: 40%;
+  flex: 1;
+  justify-content: space-between;
+  padding: 0 10px;
 `;
 
 export const WrapperCarousel = styled.View`
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  margin-top: 20px;
-`;
-
-export const CardPrice = styled.Text`
   ${() => css`
-    height: 100%;
-    bottom: -10px;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 0 10px;
-    border-width: 3px;
-    border-color: #07070763;
-    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 35%;
+    padding: 10px 0;
+    margin-top: 10px;
   `}
 `;
 
 export const Image = styled.Image`
   width: auto;
-  height: 90%;
 `;
 
-export const GasText = styled.Text``;
-export const EtanolText = styled.Text``;
+export const CardPrice = styled.View`
+  ${() => css`
+    justify-content: space-between;
+    height: 50%;
+    border-radius: 2px;
+    padding: 5px;
+    background-color: #ffffff;
+  `}
+`;
+
+export const WrapperFuelText = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const FuelText = styled.Text`
+  font-size: 20px;
+`;
+
+export const FuelPrice = styled(FuelText)`
+  font-weight: bold;
+`;
+
+export const PurchaseText = styled.Text`
+  color: aliceblue;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px;
+`;

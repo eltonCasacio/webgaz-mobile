@@ -1,51 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
 import Title from '../../components/Title';
 import CardPurchase from '../../components/CardPurchase';
-import Footer from '../../components/Footer';
+import * as S from './styles'
 
-const pedidos = [
-  {
-    order: 1,
-    date: '01-01-2022',
-    status: 'Em analise',
-    type: 'Gasolina',
-    total: 25.0,
-  },
-  {
-    order: 2,
-    date: '01-01-2022',
-    status: 'Pedido entregue',
-    type: 'Etanol',
-    total: 19.0,
-  },
-  {
-    order: 3,
-    date: '01-01-2021',
-    status: 'Em analise',
-    type: 'Etanol-Gasolina',
-    total: 55.0,
-  },
-];
+import {purchases} from '../../mocks/Purchases'
 
 const PurchaseOrder = ({navigation}) => {
   return (
-    <View style={styles.Wrapper}>
+    <S.Wrapper>
       <Title>PEDIDOS</Title>
-      <ScrollView>
-        {pedidos.map(item => (
+      <S.ScrollView>
+        {purchases.map(item => (
           <CardPurchase key={item.order} data={item} navigation={navigation}/>
         ))}
-      </ScrollView>
-      <Footer navigation={navigation} setBorder="PurchaseOrder" />
-    </View>
+      </S.ScrollView>
+    </S.Wrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  Wrapper: {
-    flex: 1,
-  },
-});
 
 export default PurchaseOrder;
