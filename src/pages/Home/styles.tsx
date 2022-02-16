@@ -5,6 +5,7 @@ export const Wrapper = styled.View`
   flex: 1;
   justify-content: space-between;
   padding: 0 10px;
+  background-color: ${Theme.colors.primary};
 `;
 
 export const WrapperCarousel = styled.View`
@@ -20,6 +21,8 @@ export const WrapperCarousel = styled.View`
 
 export const Image = styled.Image`
   width: auto;
+  height: 200px;
+  border-radius: 10px;
 `;
 
 export const CardPrice = styled.View`
