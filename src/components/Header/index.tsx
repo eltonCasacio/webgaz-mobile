@@ -12,13 +12,13 @@ const Header = (params: HeaderParams) => {
   return (
     <S.Wrapper>
       <S.ImageUser onPress={params.showMenu}>
-        <UserIcon name="user" size={20} color="#fcfcfc" />
+        <UserIcon name="user" size={18} color="#fcfcfc" />
       </S.ImageUser>
       <S.Location>Webgaz</S.Location>
       <S.Notification>
         <NotificationIcon
           name="notifications-outline"
-          size={30}
+          size={22}
           color="#fcfcfc"
         />
         <S.NotificationCircle />

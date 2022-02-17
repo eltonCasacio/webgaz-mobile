@@ -21,7 +21,26 @@ export default function Footer() {
   return (
     <S.Wrapper>
       <S.Scroll horizontal>
-        {Menus.map(menu => createMenu(menu))}
+        {/* {Menus.map(menu => createMenu(menu))} */}
+
+        <S.Menu onPress={() => linkTo(`/Perfil`)}>
+          <S.MenuTextView>
+            <S.MenuText>Perfil</S.MenuText>
+          </S.MenuTextView>
+        </S.Menu>
+
+        <S.Menu onPress={() => linkTo(`/Inicio`)}>
+          <S.MenuTextView>
+            <S.MenuText>Inicio</S.MenuText>
+          </S.MenuTextView>
+        </S.Menu>
+
+        <S.Menu onPress={() => linkTo(`/Pedidos`)}>
+          <S.MenuTextView>
+            <S.MenuText>Pedidos</S.MenuText>
+          </S.MenuTextView>
+        </S.Menu>
+
         <S.Menu onPress={signOut}>
           <S.MenuTextView>
             <S.MenuText>SAIR</S.MenuText>
