@@ -1,16 +1,19 @@
-import Header from './Header';
-import Footer from './Footer';
+import Address from './Address';
 import Base from './Base';
 import Buttom from './Buttom';
 import Card from './Card';
 import CardPurchase from './CardPurchase';
 import Divider from './Divider';
+import Footer from './Footer';
+import Header from './Header';
+import InputText from './InputText';
 import Loading from './Loading';
 import MyLink from './MyLink';
 import Title from './Title';
-import InputText from './InputText';
+import UseInfo from './UseInfo';
 
 export {
+  Address,
   Base,
   Buttom,
   Card,
@@ -22,4 +25,5 @@ export {
   Loading,
   MyLink,
   Title,
+  UseInfo,
 };

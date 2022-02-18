@@ -1,229 +1,130 @@
 import * as S from './styles';
-import React, {useState} from 'react';
-import {Input} from 'react-native-elements';
-import Buttom from '../../components/Buttom';
-import {signup} from '../../service/auth';
+import React, {useEffect, useState} from 'react';
+import {Buttom, UseInfo, Address} from '../../components';
 
-import {CompanyMocks} from '../../mocks/Company';
+const logo_com_nome = require('../../assets/logo-com-nome.png');
+const signup_step1 = require('../../assets/signup-step1.png');
+const signup_step2 = require('../../assets/signup-step2.png');
+const signup_step3 = require('../../assets/signup-step3.png');
+
+export type CompanyProps = {
+  cnpj: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+
+  cep: string;
+  district: string;
+  city: string;
+  state: string;
+  street: string;
+  number: string;
+  complement: string;
+  telephone: string;
+};
+
+enum STEP {
+  'step1' = 'step1',
+  'step2' = 'step2',
+  'step3' = 'step3',
+}
 
 const SignUp: React.FC = ({navigation}: any) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [company, setCompany] = useState({} as CompanyProps);
+  const [step, setStep] = useState<STEP>();
 
-  const [name, setName] = useState(CompanyMocks.info.name);
-  const [cnpj, setCnpj] = useState(CompanyMocks.info.cnpj);
-  const [telephone, setTelephone] = useState(CompanyMocks.info.telephone);
+  function nextStep() {
+    if (step === STEP.step1) setStep(STEP.step2);
+    if (step === STEP.step2) setStep(STEP.step3);
+  }
 
-  const [cep, setCep] = useState(CompanyMocks.address.cep);
-  const [city, setCity] = useState(CompanyMocks.address.city);
-  const [state, setState] = useState(CompanyMocks.address.state);
-  const [street, setStreet] = useState(CompanyMocks.address.street);
-  const [number, setNumber] = useState(CompanyMocks.address.number);
-  const [complement, setComplement] = useState(CompanyMocks.address.complement);
+  function handleUpdateProps(nameProps: string, value: string) {
+    setCompany({...company, [nameProps]: value});
+  }
 
-  const [validated, setValidated] = useState(false);
+  function goBack() {
+    if (step === STEP.step1) navigation.goBack();
+    if (step === STEP.step2) setStep(STEP.step1);
+    if (step === STEP.step3) setStep(STEP.step2);
+  }
 
-  const handleConfirm = async () => {
-    const data = {
-      userAuth: {
-        email: email,
-        password: CompanyMocks.userAuth.password,
-        passwordConfirmation: CompanyMocks.userAuth.passwordConfirmation,
-      },
-      info: {
-        name: CompanyMocks.info.name,
-        cnpj: CompanyMocks.info.cnpj,
-        telephone: CompanyMocks.info.telephone,
-      },
-      address: {
-        cep: CompanyMocks.address.cep,
-        city: CompanyMocks.address.city,
-        state: CompanyMocks.address.state,
-        street: CompanyMocks.address.street,
-        number: CompanyMocks.address.number,
-        complement: CompanyMocks.address.complement,
-      },
-    };
+  useEffect(() => {
+    setStep(STEP.step1);
+  }, [navigation]);
 
-    setValidated(true);
+  // const handleConfirm = async () => {
+  //   const data = {
+  //     userAuth: {
+  //       email: email,
+  //       password: CompanyMocks.userAuth.password,
+  //       passwordConfirmation: CompanyMocks.userAuth.passwordConfirmation,
+  //     },
+  //     info: {
+  //       name: CompanyMocks.info.name,
+  //       cnpj: CompanyMocks.info.cnpj,
+  //       telephone: CompanyMocks.info.telephone,
+  //     },
+  //     address: {
+  //       cep: CompanyMocks.address.cep,
+  //       city: CompanyMocks.address.city,
+  //       state: CompanyMocks.address.state,
+  //       street: CompanyMocks.address.street,
+  //       number: CompanyMocks.address.number,
+  //       complement: CompanyMocks.address.complement,
+  //     },
+  //   };
 
-    if (isValid()) {
-      const res = await signup(data);
-      if (res.status === 201) {
-        console.debug('CRIADO', res.status);
-        navigation.navigate('SignIn');
-      }
+  //   setValidated(true);
 
-      console.error('NÃO CRIADO', res);
+  //   if (isValid()) {
+  //     const res = await signup(data);
+  //     if (res.status === 201) {
+  //       console.debug('CRIADO', res.status);
+  //       navigation.navigate('SignIn');
+  //     }
 
-    }
-  };
-
-  const isValid = () => {
-    return (
-      !!password &&
-      !!passwordConfirmation &&
-      !!name &&
-      !!cnpj &&
-      !!telephone &&
-      !!cep &&
-      !!city &&
-      !!state &&
-      !!street &&
-      !!number &&
-      !!complement &&
-      !!email
-    );
-  };
+  //     console.error('NÃO CRIADO', res);
+  //   }
+  // };
 
   return (
     <S.Wrapper>
-      <S.Title>Cadastro</S.Title>
-      <S.WrapperCompany>
-        <Input
-          autoCompleteType={false}
-          placeholder="Nome"
-          textContentType="name"
-          onChangeText={value => setName(value)}
-          value={name}
-          style={
-            validated && name === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
+      <S.ScrollView>
+        <S.LogoWrapper>
+          <S.Image source={logo_com_nome} />
+        </S.LogoWrapper>
 
-        <Input
-          autoCompleteType={false}
-          placeholder="CNPJ"
-          keyboardType="numeric"
-          onChangeText={value => setCnpj(value)}
-          value={cnpj}
-          style={
-            validated && cnpj === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
+        <S.WrapperSteps>
+          <S.Steps active={step === STEP.step1}>
+            <S.StepsIcon source={signup_step1} />
+          </S.Steps>
 
-        <Input
-          autoCompleteType={false}
-          placeholder="Telefone"
-          keyboardType="numeric"
-          onChangeText={value => setTelephone(value)}
-          value={telephone}
-          style={
-            validated &&
-            telephone === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
-      </S.WrapperCompany>
+          <S.Steps active={step === STEP.step2}>
+            <S.StepsIcon source={signup_step2} />
+          </S.Steps>
 
-      <S.WrapperAddress>
-        <Input
-          autoCompleteType={false}
-          placeholder="Rua"
-          textContentType="streetAddressLine1"
-          onChangeText={value => setStreet(value)}
-          value={street}
-          style={
-            validated && street === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
+          <S.Steps active={step === STEP.step3}>
+            <S.StepsIcon source={signup_step3} />
+          </S.Steps>
+        </S.WrapperSteps>
+        <S.StepsSelected step={step} />
 
-        <Input
-          autoCompleteType={false}
-          placeholder="CEP"
-          keyboardType="numeric"
-          textContentType="postalCode"
-          onChangeText={value => setCep(value)}
-          value={cep}
-          style={
-            validated && cep === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
+        <S.Container>
+          {step === STEP.step1 && (
+            <UseInfo handleUpdateProps={handleUpdateProps} company={company} />
+          )}
 
-        <Input
-          autoCompleteType={false}
-          placeholder="Número"
-          keyboardType="numeric"
-          onChangeText={value => setNumber(value)}
-          value={number}
-          style={
-            validated && number === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
-
-        <Input
-          autoCompleteType={false}
-          placeholder="Cidade"
-          textContentType="addressCity"
-          onChangeText={value => setCity(value)}
-          value={city}
-          style={
-            validated && city === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
-
-        <Input
-          autoCompleteType={false}
-          placeholder="UF"
-          textContentType="addressCityAndState"
-          onChangeText={value => setState(value)}
-          value={state}
-          style={
-            validated && state === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
-
-        <Input
-          autoCompleteType={false}
-          placeholder="Complemento"
-          onChangeText={value => setComplement(value)}
-          value={complement}
-          style={
-            validated &&
-            complement === '' && {borderWidth: 1, borderColor: 'red'}
-          }
-        />
-      </S.WrapperAddress>
-
-      <Input
-        autoCompleteType={false}
-        placeholder="Email"
-        textContentType="emailAddress"
-        onChangeText={value => setEmail(value)}
-        value={email}
-        style={
-          validated && email === '' && {borderWidth: 1, borderColor: 'red'}
-        }
-      />
-
-      <Input
-        autoCompleteType={false}
-        placeholder="senha"
-        secureTextEntry={true}
-        onChangeText={value => setPassword(value)}
-        value={password}
-        style={
-          validated && password === '' && {borderWidth: 1, borderColor: 'red'}
-        }
-      />
-
-      <Input
-        autoCompleteType={false}
-        placeholder="confirmar senha"
-        secureTextEntry={true}
-        onChangeText={value => setPasswordConfirmation(value)}
-        value={passwordConfirmation}
-        style={
-          validated &&
-          passwordConfirmation === '' && {borderWidth: 1, borderColor: 'red'}
-        }
-      />
+          {step === STEP.step2 && (
+            <Address handleUpdateProps={handleUpdateProps} company={company} />
+          )}
+        </S.Container>
+      </S.ScrollView>
 
       <S.Footer>
-        <Buttom title="Confirmar" callback={handleConfirm} />
-        <S.GoBack onPress={() => navigation.goBack()}>
-          <S.GoBackText>Voltar</S.GoBackText>
-        </S.GoBack>
+        <Buttom color="buttonDefault" title="PROXIMO" callback={nextStep} />
+        <S.Goback onPress={goBack}>
+          <S.GobackText>VOLTAR</S.GobackText>
+        </S.Goback>
       </S.Footer>
     </S.Wrapper>
   );

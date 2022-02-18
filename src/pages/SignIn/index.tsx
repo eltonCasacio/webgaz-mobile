@@ -7,9 +7,10 @@ import {useAuth} from '../../contexts/auth';
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
 
-const logo_com_nome = require('../../assets/logo-com-nome.png');
 
 const SignIn: React.FC = () => {
+  const logo_com_nome = require('../../assets/logo-com-nome.png');
+  
   const navigation = useNavigation();
   const [username, setUsername] = useState('teste');
   const [usernameError, setUsernameError] = useState(false);

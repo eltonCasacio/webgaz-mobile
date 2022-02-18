@@ -55,8 +55,8 @@ const ResetPassword: React.FC = () => {
           callback={handleResetPassword}
         />
       </S.Footer>
-      <S.Goback>
-        <MyLink screen="SignIn" title="Voltar" navigation={navigation} />
+      <S.Goback onPress={() => navigation.goBack()}>
+        <S.GobackText>VOLTAR</S.GobackText>
       </S.Goback>
     </S.Wrapper>
   );

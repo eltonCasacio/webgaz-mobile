@@ -5,7 +5,8 @@ export const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 0 15px;
+  padding-bottom: 35px;
   background-color: ${Theme.colors.primary};
 `;
 
@@ -29,31 +30,6 @@ export const Label = styled.Text`
   font-weight: bold;
 `;
 
-export const InputWrapper = styled.View`
-  width: 100%;
-  margin-top: 10%;
-`;
-
-export const InputLabel = styled.Text`
-  color: ${Theme.colors.white};
-  margin-bottom: 2px;
-  padding: 0 5px;
-  font-size: 16px;
-`;
-
-export const SignupForgotPassword = styled.View`
-  width: 100%;
-  justify-content: space-between;
-  flex-direction: row;
-  padding: 0 5px;
-  margin-top: 15px;
-`;
-
-export const SignupForgotPasswordText = styled.Text`
-  color: ${Theme.colors.white};
-  margin: 15px 0;
-  font-size: 16px;
-`;
 
 type InputParams = {hasError: boolean};
 export const Input = styled.TextInput<InputParams>`
@@ -68,9 +44,34 @@ export const Input = styled.TextInput<InputParams>`
   `}
 `;
 
+export const InputWrapper = styled.View`
+  width: 100%;
+  margin-top: 20px;
+`;
+
+export const InputLabel = styled.Text`
+  color: ${Theme.colors.white};
+  margin-bottom: 2px;
+  padding: 0 5px;
+  font-size: 16px;
+`;
+
+export const SignupForgotPassword = styled.View`
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 15px;
+`;
+
+export const SignupForgotPasswordText = styled.Text`
+  color: ${Theme.colors.white};
+  font-size: 14px;
+`;
+
+
 export const Footer = styled.View`
   width: 100%;
-  justify-content: center;
+  flex: auto;
+  justify-content: flex-end;
   align-items: center;
-  margin-top: 44%;
 `;

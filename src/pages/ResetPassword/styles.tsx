@@ -5,7 +5,7 @@ export const Wrapper = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 0 15px;
   background-color: ${Theme.colors.primary};
 `;
 
@@ -68,7 +68,13 @@ export const Footer = styled.View`
   margin-bottom: 5px;
 `;
 
-export const Goback = styled.View`
+export const Goback = styled.TouchableOpacity`
   width: 100%;
   align-items: center;
+  padding-bottom: 10px;
+`;
+
+export const GobackText = styled.Text`
+  color: ${Theme.colors.white};
+  font-size: 14px;
 `;
