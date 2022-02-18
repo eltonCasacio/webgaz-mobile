@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components/native';
-import Theme from '../../styles/theme';
+import Theme from '../../../styles/theme';
 
 export const Address = styled.View`
   width: 100%;
@@ -7,6 +7,7 @@ export const Address = styled.View`
 
 export const InputWrapper = styled.View`
   width: 100%;
+  margin-top: 25px;
 `;
 
 export const InputLabel = styled.Text`
@@ -48,12 +49,4 @@ export const Telephone = styled(InputWrapper)`
 
 export const Cep = styled(InputWrapper)`
   width: 40%;
-`;
-
-export const Label = styled.Text`
-  align-self: center;
-  color: ${Theme.colors.white};
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 20%;
 `;

@@ -1,18 +1,11 @@
 import styled, {css} from 'styled-components/native';
-import Theme from '../../styles/theme';
+import Theme from '../../../styles/theme';
 
-export const UseInfo = styled.View`
+export const Wrapper = styled.View`
   width: 100%;
-`;
-
-export const WrapperPassword = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-export const InputPassword = styled.View`
-  width: 47%;
-  margin-top: 25px;
+  flex: 1;
+  height: 100%;
+  margin-top: 28%;
 `;
 
 export const InputWrapper = styled.View`
@@ -38,12 +31,4 @@ export const Input = styled.TextInput<InputParams>`
     background-color: ${Theme.colors.bgInput};
     border: ${hasError ? 'solid 1px #D27A7A' : 'none'};
   `}
-`;
-
-export const Label = styled.Text`
-  align-self: center;
-  color: ${Theme.colors.white};
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 20%;
 `;

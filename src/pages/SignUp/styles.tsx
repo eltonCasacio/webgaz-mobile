@@ -61,14 +61,6 @@ export const StepsSelected = styled.View<StepSelectedProps>`
   `}
 `;
 
-export const Label = styled.Text`
-  align-self: center;
-  color: ${Theme.colors.white};
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 20%;
-`;
-
 export const Container = styled.View`
   padding: 0 15px;
 `;
@@ -78,6 +70,7 @@ export const Footer = styled.View`
   justify-content: flex-end;
   align-items: center;
   padding: 0 15px;
+  margin-top: 20px;
 `;
 
 export const Goback = styled.TouchableOpacity`
@@ -89,4 +82,12 @@ export const Goback = styled.TouchableOpacity`
 export const GobackText = styled.Text`
   color: ${Theme.colors.white};
   font-size: 14px;
+`;
+
+export const Label = styled.Text`
+  align-self: center;
+  color: ${Theme.colors.white};
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
 `;

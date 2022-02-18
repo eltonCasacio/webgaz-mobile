@@ -1,4 +1,3 @@
-import Address from './Address';
 import Base from './Base';
 import Buttom from './Buttom';
 import Card from './Card';
@@ -10,7 +9,9 @@ import InputText from './InputText';
 import Loading from './Loading';
 import MyLink from './MyLink';
 import Title from './Title';
-import UseInfo from './UseInfo';
+import Address from './signup/Address';
+import UseInfo from './signup/UseInfo';
+import Rede from './signup/Rede';
 
 export {
   Address,
@@ -26,4 +27,5 @@ export {
   MyLink,
   Title,
   UseInfo,
+  Rede
 };

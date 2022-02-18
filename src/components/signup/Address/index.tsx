@@ -1,5 +1,5 @@
 import React from 'react';
-import {CompanyProps} from '../../pages/SignUp';
+import {CompanyProps} from '../../../pages/SignUp';
 import * as S from './styles';
 
 export type UserInfoProps = {
@@ -66,8 +66,6 @@ const Address: React.FC<UserInfoProps> = props => (
         />
       </S.Cep>
     </S.HorizontalDirection>
-
-    <S.Label>Cadastrar Empresa</S.Label>
   </S.Address>
 );
 
