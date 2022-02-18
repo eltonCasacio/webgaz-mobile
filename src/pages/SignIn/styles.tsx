@@ -3,6 +3,8 @@ import Theme from '../../styles/theme';
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   background-color: ${Theme.colors.primary};
 `;
@@ -10,7 +12,6 @@ export const Wrapper = styled.SafeAreaView`
 export const Content = styled.View`
   flex: 1;
   width: 100%;
-  justify-content: flex-start;
   align-items: center;
 `;
 
@@ -71,4 +72,5 @@ export const Footer = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
+  margin-top: 44%;
 `;

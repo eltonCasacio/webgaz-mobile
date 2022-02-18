@@ -12,6 +12,7 @@ const AuthRoutes: React.FC = () => (
     screenOptions={{
       headerShown: false,
       contentStyle: {backgroundColor: 'transparent'},
+      animation: 'none',
     }}>
     <AuthStack.Screen
       name="SignIn"

@@ -34,13 +34,13 @@ const SignIn: React.FC = () => {
 
   return (
     <S.Wrapper>
-      <S.Content>
-        <S.LogoWrapper>
-          <S.Image source={logo_com_nome} />
-        </S.LogoWrapper>
+      <S.LogoWrapper>
+        <S.Image source={logo_com_nome} />
+      </S.LogoWrapper>
 
+      <S.Content>
         <S.Label>Login</S.Label>
-        
+
         <S.InputWrapper>
           <S.InputLabel>Nome do Usuário</S.InputLabel>
           <S.Input
@@ -69,11 +69,15 @@ const SignIn: React.FC = () => {
 
           <MyLink screen="SignUp" title="Cadastrar" navigation={navigation} />
         </S.SignupForgotPassword>
-      </S.Content>
 
-      <S.Footer>
-        <Buttom color="buttonDefault" title="ENTRAR" callback={handleSignIn} />
-      </S.Footer>
+        <S.Footer>
+          <Buttom
+            color="buttonDefault"
+            title="ENTRAR"
+            callback={handleSignIn}
+          />
+        </S.Footer>
+      </S.Content>
     </S.Wrapper>
   );
 };
