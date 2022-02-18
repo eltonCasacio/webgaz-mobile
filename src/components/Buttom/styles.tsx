@@ -1,12 +1,15 @@
 import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
 
-export const Wrapper = styled.TouchableOpacity`
-  ${() => css`
+export type WrapperParams = {
+  color: 'buttonDefault' | 'buttonDanger' | 'buttonConfirm';
+};
+export const Wrapper = styled.TouchableOpacity<WrapperParams>`
+  ${({color}) => css`
     width: 100%;
-    background-color: ${Theme.colors.secondary};
-    border-radius: 2px;
-    padding: 5px;
+    background-color: ${Theme.colors[color]};
+    border-radius: 12px;
+    padding: 15px;
   `}
 `;
 

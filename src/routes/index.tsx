@@ -20,7 +20,7 @@ const Routes: React.FC = () => {
   //   <AuthRoutes />
   // );
 
-  return <AppRoutes />;
+  return <AuthRoutes />;
 };
 
 export default Routes;

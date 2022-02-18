@@ -8,15 +8,17 @@ import Divider from './Divider';
 import Loading from './Loading';
 import MyLink from './MyLink';
 import Title from './Title';
+import InputText from './InputText';
 
 export {
-  Header,
-  Footer,
   Base,
   Buttom,
   Card,
   CardPurchase,
   Divider,
+  Footer,
+  Header,
+  InputText,
   Loading,
   MyLink,
   Title,

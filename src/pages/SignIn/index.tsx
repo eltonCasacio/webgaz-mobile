@@ -1,69 +1,78 @@
 import * as S from './styles';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {Input} from 'react-native-elements';
+
+import {useAuth} from '../../contexts/auth';
+
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
-import {useAuth} from '../../contexts/auth';
+
+const logo_com_nome = require('../../assets/logo-com-nome.png');
 
 const SignIn: React.FC = () => {
   const navigation = useNavigation();
-  const [username, setUsername] = useState('');
-  const [usernameError, setUsernameError] = useState('');
+  const [username, setUsername] = useState('teste');
+  const [usernameError, setUsernameError] = useState(false);
 
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [password, setPassword] = useState('testes');
+  const [passwordError, setPasswordError] = useState(false);
 
-  const [info, setInfo] = useState('');
+  function validate() {
+    setUsernameError(!username);
+    setPasswordError(!password);
+
+    return !!username && !!password;
+  }
 
   const {signIn} = useAuth();
 
   const handleSignIn = async () => {
-    setUsernameError(username ? '' : 'Campo obrigatório');
-    setPasswordError(password ? '' : 'Campo obrigatório');
-
-    if (username && password) {
+    if (validate()) {
       const {msg, severity} = await signIn({email: username, password});
-      if (severity === 'error') {
-        setInfo(msg);
-      }
     }
   };
 
   return (
     <S.Wrapper>
       <S.Content>
-        <Input
-          autoCompleteType={false}
-          keyboardType="email-address"
-          placeholder="E-mail"
-          leftIcon={<Icon name="at" size={18} color="#9d9d9d" />}
-          onChangeText={text => setUsername(text)}
-          errorMessage={usernameError}
-        />
+        <S.LogoWrapper>
+          <S.Image source={logo_com_nome} />
+        </S.LogoWrapper>
 
-        <Input
-          autoCompleteType={false}
-          placeholder="senha"
-          leftIcon={<Icon name="lock" size={18} color="#9d9d9d" />}
-          secureTextEntry={true}
-          onChangeText={text => setPassword(text)}
-          errorMessage={passwordError}
-        />
+        <S.Label>Login</S.Label>
+        
+        <S.InputWrapper>
+          <S.InputLabel>Nome do Usuário</S.InputLabel>
+          <S.Input
+            hasError={usernameError}
+            onChangeText={text => setUsername(text)}
+            value={username}
+          />
+        </S.InputWrapper>
 
-        <S.Info>{info}</S.Info>
+        <S.InputWrapper>
+          <S.InputLabel>Senha</S.InputLabel>
+          <S.Input
+            hasError={passwordError}
+            secureTextEntry={true}
+            onChangeText={text => setPassword(text)}
+            value={password}
+          />
+        </S.InputWrapper>
 
-        <MyLink
-          screen="ResetPassword"
-          title="Esqueci minha senha"
-          navigation={navigation}
-        />
+        <S.SignupForgotPassword>
+          <MyLink
+            screen="ResetPassword"
+            title="Esqueci minha senha"
+            navigation={navigation}
+          />
+
+          <MyLink screen="SignUp" title="Cadastrar" navigation={navigation} />
+        </S.SignupForgotPassword>
       </S.Content>
 
       <S.Footer>
-        <Buttom title="ENTRAR" callback={handleSignIn} />
-        <MyLink screen="SignUp" title="Criar conta" navigation={navigation} />
+        <Buttom color="buttonDefault" title="ENTRAR" callback={handleSignIn} />
       </S.Footer>
     </S.Wrapper>
   );

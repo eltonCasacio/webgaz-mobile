@@ -31,6 +31,10 @@ export default {
     gray: '#8F8F8F',
     darkGray: '#2E2F42',
     border: '#2e9aff',
+    bgInput: '#2F2C44',
+    buttonDefault: '#867AD2',
+    buttonDanger: '#D27A7A',
+    buttonConfirm: '#7AD27D',
   },
   spacings: {
     xxsmall: '0.5%',
