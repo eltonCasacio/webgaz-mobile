@@ -33,7 +33,7 @@ export const Order = styled.TouchableOpacity`
   align-items: center;
 `;
 export const OrderText = styled.Text`
-  color: ${Theme.colors.gray};
+  color: ${Theme.colors.white};
   text-align: right;
   padding-bottom: 2.8px;
   margin-right: 5px;
@@ -47,6 +47,7 @@ export const CardPrice = styled.View`
     padding: 5px;
     border: solid 2px #a4a2a24d;
     margin-bottom: 20%;
+    background-color: ${Theme.colors.secondary};
   `}
 `;
 

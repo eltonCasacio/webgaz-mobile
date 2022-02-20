@@ -18,7 +18,7 @@ const PurchaseOrder = ({navigation}) => {
         <S.Label>Pedidos</S.Label>
 
         <S.SearchWrapper>
-          <S.SearchIcon source={require('../../assets/search.png')} />
+          <S.SearchIcon source={require('../../assets/search.png')}/>
           <S.SearchInput onChangeText={text => handleSearch(text)} />
         </S.SearchWrapper>
 

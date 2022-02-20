@@ -22,15 +22,19 @@ export const SearchWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 0 15px;
-  margin: 0 4px 30px;
-  border-radius: 10px;
-  background-color: #2f2c44;
+  margin: 0 3px 30px;
+  border-radius: 5px;
+  background-color: ${Theme.colors.secondary};
+  border-color: ${Theme.colors.gray};
+  border-width: 0.3px;
 `;
 export const SearchInput = styled.TextInput`
   width: 100%;
   color: ${Theme.colors.text};
+  font-size: 18px;
 `;
 export const SearchIcon = styled.Image`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 `;

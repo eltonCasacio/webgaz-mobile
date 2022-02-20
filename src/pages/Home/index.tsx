@@ -42,7 +42,7 @@ const Home: React.FC = () => {
         <S.Order onPress={() => linkTo('/Inicio')}>
           <S.OrderText>Fazer Pedido</S.OrderText>
           <S.OrderIcon>
-            <AntDesign name="right" color={'#8f8f8f'} size={18} />
+            <AntDesign name="right" color={'#fff'} size={18} />
           </S.OrderIcon>
         </S.Order>
 

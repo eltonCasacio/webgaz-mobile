@@ -4,13 +4,13 @@ import Theme from '../../styles/theme';
 export const Wrapper = styled.View`
   ${() => css`
     align-items: center;
-    background-color: ${Theme.colors.primary};
+    background-color: ${Theme.colors.secondary};
     padding: 5px 15px;
     margin: 0 3px;
     margin-bottom: 10px;
     border-radius: 5px;
 
-    border-color: ${Theme.colors.lightGray};
+    border-color: ${Theme.colors.gray};
     border-width: 0.3px;
   `}
 `;
