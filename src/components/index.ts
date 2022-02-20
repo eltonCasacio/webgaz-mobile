@@ -12,6 +12,8 @@ import Title from './Title';
 import Address from './signup/Address';
 import UseInfo from './signup/UseInfo';
 import Rede from './signup/Rede';
+import CardPurchaseDetails from './CardPurchaseDetails';
+import CardNotification from './CardNotification';
 
 export {
   Address,
@@ -27,5 +29,7 @@ export {
   MyLink,
   Title,
   UseInfo,
-  Rede
+  Rede,
+  CardPurchaseDetails,
+  CardNotification
 };

@@ -14,27 +14,28 @@ const AppRoutes: React.FC = () => {
       screenOptions={{
         headerShown: false,
         contentStyle: {backgroundColor: 'transparent'},
+        animation: 'none',
       }}>
       <AppStack.Screen
         name="Inicio"
         component={Home}
-        options={{title: 'Tabela de Preços', animation: 'none'}}
+        options={{title: 'Tabela de Preços'}}
       />
       <AppStack.Screen
         name="Perfil"
         component={ProfileUser}
-        options={{title: 'Perfil', animation: 'none'}}
+        options={{title: 'Perfil'}}
       />
       <AppStack.Screen
         name="Pedidos"
         component={PurchaseOrder}
-        options={{title: 'Pedidos', animation: 'none'}}
+        options={{title: 'Pedidos'}}
       />
 
       <AppStack.Screen
         name="Detalhes"
         component={PurchaseOrderDetails}
-        options={{title: 'Detalhes do Pedido', animation: 'none'}}
+        options={{title: 'Detalhes do Pedido'}}
       />
     </AppStack.Navigator>
   );

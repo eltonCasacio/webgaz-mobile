@@ -3,10 +3,7 @@ import Theme from '../../styles/theme';
 
 export const Wrapper = styled.View`
   flex: 1;
-  background-color: #ffffff;
-  margin: 0 10px;
-  padding: 0 5px;
-  border-radius: 2px;
+  background-color: ${Theme.colors.primary};
 `;
 
 export const ScrollView = styled.ScrollView`

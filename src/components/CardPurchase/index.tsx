@@ -1,5 +1,4 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
 import * as S from './styles';
 
 export default function CardPurchase({data, navigation}) {
@@ -12,14 +11,14 @@ export default function CardPurchase({data, navigation}) {
       <S.Header>
         <S.Text>{data?.order}</S.Text>
         <S.Text>{data?.date}</S.Text>
-        <TouchableOpacity onPress={openDetails}>
-          <S.Details>Ver mais</S.Details>
-        </TouchableOpacity>
+        <S.TouchableOpacity onPress={openDetails}>
+          <S.Details source={require('../../assets/details.png')} />
+        </S.TouchableOpacity>
       </S.Header>
       <S.Status>
         <S.StatusColor
           statusColor={
-            data.status === 'Em analise' ? '#ff0' : '#0f0'
+            data.status === 'Em analise' ? '#aaaa0d' : '#0c910c'
           }></S.StatusColor>
         <S.Text>{data?.status}</S.Text>
       </S.Status>

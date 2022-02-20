@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './styles';
-import Title from '../../components/Title';
+import {Title, Footer, Header} from '../../components';
 import {CompanyMocks} from '../../mocks/Company';
 
 const Profile: React.FC = () => {
@@ -9,7 +9,7 @@ const Profile: React.FC = () => {
   };
   return (
     <>
-      <Title>PERFIL</Title>
+     <Header />
       <S.Wrapper>
         <S.ScrollView>
           <S.WrapperLine>
@@ -70,6 +70,7 @@ const Profile: React.FC = () => {
           <S.Editar title="Editar" onPress={handleEdit}></S.Editar>
         </S.ScrollView>
       </S.Wrapper>
+      <Footer />
     </>
   );
 };

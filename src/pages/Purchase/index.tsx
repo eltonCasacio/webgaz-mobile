@@ -1,11 +1,14 @@
 import React from 'react';
 import * as S from './styles';
-import Card from '../../components/Card';
+import {Header, Footer} from '../../components';
 
 const Purchase: React.FC = () => {
   return (
-    <S.Wrapper>
-    </S.Wrapper>
+    <>
+      <Header />
+      <S.Wrapper></S.Wrapper>
+      <Footer />
+    </>
   );
 };
 

@@ -24,10 +24,10 @@ export default {
   colors: {
     primary: '#1C1A29',
     secondary: '#2e9aff',
-    mainBg: '#00227e',
+    mainBg: '#0e0d2e',
     white: '#FAFAFA',
     black: '#030517',
-    lightGray: '#EAEAEA',
+    lightGray: '#9b9b9b7c',
     gray: '#8F8F8F',
     darkGray: '#2E2F42',
     border: '#2e9aff',
@@ -35,6 +35,7 @@ export default {
     buttonDefault: '#867AD2',
     buttonDanger: '#D27A7A',
     buttonConfirm: '#7AD27D',
+    text: '#c5c5c5',
   },
   spacings: {
     xxsmall: '0.5%',
