@@ -35,7 +35,7 @@ export const SendDocument = styled.Text`
 `;
 export const OrderIcon = styled.View``;
 
-export const CardPrice = styled.TouchableOpacity`
+export const CardPrice = styled.View`
   ${() => css`
     justify-content: space-between;
     border-radius: 15px;
@@ -146,7 +146,9 @@ export const WhatsAppText = styled.Text`
   font-size: 16px;
 `;
 
-export const PurchaseButton = styled.Text`
+export const PurchaseButton = styled.TouchableOpacity``;
+
+export const PurchaseButtonText = styled.Text`
   color: ${Theme.colors.white};
   font-size: 20px;
   font-weight: bold;

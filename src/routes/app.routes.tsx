@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import ProfileUser from '../pages/ProfileUser';
 import PurchaseOrder from '../pages/PurchaseOrder';
 import PurchaseOrderDetails from '../pages/PurchaseOrderDetails';
+import Purchase from '../pages/Purchase';
 
 const AppStack = createNativeStackNavigator();
 
@@ -25,6 +26,11 @@ const AppRoutes: React.FC = () => {
         name="Perfil"
         component={ProfileUser}
         options={{title: 'Perfil'}}
+      />
+      <AppStack.Screen
+        name="Pedir"
+        component={Purchase}
+        options={{title: 'Pedir'}}
       />
       <AppStack.Screen
         name="Pedidos"
