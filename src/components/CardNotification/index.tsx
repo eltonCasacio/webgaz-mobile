@@ -33,7 +33,7 @@ const CardNotification: React.FC<ModalNotificationProps> = params => {
             params.setModalVisible(!params.modalVisible);
             params.handleNotificationRead();
           }}>
-          <Text style={styles.textStyle}>SAIR</Text>
+          <Text style={styles.textStyle}>FECHAR</Text>
         </Pressable>
       </View>
     </Modal>

@@ -3,17 +3,14 @@ import UserIcon from 'react-native-vector-icons/AntDesign';
 import NotificationIcon from 'react-native-vector-icons/Ionicons';
 
 import CardNotification from '../CardNotification';
+import ModalUserInfo from '../ModalUserInfo';
 
 import * as S from './styles';
 
-export type HeaderParams = {
-  showMenu?: () => void;
-  handleNotification?: () => void;
-};
-
-const Header = (params: HeaderParams) => {
+const Header = () => {
   const [notification, setNotification] = React.useState(true);
   const [modaVisible, setModalVisible] = React.useState(false);
+  const [modaUserInfoVisible, setModaUserInfoVisible] = React.useState(false);
 
   function handleNotificationRead() {
     setNotification(false);
@@ -26,7 +23,12 @@ const Header = (params: HeaderParams) => {
         setModalVisible={setModalVisible}
         handleNotificationRead={handleNotificationRead}
       />
-      <S.ImageUser onPress={params.showMenu}>
+      <ModalUserInfo
+        modalVisible={modaUserInfoVisible}
+        setModalVisible={setModaUserInfoVisible}
+      />
+
+      <S.ImageUser onPress={() => setModaUserInfoVisible(true)}>
         <UserIcon name="user" size={18} color="#fcfcfc" />
       </S.ImageUser>
       <S.Location>Webgaz</S.Location>
