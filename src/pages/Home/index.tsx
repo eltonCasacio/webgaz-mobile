@@ -1,9 +1,10 @@
 import React from 'react';
+import {TouchableOpacity, Linking} from 'react-native';
 import {useLinkTo} from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {Header, Footer} from '../../components';
+
+import {Header, Footer, LinkWhatsapp} from '../../components';
 import * as S from './styles';
 
 const images = [
@@ -18,6 +19,12 @@ function renderItem({item}) {
 
 const Home: React.FC = () => {
   const linkTo = useLinkTo();
+
+  const handleWhatsApp = () => {
+    Linking.openURL(
+      `whatsapp://send?text=${'Teste webgaz'}&phone=${'+5519971196825'}`,
+    );
+  };
 
   return (
     <>
@@ -39,19 +46,17 @@ const Home: React.FC = () => {
           />
         </S.WrapperCarousel>
 
-        <S.Order onPress={() => linkTo('/Inicio')}>
-          <S.OrderText>Fazer Pedido</S.OrderText>
-          <S.OrderIcon>
-            <AntDesign name="right" color={'#fff'} size={18} />
-          </S.OrderIcon>
-        </S.Order>
+        <TouchableOpacity onPress={handleWhatsApp}>
+          <LinkWhatsapp
+            text="enviar comprovante de pagamento"
+            phone="+5519971196825"
+          />
+        </TouchableOpacity>
 
         <S.CardPrice>
           <S.CardPriceTitle>
-            <S.CardPriceIcon>
-              <Entypo name="price-tag" color={'#fcfcfc'} size={22} />
-            </S.CardPriceIcon>
-            <S.CardPriceTitleText>Preços Diários</S.CardPriceTitleText>
+            <Entypo name="price-tag" color={'#fcfcfc'} size={16} />
+            <S.CardPriceTitleText>Preços do dia</S.CardPriceTitleText>
           </S.CardPriceTitle>
 
           <S.CardPriceDate>
@@ -62,12 +67,7 @@ const Home: React.FC = () => {
 
             <S.CardPriceDateItem>
               <S.CardPriceDateHourLabel>dia/mes</S.CardPriceDateHourLabel>
-              <S.CardPriceDateHour>16:00</S.CardPriceDateHour>
-            </S.CardPriceDateItem>
-
-            <S.CardPriceDateItem>
-              <S.CardPriceDateHourLabel>--</S.CardPriceDateHourLabel>
-              <S.CardPriceDateHour>--</S.CardPriceDateHour>
+              <S.CardPriceDateHour>21/02</S.CardPriceDateHour>
             </S.CardPriceDateItem>
           </S.CardPriceDate>
 
@@ -80,7 +80,19 @@ const Home: React.FC = () => {
             <S.CardPriceFuelLabel>Gasolina</S.CardPriceFuelLabel>
             <S.CardPriceFuelPrice>R$6,34</S.CardPriceFuelPrice>
           </S.CardPriceFuel>
+
+          <S.PurchaseButton>FAZER PEDIDO</S.PurchaseButton>
         </S.CardPrice>
+
+        <S.Operation>
+          <S.OperationTitleText>Horário para Pedidos</S.OperationTitleText>
+
+          <S.OperationDate>
+            <S.OperationDateItem>
+              <S.OperationHourLabel>08:00 as 16:00</S.OperationHourLabel>
+            </S.OperationDateItem>
+          </S.OperationDate>
+        </S.Operation>
       </S.Wrapper>
       <Footer />
     </>

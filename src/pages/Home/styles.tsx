@@ -3,8 +3,8 @@ import Theme from '../../styles/theme';
 
 export const Wrapper = styled.View`
   flex: 1;
-  justify-content: space-between;
-  padding: 0 5px;
+  justify-content: space-around;
+  padding: 0 10px;
   background-color: ${Theme.colors.primary};
 `;
 
@@ -13,9 +13,7 @@ export const WrapperCarousel = styled.View`
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    height: 30%;
-    margin-bottom: 30px;
-    margin-top: 10px;
+    height: 25%;
   `}
 `;
 
@@ -29,24 +27,20 @@ export const Image = styled.Image`
 export const Order = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 `;
-export const OrderText = styled.Text`
-  color: ${Theme.colors.white};
-  text-align: right;
-  padding-bottom: 2.8px;
-  margin-right: 5px;
+export const SendDocument = styled.Text`
+  text-align: center;
 `;
 export const OrderIcon = styled.View``;
 
-export const CardPrice = styled.View`
+export const CardPrice = styled.TouchableOpacity`
   ${() => css`
     justify-content: space-between;
     border-radius: 15px;
-    padding: 5px;
+    padding: 10px;
     border: solid 2px #a4a2a24d;
-    margin-bottom: 20%;
     background-color: ${Theme.colors.secondary};
   `}
 `;
@@ -57,12 +51,14 @@ export const CardPriceTitle = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  padding: 0 5px;
 `;
 
 export const CardPriceTitleText = styled.Text`
   color: ${Theme.colors.white};
-  margin-left: 10px;
-  font-size: 22px;
+  margin-left: 5px;
+  font-size: 26px;
   font-weight: bold;
 `;
 
@@ -87,17 +83,16 @@ export const CardPriceDate = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 20px 0;
+    margin: 20px 0 10px;
   `}
 `;
 
 export const CardPriceDateItem = styled.View`
   ${() => css`
     align-items: center;
-    width: 30%;
+    width: 45%;
     border-radius: 15px;
-    padding: 10px;
-    margin: 5px;
+    padding: 5px;
     border: solid 2px #a4a2a24d;
   `}
 `;
@@ -112,19 +107,7 @@ export const CardPriceDateHourLabel = styled.Text`
 export const CardPriceDateHour = styled.Text`
   ${() => css`
     color: ${Theme.colors.white};
-    font-size: 18px;
-  `}
-`;
-
-export const CardPriceDateDayLabel = styled.Text`
-  ${() => css`
-    justify-content: space-between;
-    height: 50%;
-    border-radius: 15px;
-    padding: 15px;
-    border: solid 2px #a4a2a24d;
-    margin-top: 10%;
-    /* background-color: #ffffff; */
+    font-size: 20px;
   `}
 `;
 
@@ -140,14 +123,64 @@ export const CardPriceFuel = styled.View`
 export const CardPriceFuelLabel = styled.Text`
   ${() => css`
     color: ${Theme.colors.gray};
-    font-size: 22px;
+    font-size: 24px;
+    text-transform: uppercase;
   `}
 `;
 
 export const CardPriceFuelPrice = styled.Text`
   ${() => css`
     color: ${Theme.colors.white};
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
+  `}
+`;
+
+export const WhatsApp = styled.TouchableOpacity`
+  align-items: center;
+  margin: 10% 0;
+`;
+
+export const WhatsAppText = styled.Text`
+  color: ${Theme.colors.white};
+  font-size: 16px;
+`;
+
+export const PurchaseButton = styled.Text`
+  color: ${Theme.colors.white};
+  font-size: 20px;
+  font-weight: bold;
+  border-top-width: 1px;
+  border-top-color: #a4a2a24d;
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+`;
+
+export const OperationDateItem = styled.View`
+  align-items: center;
+  flex-direction: row;
+  margin: 0 10px;
+`;
+
+export const Operation = styled.View`
+  align-items: center;
+`;
+
+export const OperationTitleText = styled.Text`
+  color: ${Theme.colors.white};
+  font-size: 18px;
+`;
+
+export const OperationDate = styled.View`
+  flex-direction: row;
+`;
+
+export const OperationHourLabel = styled.Text`
+  ${() => css`
+    color: ${Theme.colors.lightGray};
+    font-size: 18px;
   `}
 `;

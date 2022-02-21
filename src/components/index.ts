@@ -14,6 +14,7 @@ import UseInfo from './signup/UseInfo';
 import Rede from './signup/Rede';
 import CardPurchaseDetails from './CardPurchaseDetails';
 import CardNotification from './CardNotification';
+import LinkWhatsapp from './LinkWhatsapp';
 
 export {
   Address,
@@ -31,5 +32,6 @@ export {
   UseInfo,
   Rede,
   CardPurchaseDetails,
-  CardNotification
+  CardNotification,
+  LinkWhatsapp,
 };
