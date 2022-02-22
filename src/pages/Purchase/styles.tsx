@@ -1,5 +1,128 @@
-import styled from 'styled-components/native'
+import styled, {css} from 'styled-components/native';
+import Theme from '../../styles/theme';
 
 export const Wrapper = styled.View`
-  background-color: #f9fc42;
+  background-color: ${Theme.colors.primary};
+  flex: 1;
+  padding: 0 15px;
+`;
+
+export const Text = styled.Text`
+  color: ${Theme.colors.lightGray};
+  font-size: 16px;
+  margin-top: 30px;
+  padding-left: 3px;
+  text-transform: uppercase;
+`;
+
+export const Card = styled.View`
+  ${() => css`
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 2px #a4a2a24d;
+  `}
+`;
+
+export const CardTitle = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+`;
+
+export const CardTitleText = styled.Text`
+  color: ${Theme.colors.lightGray};
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+`;
+
+export const Divider = styled.View`
+  border: solid 1px #a4a2a24d;
+  width: 100%;
+  margin: 10px 0;
+`;
+
+export const LitersPrice = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const Liters = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const LitersText = styled.View`
+  padding-bottom: 30px;
+  margin-right: 10px;
+`;
+
+export const LitersInput = styled.TextInput`
+  background-color: ${Theme.colors.bgInput};
+  border-radius: 15px;
+  width: 45%;
+  text-align: center;
+  color: ${Theme.colors.white};
+`;
+
+export const Price = styled.Text`
+  color: ${Theme.colors.white};
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 5px;
+`;
+
+export const Payment = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const PaymentText = styled.Text`
+  color: ${Theme.colors.lightGray};
+  font-size: 16px;
+  margin-top: 30px;
+`;
+
+export const PaymentInputWrapper = styled.View`
+  align-items: center;
+  justify-content: space-between;
+  width: 48%;
+`;
+
+export const PaymentInput = styled.TextInput`
+  background-color: ${Theme.colors.bgInput};
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  color: ${Theme.colors.white};
+`;
+
+export const MessageFreight = styled.View`
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const MessageFreightTitle = styled.Text`
+  color: ${Theme.colors.warning};
+  font-size: 20px;
+  margin-top: 12%;
+`;
+
+export const MessageFreightMsg = styled.Text`
+  color: ${Theme.colors.lightGray};
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+`;
+
+export const Button = styled.View`
+  justify-content: flex-end;
+  flex: 1;
+  margin-bottom: 10px;
 `;

@@ -35,6 +35,7 @@ export default {
     buttonDefault: '#867AD2',
     buttonDanger: '#D27A7A',
     buttonConfirm: '#7AD27D',
+    warning: '#e7eb12',
     text: '#c5c5c5',
   },
   spacings: {
