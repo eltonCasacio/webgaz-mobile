@@ -18,28 +18,32 @@ const Header = () => {
 
   return (
     <S.Wrapper>
+      <S.ImageUser onPress={() => setModaUserInfoVisible(true)}>
+        <UserIcon name="user" size={20} color="#fcfcfc" />
+      </S.ImageUser>
+
+      <S.Location>Webgaz</S.Location>
+     
+      <S.Notification onPress={() => setModalVisible(true)}>
+        <NotificationIcon
+          name="notifications-outline"
+          size={30}
+          color="#fcfcfc"
+        />
+        {notification && <S.NotificationCircle />}
+      </S.Notification>
+
       <CardNotification
         modalVisible={modaVisible}
         setModalVisible={setModalVisible}
         handleNotificationRead={handleNotificationRead}
       />
+      
       <ModalUserInfo
         modalVisible={modaUserInfoVisible}
         setModalVisible={setModaUserInfoVisible}
       />
 
-      <S.ImageUser onPress={() => setModaUserInfoVisible(true)}>
-        <UserIcon name="user" size={18} color="#fcfcfc" />
-      </S.ImageUser>
-      <S.Location>Webgaz</S.Location>
-      <S.Notification onPress={() => setModalVisible(true)}>
-        <NotificationIcon
-          name="notifications-outline"
-          size={22}
-          color="#fcfcfc"
-        />
-        {notification && <S.NotificationCircle />}
-      </S.Notification>
     </S.Wrapper>
   );
 };

@@ -9,22 +9,22 @@ export const Wrapper = styled.View`
 
 export const Text = styled.Text`
   color: ${Theme.colors.lightGray};
-  font-size: 16px;
-  margin-top: 30px;
-  padding-left: 3px;
+  font-size: 18px;
+  margin-top: 25px;
+  padding-left: 2px;
   text-transform: uppercase;
 `;
 
 export const Card = styled.View`
   ${() => css`
     justify-content: space-between;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px;
     border: solid 2px #a4a2a24d;
   `}
 `;
 
-export const CardTitle = styled.View`
+export const CardTitle = styled.Pressable`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -35,9 +35,8 @@ export const CardTitle = styled.View`
 export const CardTitleText = styled.Text`
   color: ${Theme.colors.lightGray};
   margin-left: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-size: 18px;
+  padding: 5px 0;
 `;
 
 export const Divider = styled.View`
@@ -60,12 +59,13 @@ export const Liters = styled.View`
 export const LitersText = styled.View`
   padding-bottom: 30px;
   margin-right: 10px;
+  padding-left: 2px;
 `;
 
 export const LitersInput = styled.TextInput`
   background-color: ${Theme.colors.bgInput};
-  border-radius: 15px;
-  width: 45%;
+  border-radius: 5px;
+  width: 48%;
   text-align: center;
   color: ${Theme.colors.white};
 `;
@@ -86,7 +86,15 @@ export const Payment = styled.View`
 export const PaymentText = styled.Text`
   color: ${Theme.colors.lightGray};
   font-size: 16px;
-  margin-top: 30px;
+`;
+
+export const PaymentDateText = styled.Text`
+  color: ${Theme.colors.lightGray};
+  font-size: 18px;
+`;
+
+export const PaymentDate = styled.TouchableOpacity`
+  color: ${Theme.colors.lightGray};
 `;
 
 export const PaymentInputWrapper = styled.View`
@@ -101,6 +109,16 @@ export const PaymentInput = styled.TextInput`
   width: 100%;
   text-align: center;
   color: ${Theme.colors.white};
+  font-size: 18px;
+`;
+
+export const PaymentInputDate = styled.TouchableOpacity`
+  align-items: center;
+  background-color: ${Theme.colors.bgInput};
+  border-radius: 5px;
+  width: 100%;
+  color: ${Theme.colors.white};
+  padding: 12px;
 `;
 
 export const MessageFreight = styled.View`
@@ -111,7 +129,7 @@ export const MessageFreight = styled.View`
 export const MessageFreightTitle = styled.Text`
   color: ${Theme.colors.warning};
   font-size: 20px;
-  margin-top: 12%;
+  margin-top: 5%;
 `;
 
 export const MessageFreightMsg = styled.Text`
@@ -125,4 +143,15 @@ export const Button = styled.View`
   justify-content: flex-end;
   flex: 1;
   margin-bottom: 10px;
+`;
+
+export type RadioProps = {active: boolean};
+export const RadioButton = styled.TouchableOpacity<RadioProps>`
+  ${({active = false}) => css`
+    width: 20px;
+    height: 20px;
+    background-color: ${!active ? '#ffffff2d' : '#ffffffb5'};
+    border: solid 2px #fff;
+    border-radius: 200px;
+  `}
 `;

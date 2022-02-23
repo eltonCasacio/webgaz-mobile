@@ -7,14 +7,14 @@ export const Wrapper = styled.View`
   justify-content: space-between;
   align-items: center;
   background-color: ${Theme.colors.primary};
-  padding: 15px;
+  padding: 20px 15px 15px;
 `;
 export const ImageUser = styled.TouchableOpacity`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 27px;
-  height: 27px;
+  width: 35px;
+  height: 35px;
   border-radius: 300px;
   background-color: #ffffff67;
 `;
@@ -29,8 +29,8 @@ export const Notification = styled.TouchableOpacity``;
 export const NotificationCircle = styled.View`
   position: absolute;
   background-color: #eb5757;
-  width: 7px;
-  height: 7px;
+  width: 10px;
+  height: 10px;
   right: 15%;
   top: 10%;
   border-radius: 100px;
