@@ -88,6 +88,14 @@ export const PaymentText = styled.Text`
   font-size: 16px;
 `;
 
+
+export const PaymentSelectWrapper = styled.View`
+  height: 50px;
+  width: 100%;
+  background-color: ${Theme.colors.bgInput};
+  border-radius: 5px;
+`;
+
 export const PaymentDateText = styled.Text`
   color: ${Theme.colors.lightGray};
   font-size: 18px;

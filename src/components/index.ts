@@ -15,6 +15,7 @@ import Rede from './signup/Rede';
 import CardPurchaseDetails from './CardPurchaseDetails';
 import CardNotification from './CardNotification';
 import LinkWhatsapp from './LinkWhatsapp';
+import SelectPurchase from './SelectPurchase';
 
 export {
   Address,
@@ -34,4 +35,5 @@ export {
   CardPurchaseDetails,
   CardNotification,
   LinkWhatsapp,
+  SelectPurchase,
 };

@@ -1,8 +1,13 @@
-import React, {useState} from 'react';
-import * as S from './styles';
-import {Header, Footer, Buttom} from '../../components';
+import React, {useEffect, useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Platform} from 'react-native';
+
+import {Header, Footer, Buttom, SelectPurchase} from '../../components';
+
+import * as S from './styles';
+import {ShippingType} from '../../components/Card/styles';
+
+const PaymentTypeList = ['ANTECIPADO', 'À VISTA', '7 DIAS', '10 DIAS'];
 
 enum FuelType {
   'Gasolina' = 'Gasolina',
@@ -20,6 +25,7 @@ const Purchase: React.FC = () => {
 
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [paymentSelected, setPaymentSelected] = useState<string>('ANTECIPADO');
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate || date;
@@ -83,7 +89,13 @@ const Purchase: React.FC = () => {
         <S.Payment>
           <S.PaymentInputWrapper>
             <S.PaymentText>Forma de Pagamento</S.PaymentText>
-            <S.PaymentInput />
+            <S.PaymentSelectWrapper>
+              <SelectPurchase
+                options={PaymentTypeList}
+                onChangeSelected={setPaymentSelected}
+                option={paymentSelected}
+              />
+            </S.PaymentSelectWrapper>
           </S.PaymentInputWrapper>
 
           <S.PaymentInputWrapper>
@@ -104,12 +116,14 @@ const Purchase: React.FC = () => {
           </S.PaymentInputWrapper>
         </S.Payment>
 
-        <S.MessageFreight>
-          <S.MessageFreightTitle>Atenção</S.MessageFreightTitle>
-          <S.MessageFreightMsg>
-            Informamos que tera um acrescimo no valor total referente ao frete
-          </S.MessageFreightMsg>
-        </S.MessageFreight>
+        {shippingSelected === Shipping.Colocada && (
+          <S.MessageFreight>
+            <S.MessageFreightTitle>Atenção</S.MessageFreightTitle>
+            <S.MessageFreightMsg>
+              Informamos que tera um acrescimo no valor total referente ao frete
+            </S.MessageFreightMsg>
+          </S.MessageFreight>
+        )}
 
         <S.Button>
           <Buttom
