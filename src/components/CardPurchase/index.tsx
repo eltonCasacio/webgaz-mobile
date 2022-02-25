@@ -1,10 +1,20 @@
 import React from 'react';
 import * as S from './styles';
+import {PurchaseOrderProps} from '../../pages/PurchaseOrder';
 
-export default function CardPurchase({data, navigation}) {
+type CardPurchaseProps = {
+  data: PurchaseOrderProps;
+  navigation: any;
+};
+
+export default function CardPurchase({data, navigation}: CardPurchaseProps) {
   function openDetails() {
-    navigation.navigate('detalhes', {data: data});
+    navigation.navigate('detalhes', {purchaseOrder: data.order});
   }
+
+  React.useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <S.Wrapper>
@@ -23,8 +33,8 @@ export default function CardPurchase({data, navigation}) {
         <S.Text>{data?.status}</S.Text>
       </S.Status>
       <S.Description>
-        <S.Text>{data.type}</S.Text>
-        <S.Text>Total: R${data.total}</S.Text>
+        <S.Text>{data.fuelType}</S.Text>
+        <S.Text>Total: R${data.totalPrice}</S.Text>
       </S.Description>
     </S.Wrapper>
   );

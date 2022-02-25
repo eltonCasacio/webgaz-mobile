@@ -3,10 +3,8 @@ import Theme from '../../styles/theme';
 
 export const Wrapper = styled.View`
   flex: 1;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
   background-color: ${Theme.colors.primary};
+  padding: 15px;
 `;
 
 export const Content = styled.View`

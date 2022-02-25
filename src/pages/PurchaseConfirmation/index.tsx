@@ -66,7 +66,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
             </S.Line>
           </S.PurchaseWrapper>
 
-          <S.ShippingWrapper>
+          {purchase?.deliveryType === 'RETIRADA' && <S.ShippingWrapper>
             <S.Title>Detalhes da Transportadora</S.Title>
             <S.Column>
               <S.Description>Nome do Motorista</S.Description>
@@ -96,7 +96,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
                 <S.Value> {purchase?.plate}</S.Value>
               </S.Description>
             </S.Line>
-          </S.ShippingWrapper>
+          </S.ShippingWrapper>}
         </S.Content>
 
         <S.PaymentConfirmText>

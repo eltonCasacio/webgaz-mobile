@@ -38,3 +38,14 @@ export const SearchIcon = styled.Image`
   height: 18px;
   margin-right: 5px;
 `;
+
+export const Goback = styled.TouchableOpacity`
+  width: 100%;
+  align-items: center;
+  padding: 20px;
+`;
+
+export const GobackText = styled.Text`
+  color: ${Theme.colors.white};
+  font-size: 14px;
+`;

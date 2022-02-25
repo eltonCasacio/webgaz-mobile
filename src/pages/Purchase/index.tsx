@@ -144,7 +144,7 @@ const Purchase: React.FC = ({navigation}: any) => {
           </S.PaymentInputWrapper>
 
           <S.PaymentInputWrapper>
-            <S.PaymentText>Data de entrega</S.PaymentText>
+            <S.PaymentText>Data da Entrega</S.PaymentText>
             <S.PaymentInputDate onPress={() => setShow(true)}>
               <S.PaymentDateText>
                 {formatDate(new Date(purchase.date))}

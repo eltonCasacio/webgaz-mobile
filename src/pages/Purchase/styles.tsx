@@ -104,13 +104,14 @@ export const Payment = styled.View`
 export const PaymentText = styled.Text`
   color: ${Theme.colors.lightGray};
   font-size: 16px;
+  margin-left: 3px;
 `;
 
 export const PaymentSelectWrapper = styled.View`
   height: 50px;
   width: 100%;
   background-color: ${Theme.colors.bgInput};
-  border-radius: 5px;
+  border-radius: 4px;
 `;
 
 export const PaymentDateText = styled.Text`
@@ -123,14 +124,13 @@ export const PaymentDate = styled.TouchableOpacity`
 `;
 
 export const PaymentInputWrapper = styled.View`
-  align-items: center;
   justify-content: space-between;
   width: 48%;
 `;
 
 export const PaymentInput = styled.TextInput`
   background-color: ${Theme.colors.bgInput};
-  border-radius: 5px;
+  /* border-radius: 2px; */
   width: 100%;
   text-align: center;
   color: ${Theme.colors.white};
@@ -140,7 +140,7 @@ export const PaymentInput = styled.TextInput`
 export const PaymentInputDate = styled.TouchableOpacity`
   align-items: center;
   background-color: ${Theme.colors.bgInput};
-  border-radius: 5px;
+  border-radius: 4px;
   width: 100%;
   color: ${Theme.colors.white};
   padding: 12px;
@@ -170,7 +170,7 @@ export const Button = styled.View`
 `;
 
 export type RadioProps = {active: boolean};
-export const RadioButton = styled.TouchableOpacity<RadioProps>`
+export const RadioButton = styled.View<RadioProps>`
   ${({active = false}) => css`
     width: 20px;
     height: 20px;
