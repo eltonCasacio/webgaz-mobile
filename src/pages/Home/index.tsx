@@ -81,7 +81,7 @@ const Home: React.FC = () => {
             <S.CardPriceFuelPrice>R$6,34</S.CardPriceFuelPrice>
           </S.CardPriceFuel>
 
-          <S.PurchaseButton onPress={() => linkTo('/Pedir')}>
+          <S.PurchaseButton onPress={() => linkTo('/pedido')}>
             <S.PurchaseButtonText>FAZER PEDIDO</S.PurchaseButtonText>
           </S.PurchaseButton>
         </S.CardPrice>

@@ -1,48 +1,81 @@
+import {Platform, LogBox} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {Platform} from 'react-native';
 
 import {Header, Footer, Buttom, SelectPurchase} from '../../components';
-
+import {Purchase as PurchaseProps} from '../../types/Purchase';
+import {formatNumber, formatDate} from '../../utils';
 import * as S from './styles';
-import {ShippingType} from '../../components/Card/styles';
 
-const PaymentTypeList = ['ANTECIPADO', 'À VISTA', '7 DIAS', '10 DIAS'];
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
-enum FuelType {
-  'Gasolina' = 'Gasolina',
-  'Etanol' = 'Etanol',
+enum FuelEnum {
+  GASOLINA = 'GASOLINA',
+  ETANOL = 'ETANOL',
 }
 
-enum Shipping {
-  'Retirada' = 'Retirada',
-  'Colocada' = 'Colocada',
+enum ShippingEnum {
+  RETIRADA = 'RETIRADA',
+  COLACADO = 'COLACADO',
 }
 
-const Purchase: React.FC = () => {
-  const [fuelSelected, setFuelSelected] = useState(FuelType.Etanol);
-  const [shippingSelected, setShippingSelected] = useState(Shipping.Retirada);
+const Purchase: React.FC = ({navigation}: any) => {
+  const PaymentTypeList = ['ANTECIPADO', 'À VISTA', '7 DIAS', '10 DIAS'];
 
-  const [date, setDate] = useState(new Date());
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1);
+
   const [show, setShow] = useState(false);
-  const [paymentSelected, setPaymentSelected] = useState<string>('ANTECIPADO');
+  const [price, setPrice] = useState(6);
 
-  const onChange = (event: any, selectedDate: any) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-  };
+  const [purchase, setPurchase] = useState({
+    date: null,
+    deliveryType: 'RETIRADA',
+    fuelType: 'ETANOL',
+    liters: 1,
+    order: 1,
+    paymentType: 'ANTECIPADO',
+    totalPrice: 0,
+  } as PurchaseProps);
 
-  function formatDate() {
-    const dateFormated = new Date(date);
-    const day = dateFormated.getDate();
-    const month = dateFormated.getMonth();
-    const year = dateFormated.getFullYear();
+  async function handleNextStep() {
+    if (validationToNextStep()) {
+      const linkTo =
+        purchase.deliveryType === ShippingEnum.RETIRADA
+          ? 'pedido-transportadora'
+          : 'confirmar-pedido';
 
-    return `${day}/${month + 1}/${year}`;
+      navigation.navigate(linkTo, {
+        data: purchase,
+      });
+    }
   }
 
-  function handleNextStep() {}
+  function updateFields(name: string, value: any) {
+    setPurchase({...purchase, [name]: value});
+  }
+
+  const onChangeDatePicker = (event: any, selectedDate: any) => {
+    const currentDate = selectedDate || purchase.date;
+    setShow(Platform.OS === 'ios');
+    updateFields('date', currentDate);
+  };
+
+  function validationToNextStep() {
+    return true;
+  }
+
+  useEffect(() => {
+    const sum = purchase?.liters * price;
+    updateFields('totalPrice', sum);
+  }, [purchase.liters]);
+
+  useEffect(() => {
+    purchase.liters = 1;
+    updateFields('date', currentDate);
+  }, []);
 
   return (
     <>
@@ -50,40 +83,52 @@ const Purchase: React.FC = () => {
       <S.Wrapper>
         <S.Text>Tipo de Combustivel</S.Text>
         <S.Card>
-          <S.CardTitle onPress={() => setFuelSelected(FuelType.Gasolina)}>
+          <S.CardTitle
+            onPress={() => updateFields('fuelType', FuelEnum.GASOLINA)}>
             <S.CardTitleText>Gasolina</S.CardTitleText>
-            <S.RadioButton active={FuelType.Gasolina === fuelSelected} />
+            <S.RadioButton active={FuelEnum.GASOLINA === purchase.fuelType} />
           </S.CardTitle>
           <S.Divider />
-          <S.CardTitle onPress={() => setFuelSelected(FuelType.Etanol)}>
+          <S.CardTitle
+            onPress={() => updateFields('fuelType', FuelEnum.ETANOL)}>
             <S.CardTitleText>Etanol</S.CardTitleText>
 
-            <S.RadioButton active={FuelType.Etanol === fuelSelected} />
+            <S.RadioButton active={FuelEnum.ETANOL === purchase.fuelType} />
           </S.CardTitle>
         </S.Card>
 
         <S.Text>Tipo de Entrega</S.Text>
         <S.Card>
-          <S.CardTitle onPress={() => setShippingSelected(Shipping.Retirada)}>
+          <S.CardTitle
+            onPress={() => updateFields('deliveryType', ShippingEnum.RETIRADA)}>
             <S.CardTitleText>Retirada</S.CardTitleText>
-            <S.RadioButton active={Shipping.Retirada === shippingSelected} />
+            <S.RadioButton
+              active={ShippingEnum.RETIRADA === purchase.deliveryType}
+            />
           </S.CardTitle>
           <S.Divider />
-          <S.CardTitle onPress={() => setShippingSelected(Shipping.Colocada)}>
+          <S.CardTitle
+            onPress={() => updateFields('deliveryType', ShippingEnum.COLACADO)}>
             <S.CardTitleText>Colocada</S.CardTitleText>
 
-            <S.RadioButton active={Shipping.Colocada === shippingSelected} />
+            <S.RadioButton
+              active={ShippingEnum.COLACADO === purchase.deliveryType}
+            />
           </S.CardTitle>
         </S.Card>
 
         <S.LitersPrice>
           <S.Liters>
             <S.LitersText>
-              <S.Text>litros:</S.Text>
+              <S.LitersTitle>litros:</S.LitersTitle>
             </S.LitersText>
-            <S.LitersInput keyboardType="numeric" />
+            <S.LitersInput
+              keyboardType="numeric"
+              onChangeText={text => updateFields('liters', text)}
+              value={String(purchase?.liters)}
+            />
           </S.Liters>
-          <S.Price>R$5,00</S.Price>
+          <S.Price>R$ {formatNumber(purchase.totalPrice)}</S.Price>
         </S.LitersPrice>
 
         <S.Payment>
@@ -92,8 +137,8 @@ const Purchase: React.FC = () => {
             <S.PaymentSelectWrapper>
               <SelectPurchase
                 options={PaymentTypeList}
-                onChangeSelected={setPaymentSelected}
-                option={paymentSelected}
+                onChangeSelected={value => updateFields('paymentType', value)}
+                option={purchase?.paymentType}
               />
             </S.PaymentSelectWrapper>
           </S.PaymentInputWrapper>
@@ -101,22 +146,25 @@ const Purchase: React.FC = () => {
           <S.PaymentInputWrapper>
             <S.PaymentText>Data de entrega</S.PaymentText>
             <S.PaymentInputDate onPress={() => setShow(true)}>
-              <S.PaymentDateText>{formatDate()}</S.PaymentDateText>
+              <S.PaymentDateText>
+                {formatDate(new Date(purchase.date))}
+              </S.PaymentDateText>
             </S.PaymentInputDate>
             {show && (
               <DateTimePicker
+                minimumDate={currentDate}
                 testID="dateTimePicker"
-                value={date}
+                value={new Date(purchase.date)}
                 mode={'date'}
                 is24Hour={true}
                 display="default"
-                onChange={onChange}
+                onChange={onChangeDatePicker}
               />
             )}
           </S.PaymentInputWrapper>
         </S.Payment>
 
-        {shippingSelected === Shipping.Colocada && (
+        {purchase.deliveryType === ShippingEnum.COLACADO && (
           <S.MessageFreight>
             <S.MessageFreightTitle>Atenção</S.MessageFreightTitle>
             <S.MessageFreightMsg>

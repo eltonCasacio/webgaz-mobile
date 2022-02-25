@@ -6,6 +6,8 @@ import ProfileUser from '../pages/ProfileUser';
 import PurchaseOrder from '../pages/PurchaseOrder';
 import PurchaseOrderDetails from '../pages/PurchaseOrderDetails';
 import Purchase from '../pages/Purchase';
+import PurchaseShipping from '../pages/PurchaseShipping';
+import PurchaseConfirmation from '../pages/PurchaseConfirmation';
 
 const AppStack = createNativeStackNavigator();
 
@@ -18,28 +20,42 @@ const AppRoutes: React.FC = () => {
         animation: 'none',
       }}>
       <AppStack.Screen
-        name="Inicio"
+        name="inicio"
         component={Home}
         options={{title: 'Tabela de Preços'}}
       />
       <AppStack.Screen
-        name="Perfil"
+        name="perfil"
         component={ProfileUser}
         options={{title: 'Perfil'}}
       />
+
       <AppStack.Screen
-        name="Pedir"
+        name="pedido"
         component={Purchase}
         options={{title: 'Pedir'}}
       />
+
       <AppStack.Screen
-        name="Pedidos"
+        name="pedido-transportadora"
+        component={PurchaseShipping}
+        options={{title: 'Informações da Transportadora'}}
+      />
+
+      <AppStack.Screen
+        name="confirmar-pedido"
+        component={PurchaseConfirmation}
+        options={{title: 'Confirmar Pedido'}}
+      />
+
+      <AppStack.Screen
+        name="pedidos"
         component={PurchaseOrder}
         options={{title: 'Pedidos'}}
       />
 
       <AppStack.Screen
-        name="Detalhes"
+        name="detalhes"
         component={PurchaseOrderDetails}
         options={{title: 'Detalhes do Pedido'}}
       />

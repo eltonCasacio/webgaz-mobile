@@ -1,20 +1,19 @@
-export type purchasesType = {
+export type FuelType = 'GASOLINA' | 'ETANOL';
+export type PaymentType = 'ANTECIPADO' | 'AVISTA' | '7DIAS' | '10DIAS';
+export type DeliveryType = 'RETIRADA' | 'COLACADO';
+
+export type Purchase = {
   order: number;
-  date: string;
+  date: Date;
   status: string;
-  type: string;
-  total: number;
+  fuelType: 'GASOLINA' | 'ETANOL';
+  paymentType: 'ANTECIPADO' | 'AVISTA' | '7DIAS' | '10DIAS';
+  deliveryType: 'RETIRADA' | 'COLACADO';
+  liters: number;
+  totalPrice: number;
+  driverName: string;
+  shippingName: string;
+  cnpj: string;
+  cnh: string;
+  plate: string;
 };
-
-export type FuelType = 'GASOLINA' | 'ETANOL'
-export type PaymentType = 'ANTECIPADO' | 'AVISTA' | '7DIAS' | '10DIAS'
-export type DeliveryType = 'RETIRADA' | 'COLACADO'
-
-export interface SupplierPricesModel {
-  fuelType: FuelType
-  paymentType: PaymentType
-  deliveryType: DeliveryType
-  purchasePrice: Number
-  salesPrice: Number
-  supplierId: Number
-}

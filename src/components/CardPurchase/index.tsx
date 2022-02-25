@@ -3,7 +3,7 @@ import * as S from './styles';
 
 export default function CardPurchase({data, navigation}) {
   function openDetails() {
-    navigation.navigate('Detalhes', {data: data});
+    navigation.navigate('detalhes', {data: data});
   }
 
   return (

@@ -48,6 +48,7 @@ const SelectPurchase: React.FC<SelectPurchaseProps> = params => {
             <View style={styles.wrapperItem}>
               {params.options.map(item => (
                 <TouchableOpacity
+                  key={item}
                   style={styles.menuItem}
                   onPress={() => handleChangeSelected(item)}>
                   <AntDesign name="arrowright" size={20} color="#fff" />

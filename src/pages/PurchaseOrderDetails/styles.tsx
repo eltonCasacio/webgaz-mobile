@@ -10,7 +10,7 @@ export const Wrapper = styled.View`
 export const Label = styled.Text`
   align-self: center;
   color: ${Theme.colors.white};
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   padding-top: 15px;
   padding-bottom: 25px;

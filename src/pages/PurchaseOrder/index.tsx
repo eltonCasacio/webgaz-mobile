@@ -17,10 +17,10 @@ const PurchaseOrder = ({navigation}) => {
       <S.Wrapper>
         <S.Label>Pedidos</S.Label>
 
-        <S.SearchWrapper>
+        {/* <S.SearchWrapper>
           <S.SearchIcon source={require('../../assets/search.png')}/>
           <S.SearchInput onChangeText={text => handleSearch(text)} />
-        </S.SearchWrapper>
+        </S.SearchWrapper> */}
 
         <S.ScrollView>
           {purchases.map(item => (

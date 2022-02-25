@@ -7,10 +7,25 @@ export const Wrapper = styled.View`
   padding: 0 15px;
 `;
 
+export const Label = styled.Text`
+  color: ${Theme.colors.white};
+  font-size: 25px;
+  font-weight: bold;
+  align-self: center;
+
+`;
+
 export const Text = styled.Text`
   color: ${Theme.colors.lightGray};
-  font-size: 18px;
-  margin-top: 25px;
+  font-size: 14px;
+  margin-top: 20px;
+  padding-left: 2px;
+  text-transform: uppercase;
+`;
+
+export const LitersTitle = styled.Text`
+  color: ${Theme.colors.lightGray};
+  font-size: 14px;
   padding-left: 2px;
   text-transform: uppercase;
 `;
@@ -18,7 +33,7 @@ export const Text = styled.Text`
 export const Card = styled.View`
   ${() => css`
     justify-content: space-between;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
     border: solid 2px #a4a2a24d;
   `}
@@ -49,6 +64,7 @@ export const LitersPrice = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 20px 0;
 `;
 
 export const Liters = styled.View`
@@ -57,7 +73,6 @@ export const Liters = styled.View`
 `;
 
 export const LitersText = styled.View`
-  padding-bottom: 30px;
   margin-right: 10px;
   padding-left: 2px;
 `;
@@ -68,6 +83,9 @@ export const LitersInput = styled.TextInput`
   width: 48%;
   text-align: center;
   color: ${Theme.colors.white};
+  font-size: 18px;
+  height: 35px;
+  padding: 0;
 `;
 
 export const Price = styled.Text`
@@ -87,7 +105,6 @@ export const PaymentText = styled.Text`
   color: ${Theme.colors.lightGray};
   font-size: 16px;
 `;
-
 
 export const PaymentSelectWrapper = styled.View`
   height: 50px;
@@ -143,7 +160,6 @@ export const MessageFreightTitle = styled.Text`
 export const MessageFreightMsg = styled.Text`
   color: ${Theme.colors.lightGray};
   font-size: 16px;
-  margin-top: 10px;
   text-align: center;
 `;
 
@@ -158,7 +174,7 @@ export const RadioButton = styled.TouchableOpacity<RadioProps>`
   ${({active = false}) => css`
     width: 20px;
     height: 20px;
-    background-color: ${!active ? '#ffffff2d' : '#ffffffb5'};
+    background-color: ${!active ? '#ffffff14' : '#ffffffb5'};
     border: solid 2px #fff;
     border-radius: 200px;
   `}

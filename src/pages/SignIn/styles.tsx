@@ -26,7 +26,7 @@ export const Image = styled.Image`
 
 export const Label = styled.Text`
   color: ${Theme.colors.white};
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
 `;
 
