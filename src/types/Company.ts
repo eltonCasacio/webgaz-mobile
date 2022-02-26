@@ -1,21 +1,17 @@
 //POST
-export type CompanyType = {
-  userAuth: {
-    email: string;
-    password: string;
-    passwordConfirmation: string;
-  };
-  info: {
-    name: string;
-    cnpj: string;
-    telephone: string;
-  };
-  address: {
-    cep: string;
-    city: string;
-    state: string;
-    street: string;
-    number: string;
-    complement: string;
-  };
+export type FuelStationType = {
+  name: string;
+  cnpj: string;
+  email: string;
+  telephone: string;
+  city: string;
+  district: string;
+  street: string;
+  fuelStationNumber: string;
+  cep: string;
+  flag: string;
+  isNetwork: string;
+  networkName: string;
+  password: string;
+  passwordConfirmation: string;
 };

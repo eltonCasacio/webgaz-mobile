@@ -1,6 +1,7 @@
 import * as S from './styles';
 import React, {useEffect, useState} from 'react';
 import {Buttom, UseInfo, Address, Rede} from '../../components';
+import {signup} from '../../service/auth';
 
 const logo_com_nome = require('../../assets/logo-com-nome.png');
 const signup_step1 = require('../../assets/signup-step1.png');
@@ -56,44 +57,40 @@ const SignUp: React.FC = ({navigation}: any) => {
     if (step === STEP.step3) setStep(STEP.step2);
   }
 
-  useEffect(() => {
-    setStep(STEP.step1);
-  }, [navigation]);
+  function isValid() {
+    return true;
+  }
 
   const handleConfirm = async () => {
     const data = {
-      userAuth: {
-        email: company.email,
-        password: company.password,
-        passwordConfirmation: company.confirmPassword,
-      },
-      info: {
-        name: company.name,
-        cnpj: company.cnpj,
-        telephone: company.telephone,
-      },
-      address: {
-        cep: company.cep,
-        city: company.city,
-        state: company.state,
-        street: company.street,
-        number: company.number,
-        complement: company.complement,
-      },
+      name: 'Shell',
+      cnpj: '111111',
+      email: 'teste@teste.com',
+      telephone: '19993722823',
+      city: 'Valinhos',
+      district: 'Centro',
+      street: 'Rua maykinho',
+      fuelStationNumber: '20',
+      cep: '13270-000',
+      flag: 'BANDEIRA',
+      isNetwork: 'SIM',
+      networkName: 'Shell',
+      password: '123',
+      passwordConfirmation: '123',
     };
 
-    // if (isValid()) {
-    //   const res = await signup(data);
-    //   if (res.status === 201) {
-    //     console.debug('CRIADO', res.status);
-    //     navigation.navigate('SignIn');
-    //   }
-
-    //   console.error('NÃO CRIADO', res);
-    // }
-
-    navigation.navigate('SignIn')
+    if (isValid()) {
+      const res = await signup(data);
+      if (res.status === 201) {
+        console.debug('CRIADO', res.status);
+        navigation.navigate('SignIn');
+      }
+    }
   };
+
+  useEffect(() => {
+    setStep(STEP.step1);
+  }, [navigation]);
 
   return (
     <S.Wrapper>

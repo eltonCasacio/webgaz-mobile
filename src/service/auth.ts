@@ -1,5 +1,5 @@
 import API from '../service/api';
-import {CompanyType} from '../types/Company';
+import {FuelStationType} from '../types/Company';
 import {SignInProps, ResponseSignInProps} from '../types/Auth';
 
 export async function signIn({
@@ -11,7 +11,6 @@ export async function signIn({
       email,
       password,
     });
-    console.log('SERVICE::SIGNIN::', data);
     return {
       token: data.token,
       user: {
@@ -20,15 +19,15 @@ export async function signIn({
       },
     };
   } catch (error) {
-    console.log('SERVICE::SIGNIN::Erro', error);
+    console.debug('SERVICE::SIGNIN::Erro', error);
   }
 }
 
-export async function signup(params: CompanyType): Promise<any> {
+export async function signup(params: FuelStationType): Promise<any> {
   try {
     const res = await API.post('signup', params);
     return res;
   } catch (error) {
-    console.log('SERVICE::SIGNIN::Erro', error);
+    console.debug('SERVICE::SIGNIN::Erro', error);
   }
 }

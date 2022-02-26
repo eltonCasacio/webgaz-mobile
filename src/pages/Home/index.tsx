@@ -1,10 +1,14 @@
 import React from 'react';
 import {TouchableOpacity, Linking} from 'react-native';
-import {useLinkTo} from '@react-navigation/native';
-import Carousel from 'react-native-snap-carousel';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Carousel from 'react-native-snap-carousel';
+import {useLinkTo} from '@react-navigation/native';
 
+import {loadPrices} from '../../service/home';
 import {Header, Footer, LinkWhatsapp} from '../../components';
+
+import {ResponseProps} from '../../types/Home';
+
 import * as S from './styles';
 
 const images = [
@@ -17,14 +21,23 @@ function renderItem({item}) {
   return <S.Image source={item.image} />;
 }
 
-const Home: React.FC = () => {
+const Home: React.FC = props => {
   const linkTo = useLinkTo();
+  const [homePrice, setHomePrice] = React.useState<ResponseProps>();
 
   const handleWhatsApp = () => {
     Linking.openURL(
       `whatsapp://send?text=${'Teste webgaz'}&phone=${'+5519971196825'}`,
     );
   };
+
+  React.useEffect(() => {
+    async function run() {
+      const data = await loadPrices(2);
+      setHomePrice(data);
+    }
+    run();
+  }, [props]);
 
   return (
     <>
@@ -72,13 +85,13 @@ const Home: React.FC = () => {
           </S.CardPriceDate>
 
           <S.CardPriceFuel>
-            <S.CardPriceFuelLabel>Etanol</S.CardPriceFuelLabel>
-            <S.CardPriceFuelPrice>R$5,63</S.CardPriceFuelPrice>
+            <S.CardPriceFuelLabel>{homePrice?.fuelType}</S.CardPriceFuelLabel>
+            <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
           </S.CardPriceFuel>
 
           <S.CardPriceFuel>
-            <S.CardPriceFuelLabel>Gasolina</S.CardPriceFuelLabel>
-            <S.CardPriceFuelPrice>R$6,34</S.CardPriceFuelPrice>
+            <S.CardPriceFuelLabel>{homePrice?.fuelType}</S.CardPriceFuelLabel>
+            <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
           </S.CardPriceFuel>
 
           <S.PurchaseButton onPress={() => linkTo('/pedido')}>
