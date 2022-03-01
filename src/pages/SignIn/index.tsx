@@ -7,15 +7,14 @@ import {useAuth} from '../../contexts/auth';
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
 
-
 const SignIn: React.FC = () => {
   const logo_com_nome = require('../../assets/logo-com-nome.png');
-  
+
   const navigation = useNavigation();
-  const [username, setUsername] = useState('teste');
+  const [username, setUsername] = useState('teste@teste.com');
   const [usernameError, setUsernameError] = useState(false);
 
-  const [password, setPassword] = useState('testes');
+  const [password, setPassword] = useState('123');
   const [passwordError, setPasswordError] = useState(false);
 
   function validate() {
@@ -29,7 +28,7 @@ const SignIn: React.FC = () => {
 
   const handleSignIn = async () => {
     if (validate()) {
-      const {msg, severity} = await signIn({email: username, password});
+      signIn({email: username, password}).then(res => console.debug("??", res));
     }
   };
 

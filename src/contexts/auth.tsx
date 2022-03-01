@@ -2,15 +2,14 @@ import React, {createContext, useEffect, useState, useContext} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as auth from '../service/auth';
 import api from '../service/api';
-import {responseMessage, ResponseProps} from '../utils';
 
-import {UserProps, SignInProps as SignInProps} from '../types/Auth';
+import {User, SignInProps as SignInProps} from '../types/Auth';
 
 interface AuthContextData {
   signed: boolean;
-  user: UserProps | null;
+  user: User | null;
   loading: boolean;
-  signIn({}: SignInProps): Promise<ResponseProps>;
+  signIn({}: SignInProps): Promise<void>;
   signOut(): void;
 }
 
@@ -18,28 +17,23 @@ export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({children}) => {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<UserProps | null>(null);
+  const [user, setUser] = useState<User>();
 
-  async function signIn({
-    email,
-    password,
-  }: SignInProps): Promise<ResponseProps> {
-    const response = await auth.signIn({email, password});
-    if (response) {
-      setUser(response.user);
+  async function signIn(params: SignInProps): Promise<void> {
+    const response = await auth.signIn(params);
+
+    if (response.token) {
       api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
-      await AsyncStorage.setItem('@webgaz:user', JSON.stringify(response.user));
+      let {cnpj, name, status} = {...response};
+
       await AsyncStorage.setItem('@webgaz:token', response.token);
-      return responseMessage({
-        msg: 'Usuário Logado',
-        severity: 'success',
-      });
-    } else {
-      return responseMessage({
-        msg: 'Usuário ou Senha Inválido',
-        severity: 'error',
-      });
+      await AsyncStorage.setItem(
+        '@webgaz:user',
+        JSON.stringify({id: cnpj, name, status}),
+      );
+
+      setUser({id: cnpj, name, status});
     }
   }
 
@@ -50,17 +44,12 @@ export const AuthProvider: React.FC = ({children}) => {
 
   useEffect(() => {
     async function loadStorageData() {
-      const storageData = await AsyncStorage.multiGet([
-        '@webgaz:user',
-        '@webgaz:token',
-      ]);
+      const dataUser = await AsyncStorage.getItem('@webgaz:user');
+      const token = await AsyncStorage.getItem('@webgaz:token');
 
-      const storageUser = storageData[0][1];
-      const storageToken = storageData[0][1];
-
-      if (storageUser && storageToken) {
-        api.defaults.headers['Authorizarion'] = `Bearer ${storageToken}`;
-        setUser(JSON.parse(storageUser));
+      if (dataUser && token) {
+        api.defaults.headers['Authorizarion'] = `Bearer ${token}`;
+        setUser(JSON.parse(dataUser));
         setLoading(false);
       }
     }
