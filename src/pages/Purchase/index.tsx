@@ -4,8 +4,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {Header, Footer, Buttom, SelectPurchase} from '../../components';
 import {Purchase as PurchaseProps} from '../../types/Purchase';
+import {User} from '../../types/Auth';
 import {formatNumber, formatDate} from '../../utils';
+import {loadPurchase} from '../../service/purchase';
 import * as S from './styles';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -27,18 +31,11 @@ const Purchase: React.FC = ({navigation}: any) => {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
 
-  const [show, setShow] = useState(false);
-  const [price, setPrice] = useState(6);
+  const [purchase, setPurchase] = useState({} as PurchaseProps);
 
-  const [purchase, setPurchase] = useState({
-    date: null,
-    deliveryType: 'RETIRADA',
-    fuelType: 'ETANOL',
-    liters: 1,
-    order: 1,
-    paymentType: 'ANTECIPADO',
-    totalPrice: 0,
-  } as PurchaseProps);
+  const [show, setShow] = useState(false);
+  const [price, setPrice] = useState(0);
+
 
   async function handleNextStep() {
     if (validationToNextStep()) {
@@ -58,7 +55,7 @@ const Purchase: React.FC = ({navigation}: any) => {
   }
 
   const onChangeDatePicker = (event: any, selectedDate: any) => {
-    const currentDate = selectedDate || purchase.date;
+    const currentDate = selectedDate || purchase.deliveryDate;
     setShow(Platform.OS === 'ios');
     updateFields('date', currentDate);
   };
@@ -68,13 +65,27 @@ const Purchase: React.FC = ({navigation}: any) => {
   }
 
   useEffect(() => {
-    const sum = purchase?.liters * price;
+    const sum = purchase?.qtdLiters * price;
     updateFields('totalPrice', sum);
-  }, [purchase.liters]);
+  }, [purchase.qtdLiters]);
+  
 
   useEffect(() => {
-    purchase.liters = 1;
-    updateFields('date', currentDate);
+    async function run() {
+      const user: User = JSON.parse(await AsyncStorage.getItem('@webgaz:user'));
+      const {price} = await loadPurchase({
+        deliveryType: 'RETIRADA',
+        fuelType: 'ETANOL',
+        paymentType: 'ANTECIPADO',
+        fuelStationId: Number(user.id),
+      });
+
+      purchase.qtdLiters = 1;
+      setPrice(price);
+      updateFields('date', currentDate);
+    }
+
+    run();
   }, []);
 
   return (
@@ -124,8 +135,8 @@ const Purchase: React.FC = ({navigation}: any) => {
             </S.LitersText>
             <S.LitersInput
               keyboardType="numeric"
-              onChangeText={text => updateFields('liters', text)}
-              value={String(purchase?.liters)}
+              onChangeText={text => updateFields('qtdLiters', text)}
+              value={String(purchase?.qtdLiters)}
             />
           </S.Liters>
           <S.Price>R$ {formatNumber(purchase.totalPrice)}</S.Price>
@@ -147,14 +158,14 @@ const Purchase: React.FC = ({navigation}: any) => {
             <S.PaymentText>Data da Entrega</S.PaymentText>
             <S.PaymentInputDate onPress={() => setShow(true)}>
               <S.PaymentDateText>
-                {formatDate(new Date(purchase.date))}
+                {formatDate(new Date(purchase.deliveryDate))}
               </S.PaymentDateText>
             </S.PaymentInputDate>
             {show && (
               <DateTimePicker
                 minimumDate={currentDate}
                 testID="dateTimePicker"
-                value={new Date(purchase.date)}
+                value={new Date(purchase.deliveryDate)}
                 mode={'date'}
                 is24Hour={true}
                 display="default"
@@ -181,7 +192,7 @@ const Purchase: React.FC = ({navigation}: any) => {
           />
         </S.Button>
       </S.Wrapper>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

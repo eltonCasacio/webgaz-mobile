@@ -2,12 +2,13 @@ import React from 'react';
 import {TouchableOpacity, Linking} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Carousel from 'react-native-snap-carousel';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useLinkTo} from '@react-navigation/native';
 
-import {loadPrices} from '../../service/home';
-import {Header, Footer, LinkWhatsapp} from '../../components';
-
 import {ResponseProps} from '../../types/Home';
+import {User} from '../../types/Auth';
+import {Header, LinkWhatsapp} from '../../components';
+import {loadPrices} from '../../service/home';
 
 import * as S from './styles';
 
@@ -24,6 +25,8 @@ function renderItem({item}) {
 const Home: React.FC = props => {
   const linkTo = useLinkTo();
   const [homePrice, setHomePrice] = React.useState<ResponseProps>();
+  const [isActive, setIsActive] = React.useState(Boolean);
+  const [messageInfo, setMessageInfo] = React.useState('');
 
   const handleWhatsApp = () => {
     Linking.openURL(
@@ -35,9 +38,19 @@ const Home: React.FC = props => {
     async function run() {
       const data = await loadPrices(2);
       setHomePrice(data);
+      const userJson = await AsyncStorage.getItem('@webgaz:user');
+      const user: User = JSON.parse(userJson);
+      setIsActive(user.status === 'PENDING');
     }
     run();
   }, [props]);
+
+  React.useEffect(() => {
+    async function run() {
+      setMessageInfo(isActive ? '' : 'Cadastro Pendente de Aprovação!');
+    }
+    run();
+  }, [isActive]);
 
   return (
     <S.Wrapper>
@@ -93,10 +106,14 @@ const Home: React.FC = props => {
           <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
         </S.CardPriceFuel>
 
-        <S.PurchaseButton onPress={() => linkTo('/pedido')}>
+        <S.PurchaseButton
+          disabled={!isActive}
+          onPress={() => linkTo('/pedido')}>
           <S.PurchaseButtonText>FAZER PEDIDO</S.PurchaseButtonText>
         </S.PurchaseButton>
       </S.CardPrice>
+
+      <S.MessageError>{messageInfo ? messageInfo : ''}</S.MessageError>
 
       <S.Operation>
         <S.OperationTitleText>Horário para Pedidos</S.OperationTitleText>

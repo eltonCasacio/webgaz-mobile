@@ -25,15 +25,14 @@ export const AuthProvider: React.FC = ({children}) => {
     if (response.token) {
       api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
-      let {cnpj, name, status} = {...response};
-
+      let {id, name, status} = {...response.fuelStation};
+      
       await AsyncStorage.setItem('@webgaz:token', response.token);
       await AsyncStorage.setItem(
         '@webgaz:user',
-        JSON.stringify({id: cnpj, name, status}),
+        JSON.stringify({id, name, status}),
       );
-
-      setUser({id: cnpj, name, status});
+      setUser({id, name, status});
     }
   }
 

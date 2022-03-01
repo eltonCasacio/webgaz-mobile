@@ -1,21 +1,26 @@
-export type CompanyProps = {
+export type fuelStationProps = {
+  id: number;
   name: string;
   cnpj: string;
   email: string;
-  password: string;
-  passwordConfirmation: string;
-
-  cep: string;
-  district: string;
-  city: string;
-  state: string;
-  street: string;
-  fuelStationNumber: string;
-  complement: string;
   telephone: string;
+  city: string;
+  street: string;
+  state: string;
+  cep: string;
+  complement: string;
+  district: string;
+  fuelStationNumber: string;
   flag: string;
-  networkName?: string;
   isNetwork: 'NÃO' | 'SIM';
+  networkName?: string;
+  status: 'PENDENTE' | 'ENTREGUE' | 'CANCELADO';
+  password: string;
+};
+
+export type ResponseSignIn = {
+  token: string;
+  fuelStation: fuelStationProps;
 };
 
 export type ResponseSignup = {
@@ -28,18 +33,12 @@ export type SignInProps = {
   password?: string;
 };
 
-export type ResponseSignIn = {
-  token: string;
-  status: string;
-  error: string;
-} & CompanyProps;
-
 export type ResetPasswordProps = {
   email: string;
 };
 
 export type User = {
   status: string;
-  id: string;
+  id: number;
   name: string;
 };

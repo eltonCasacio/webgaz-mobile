@@ -1,6 +1,8 @@
 import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
 
+import {Dimensions} from 'react-native'
+
 export const Wrapper = styled.View`
   flex: 1;
   justify-content: space-around;
@@ -185,4 +187,10 @@ export const OperationHourLabel = styled.Text`
     color: ${Theme.colors.lightGray};
     font-size: 18px;
   `}
+`;
+
+export const MessageError = styled.Text`
+  color: ${Theme.colors.buttonDanger};
+  font-size: 14px;
+  margin-top: 10%;
 `;

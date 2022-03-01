@@ -1,5 +1,4 @@
-//POST
-export type FuelStationType = {
+export type CompanyProps = {
   name: string;
   cnpj: string;
   email: string;

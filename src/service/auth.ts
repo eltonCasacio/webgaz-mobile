@@ -1,10 +1,6 @@
 import API from '../service/api';
-import {
-  CompanyProps,
-  ResponseSignup,
-  SignInProps,
-  ResponseSignIn,
-} from '../types/Auth';
+import {ResponseSignup, SignInProps, ResponseSignIn} from '../types/Auth';
+import {CompanyProps} from '../types/Company';
 
 export async function signIn(params: SignInProps): Promise<ResponseSignIn> {
   try {

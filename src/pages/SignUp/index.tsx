@@ -2,7 +2,7 @@ import * as S from './styles';
 import React, {useEffect, useState} from 'react';
 import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
-import {CompanyProps} from '../../types/Auth';
+import {CompanyProps} from '../../types/Company';
 
 const logo_com_nome = require('../../assets/logo-com-nome.png');
 const signup_step1 = require('../../assets/signup-step1.png');
@@ -44,23 +44,6 @@ const SignUp: React.FC = ({navigation}: any) => {
 
   const handleConfirm = async () => {
     if (isValid()) {
-      // company.cep = 'any_cep';
-      // company.city = 'any_city';
-      // company.cnpj = 'any_cnpj';
-      // company.complement = 'any_complement';
-      // company.password = 'a';
-      // company.passwordConfirmation = 'a';
-      // company.district = 'any_district';
-      // company.email = 'a@mail';
-      // company.isNetwork = 'NÃO';
-      // company.name = 'any_name';
-      // company.networkName = 'any_network';
-      // company.fuelStationNumber = '123';
-      // company.state = 'any_state';
-      // company.street = 'any_street';
-      // company.telephone = 'any_telephone';
-      // company.flag = 'BANDEIRA';
-
       const res = await signup(company);
       alert(res.message);
       navigation.navigate(res.url);
