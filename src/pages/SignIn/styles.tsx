@@ -30,6 +30,11 @@ export const Label = styled.Text`
   font-weight: bold;
 `;
 
+export const MessageError = styled.Text`
+  color: ${Theme.colors.buttonDanger};
+  font-size: 14px;
+  margin-top: 10%;
+`;
 
 type InputParams = {hasError: boolean};
 export const Input = styled.TextInput<InputParams>`
@@ -67,7 +72,6 @@ export const SignupForgotPasswordText = styled.Text`
   color: ${Theme.colors.white};
   font-size: 14px;
 `;
-
 
 export const Footer = styled.View`
   width: 100%;

@@ -11,11 +11,13 @@ const SignIn: React.FC = () => {
   const logo_com_nome = require('../../assets/logo-com-nome.png');
 
   const navigation = useNavigation();
-  const [username, setUsername] = useState('teste@teste.com');
+  const [username, setUsername] = useState('');
   const [usernameError, setUsernameError] = useState(false);
 
-  const [password, setPassword] = useState('123');
+  const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
+
+  const [messageError, setMessageError] = useState<string>();
 
   function validate() {
     setUsernameError(!username);
@@ -24,11 +26,13 @@ const SignIn: React.FC = () => {
     return !!username && !!password;
   }
 
-  const {signIn} = useAuth();
+  const {signIn, signed} = useAuth();
 
   const handleSignIn = async () => {
     if (validate()) {
-      signIn({email: username, password}).then(res => console.debug("??", res));
+      signIn({email: username, password}).then(res => {
+        setMessageError(signed ? '' : 'Usuário ou Senha Inválido!');
+      });
     }
   };
 
@@ -70,6 +74,7 @@ const SignIn: React.FC = () => {
           <MyLink screen="SignUp" title="Cadastrar" navigation={navigation} />
         </S.SignupForgotPassword>
 
+        {messageError && <S.MessageError>{messageError}</S.MessageError>}
         <S.Footer>
           <Buttom
             color="buttonDefault"
