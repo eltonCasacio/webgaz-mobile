@@ -40,77 +40,74 @@ const Home: React.FC = props => {
   }, [props]);
 
   return (
-    <>
+    <S.Wrapper>
       <Header />
-      <S.Wrapper>
-        <S.WrapperCarousel>
-          <Carousel
-            data={images}
-            sliderWidth={400}
-            itemWidth={240}
-            renderItem={renderItem}
-            autoplay={true}
-            enableMomentum={false}
-            lockScrollWhileSnapping={true}
-            autoplayDelay={100}
-            autoplayInterval={10000}
-            loop
-            inactiveSlideScale={0.7}
-          />
-        </S.WrapperCarousel>
+      <S.WrapperCarousel>
+        <Carousel
+          data={images}
+          sliderWidth={400}
+          itemWidth={240}
+          renderItem={renderItem}
+          autoplay={true}
+          enableMomentum={false}
+          lockScrollWhileSnapping={true}
+          autoplayDelay={100}
+          autoplayInterval={10000}
+          loop
+          inactiveSlideScale={0.7}
+        />
+      </S.WrapperCarousel>
 
-        <TouchableOpacity onPress={handleWhatsApp}>
-          <LinkWhatsapp
-            text="enviar comprovante de pagamento"
-            phone="+5519971196825"
-          />
-        </TouchableOpacity>
+      <TouchableOpacity onPress={handleWhatsApp}>
+        <LinkWhatsapp
+          text="enviar comprovante de pagamento"
+          phone="+5519971196825"
+        />
+      </TouchableOpacity>
 
-        <S.CardPrice>
-          <S.CardPriceTitle>
-            <Entypo name="price-tag" color={'#fcfcfc'} size={16} />
-            <S.CardPriceTitleText>Preços do dia</S.CardPriceTitleText>
-          </S.CardPriceTitle>
+      <S.CardPrice>
+        <S.CardPriceTitle>
+          <Entypo name="price-tag" color={'#fcfcfc'} size={16} />
+          <S.CardPriceTitleText>Preços do dia</S.CardPriceTitleText>
+        </S.CardPriceTitle>
 
-          <S.CardPriceDate>
-            <S.CardPriceDateItem>
-              <S.CardPriceDateHourLabel>hora</S.CardPriceDateHourLabel>
-              <S.CardPriceDateHour>16:00</S.CardPriceDateHour>
-            </S.CardPriceDateItem>
+        <S.CardPriceDate>
+          <S.CardPriceDateItem>
+            <S.CardPriceDateHourLabel>hora</S.CardPriceDateHourLabel>
+            <S.CardPriceDateHour>16:00</S.CardPriceDateHour>
+          </S.CardPriceDateItem>
 
-            <S.CardPriceDateItem>
-              <S.CardPriceDateHourLabel>dia/mes</S.CardPriceDateHourLabel>
-              <S.CardPriceDateHour>21/02</S.CardPriceDateHour>
-            </S.CardPriceDateItem>
-          </S.CardPriceDate>
+          <S.CardPriceDateItem>
+            <S.CardPriceDateHourLabel>dia/mes</S.CardPriceDateHourLabel>
+            <S.CardPriceDateHour>21/02</S.CardPriceDateHour>
+          </S.CardPriceDateItem>
+        </S.CardPriceDate>
 
-          <S.CardPriceFuel>
-            <S.CardPriceFuelLabel>{homePrice?.fuelType}</S.CardPriceFuelLabel>
-            <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
-          </S.CardPriceFuel>
+        <S.CardPriceFuel>
+          <S.CardPriceFuelLabel>{homePrice?.fuelType}</S.CardPriceFuelLabel>
+          <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
+        </S.CardPriceFuel>
 
-          <S.CardPriceFuel>
-            <S.CardPriceFuelLabel>{homePrice?.fuelType}</S.CardPriceFuelLabel>
-            <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
-          </S.CardPriceFuel>
+        <S.CardPriceFuel>
+          <S.CardPriceFuelLabel>{homePrice?.fuelType}</S.CardPriceFuelLabel>
+          <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
+        </S.CardPriceFuel>
 
-          <S.PurchaseButton onPress={() => linkTo('/pedido')}>
-            <S.PurchaseButtonText>FAZER PEDIDO</S.PurchaseButtonText>
-          </S.PurchaseButton>
-        </S.CardPrice>
+        <S.PurchaseButton onPress={() => linkTo('/pedido')}>
+          <S.PurchaseButtonText>FAZER PEDIDO</S.PurchaseButtonText>
+        </S.PurchaseButton>
+      </S.CardPrice>
 
-        <S.Operation>
-          <S.OperationTitleText>Horário para Pedidos</S.OperationTitleText>
+      <S.Operation>
+        <S.OperationTitleText>Horário para Pedidos</S.OperationTitleText>
 
-          <S.OperationDate>
-            <S.OperationDateItem>
-              <S.OperationHourLabel>08:00 as 16:00</S.OperationHourLabel>
-            </S.OperationDateItem>
-          </S.OperationDate>
-        </S.Operation>
-      </S.Wrapper>
-      <Footer />
-    </>
+        <S.OperationDate>
+          <S.OperationDateItem>
+            <S.OperationHourLabel>08:00 as 16:00</S.OperationHourLabel>
+          </S.OperationDateItem>
+        </S.OperationDate>
+      </S.Operation>
+    </S.Wrapper>
   );
 };
 

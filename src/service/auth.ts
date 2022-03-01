@@ -1,5 +1,5 @@
 import API from '../service/api';
-import {FuelStationType} from '../types/Company';
+import {CompanyProps, ResponseSignup} from '../types/Signup';
 import {SignInProps, ResponseSignInProps} from '../types/Auth';
 
 export async function signIn({
@@ -23,11 +23,18 @@ export async function signIn({
   }
 }
 
-export async function signup(params: FuelStationType): Promise<any> {
+export async function signup(params: CompanyProps): Promise<ResponseSignup> {
   try {
-    const res = await API.post('signup', params);
-    return res;
+    await API.post('signup', params);
+    return {
+      message: 'Empresa Cadastrada com Sucesso!',
+      url: 'SignIn',
+    };
   } catch (error) {
-    console.debug('SERVICE::SIGNIN::Erro', error);
+    console.debug('SERVICE::SIGNUP::Erro', error.response.status);
+    return {
+      message: 'Houve um Erro ao Tentar Cadastrar a Empresa',
+      url: '#',
+    };
   }
 }

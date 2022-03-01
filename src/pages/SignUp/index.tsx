@@ -2,31 +2,12 @@ import * as S from './styles';
 import React, {useEffect, useState} from 'react';
 import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
+import {CompanyProps} from '../../types/Signup';
 
 const logo_com_nome = require('../../assets/logo-com-nome.png');
 const signup_step1 = require('../../assets/signup-step1.png');
 const signup_step2 = require('../../assets/signup-step2.png');
 const signup_step3 = require('../../assets/signup-step3.png');
-
-export type CompanyProps = {
-  name: string;
-  cnpj: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-
-  cep: string;
-  district: string;
-  city: string;
-  state: string;
-  street: string;
-  number: string;
-  complement: string;
-  telephone: string;
-
-  network: string;
-  isNetwork: boolean;
-};
 
 enum STEP {
   'step1' = 'step1',
@@ -62,29 +43,27 @@ const SignUp: React.FC = ({navigation}: any) => {
   }
 
   const handleConfirm = async () => {
-    const data = {
-      name: 'Shell',
-      cnpj: '111111',
-      email: 'teste@teste.com',
-      telephone: '19993722823',
-      city: 'Valinhos',
-      district: 'Centro',
-      street: 'Rua maykinho',
-      fuelStationNumber: '20',
-      cep: '13270-000',
-      flag: 'BANDEIRA',
-      isNetwork: 'SIM',
-      networkName: 'Shell',
-      password: '123',
-      passwordConfirmation: '123',
-    };
-
     if (isValid()) {
-      const res = await signup(data);
-      if (res.status === 201) {
-        console.debug('CRIADO', res.status);
-        navigation.navigate('SignIn');
-      }
+      // company.cep = 'any_cep';
+      // company.city = 'any_city';
+      // company.cnpj = 'any_cnpj';
+      // company.complement = 'any_complement';
+      // company.password = 'a';
+      // company.passwordConfirmation = 'a';
+      // company.district = 'any_district';
+      // company.email = 'a@mail';
+      // company.isNetwork = 'NÃO';
+      // company.name = 'any_name';
+      // company.networkName = 'any_network';
+      // company.fuelStationNumber = '123';
+      // company.state = 'any_state';
+      // company.street = 'any_street';
+      // company.telephone = 'any_telephone';
+      // company.flag = 'BANDEIRA';
+
+      const res = await signup(company);
+      alert(res.message);
+      navigation.navigate(res.url);
     }
   };
 

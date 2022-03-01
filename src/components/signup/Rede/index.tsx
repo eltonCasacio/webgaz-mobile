@@ -1,5 +1,5 @@
 import React from 'react';
-import {CompanyProps} from '../../../pages/SignUp';
+import {CompanyProps} from '../../../types/Signup';
 import * as S from './styles';
 
 export type RedeProps = {
@@ -14,7 +14,7 @@ const Rede: React.FC<RedeProps> = props => (
       <S.Input
         hasError={false}
         onChangeText={text => props.handleUpdateProps('name', text)}
-        value={props.company.name}
+        value={props?.company?.name}
       />
     </S.InputWrapper>
 
@@ -23,7 +23,7 @@ const Rede: React.FC<RedeProps> = props => (
       <S.Input
         hasError={false}
         onChangeText={text => props.handleUpdateProps('network', text)}
-        value={props.company.network}
+        value={props?.company?.networkName}
       />
     </S.InputWrapper>
   </S.Wrapper>

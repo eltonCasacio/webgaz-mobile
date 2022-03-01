@@ -1,6 +1,6 @@
 import React from 'react';
-import {CompanyProps} from '../../../pages/SignUp';
 import * as S from './styles';
+import {CompanyProps} from '../../../types/Signup';
 
 export type UserInfoProps = {
   handleUpdateProps: (nameProps: string, value: string) => void;
@@ -16,7 +16,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
           hasError={false}
           keyboardType="numeric"
           onChangeText={text => props.handleUpdateProps('cnpj', text)}
-          value={props.company.cnpj}
+          value={props?.company?.cnpj}
         />
       </S.InputWrapper>
 
@@ -26,7 +26,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
           hasError={false}
           keyboardType="email-address"
           onChangeText={text => props.handleUpdateProps('email', text)}
-          value={props.company.email}
+          value={props?.company?.email}
         />
       </S.InputWrapper>
 
@@ -37,7 +37,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
             hasError={false}
             secureTextEntry
             onChangeText={text => props.handleUpdateProps('password', text)}
-            value={props.company.password}
+            value={props?.company?.password}
           />
         </S.InputPassword>
 
@@ -49,7 +49,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
             onChangeText={text =>
               props.handleUpdateProps('confirmPassword', text)
             }
-            value={props.company.confirmPassword}
+            value={props?.company?.confirmPassword}
           />
         </S.InputPassword>
       </S.WrapperPassword>
