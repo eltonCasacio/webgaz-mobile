@@ -22,7 +22,6 @@ export const ShippingInfo = styled.View`
 export const WrapperCnpjCnh = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 57%;
 `;
 
 export const InputCnpjCnh = styled.View`

@@ -11,9 +11,8 @@ export type Purchase = {
   deliveryType: DeliveryType;
   totalPrice: number;
   qtdLiters: number;
-  deliveryDate: Date;
+  deliveryDate: string;
 };
-
 
 export type GetPurchase = {
   fuelType: FuelType;

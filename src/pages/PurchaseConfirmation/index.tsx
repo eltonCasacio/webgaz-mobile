@@ -3,22 +3,32 @@ import {Header, Footer, Buttom} from '../../components';
 import * as S from './styles';
 
 import {Purchase} from '../../types/Purchase';
+import {ShippingCompany} from '../../types/ShippingCompany';
 import {formatNumber, formatDate} from '../../utils';
+import {confirmPurchase} from '../../service/purchase';
 
 const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
-  const {data} = route.params;
+  const data = route.params;
 
   const [purchase, setPurchase] = React.useState<Purchase>();
+  const [shipping, setShipping] = React.useState<ShippingCompany>();
+  const [message, setMessage] = React.useState<string>('Pedido Realizado com Sucesso!');
 
   React.useEffect(() => {
-    setPurchase(data);
+    setPurchase(data?.purchaseOrder);
+    setShipping(data?.shippingCompany);
   }, [data]);
 
-  function handleConfirm() {
-    //Validar
-    //Persistir as informações
+  async function handleConfirm() {
+    const status = await confirmPurchase({
+      ...purchase,
+      shippingCompany: shipping,
+    });
 
-    navigation.navigate('pedido');
+    if (status === 201) navigation.navigate('pedido');
+
+    setMessage('Não foi Possivel Realizar Pedido')
+
   }
 
   return (
@@ -40,7 +50,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
 
             <S.Line>
               <S.Description>Data da Entrega </S.Description>
-              <S.Value>{formatDate(new Date(purchase?.date))}</S.Value>
+              <S.Value>{formatDate(new Date(purchase?.deliveryDate))}</S.Value>
             </S.Line>
 
             <S.Line>
@@ -51,7 +61,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
             <S.DoubleInLine>
               <S.Line>
                 <S.Description>Litros: </S.Description>
-                <S.Value>{purchase?.liters}</S.Value>
+                <S.Value>{purchase?.qtdLiters}</S.Value>
               </S.Line>
 
               <S.Line>
@@ -66,37 +76,39 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
             </S.Line>
           </S.PurchaseWrapper>
 
-          {purchase?.deliveryType === 'RETIRADA' && <S.ShippingWrapper>
-            <S.Title>Detalhes da Transportadora</S.Title>
-            <S.Column>
-              <S.Description>Nome do Motorista</S.Description>
-              <S.Value>{purchase?.driverName}</S.Value>
-            </S.Column>
+          {purchase?.deliveryType === 'RETIRADA' && (
+            <S.ShippingWrapper>
+              <S.Title>Detalhes da Transportadora</S.Title>
+              <S.Column>
+                <S.Description>Nome do Motorista</S.Description>
+                <S.Value>{shipping?.driverName}</S.Value>
+              </S.Column>
 
-            <S.Column>
-              <S.Description>Transportadora</S.Description>
-              <S.Value>{purchase?.shippingName}</S.Value>
-            </S.Column>
+              <S.Column>
+                <S.Description>Transportadora</S.Description>
+                <S.Value>{shipping?.name}</S.Value>
+              </S.Column>
 
-            <S.DoubleInLine>
+              <S.DoubleInLine>
+                <S.Line>
+                  <S.Description>CNPJ </S.Description>
+                  <S.Value>{shipping?.cnpj}</S.Value>
+                </S.Line>
+
+                <S.Line>
+                  <S.Description>CNH </S.Description>
+                  <S.Value>{shipping?.cnh}</S.Value>
+                </S.Line>
+              </S.DoubleInLine>
+
               <S.Line>
-                <S.Description>CNPJ </S.Description>
-                <S.Value>{purchase?.cnpj}</S.Value>
+                <S.Description>
+                  Placa
+                  <S.Value> {shipping?.plateNumber}</S.Value>
+                </S.Description>
               </S.Line>
-
-              <S.Line>
-                <S.Description>CNH </S.Description>
-                <S.Value>{purchase?.cnh}</S.Value>
-              </S.Line>
-            </S.DoubleInLine>
-
-            <S.Line>
-              <S.Description>
-                Placa
-                <S.Value> {purchase?.plate}</S.Value>
-              </S.Description>
-            </S.Line>
-          </S.ShippingWrapper>}
+            </S.ShippingWrapper>
+          )}
         </S.Content>
 
         <S.PaymentConfirmText>

@@ -1,18 +1,18 @@
 import React from 'react';
-import {KeyboardAvoidingView, Platform} from 'react-native';
 import {Header, Footer, Buttom} from '../../components';
-import {Purchase} from '../../types/Purchase';
+import {ShippingCompany} from '../../types/ShippingCompany';
 
 import * as S from './styles';
 
 const PurchaseShipping: React.FC = ({route, navigation}: any) => {
-  const {data} = route.params;
-  const [shipping, setShipping] = React.useState<Purchase>(data);
+  const {purchaseOrder} = route.params;
+  const [shipping, setShipping] = React.useState<ShippingCompany>();
 
   function handleNextStep() {
     if (validationToNextStep()) {
       navigation.navigate('confirmar-pedido', {
-        data: shipping,
+        purchaseOrder: purchaseOrder,
+        shippingCompany: shipping,
       });
     }
   }
@@ -45,8 +45,8 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
             <S.InputLabel>Nome da Transportadora</S.InputLabel>
             <S.Input
               hasError={false}
-              onChangeText={text => handleUpdateProps('shippingName', text)}
-              value={shipping?.shippingName}
+              onChangeText={text => handleUpdateProps('name', text)}
+              value={shipping?.name}
             />
           </S.InputWrapper>
 
@@ -70,6 +70,13 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
               />
             </S.InputCnpjCnh>
           </S.WrapperCnpjCnh>
+
+          <S.InputLabel>Placa</S.InputLabel>
+          <S.Input
+            hasError={false}
+            onChangeText={text => handleUpdateProps('plateNumber', text)}
+            value={shipping?.plateNumber}
+          />
 
           <S.Button>
             <Buttom

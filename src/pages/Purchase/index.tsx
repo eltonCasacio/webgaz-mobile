@@ -2,14 +2,15 @@ import {Platform, LogBox} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import {Header, Footer, Buttom, SelectPurchase} from '../../components';
 import {Purchase as PurchaseProps} from '../../types/Purchase';
 import {User} from '../../types/Auth';
 import {formatNumber, formatDate} from '../../utils';
+
+import {Header, Footer, Buttom, SelectPurchase} from '../../components';
 import {loadPurchase} from '../../service/purchase';
 import * as S from './styles';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useAuth} from '../../contexts/auth';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -25,29 +26,27 @@ enum ShippingEnum {
   COLACADO = 'COLACADO',
 }
 
-const Purchase: React.FC = ({navigation}: any) => {
-  const PaymentTypeList = ['ANTECIPADO', 'À VISTA', '7 DIAS', '10 DIAS'];
+const PaymentTypeList = ['ANTECIPADO', 'À VISTA', '7 DIAS', '10 DIAS'];
 
+const Purchase: React.FC = ({navigation}: any) => {
+  const {user} = useAuth();
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
 
-  const [purchase, setPurchase] = useState({} as PurchaseProps);
-
   const [show, setShow] = useState(false);
   const [price, setPrice] = useState(0);
+  const [purchase, setPurchase] = useState({
+    qtdLiters: 1,
+    fuelType: 'ETANOL',
+    deliveryType: 'RETIRADA',
+    paymentType: 'ANTECIPADO',
+    deliveryDate: String(currentDate),
+    totalPrice: price,
+    fuelStationId: user.id,
+  } as PurchaseProps);
 
-
-  async function handleNextStep() {
-    if (validationToNextStep()) {
-      const linkTo =
-        purchase.deliveryType === ShippingEnum.RETIRADA
-          ? 'pedido-transportadora'
-          : 'confirmar-pedido';
-
-      navigation.navigate(linkTo, {
-        data: purchase,
-      });
-    }
+  function validationToNextStep() {
+    return true;
   }
 
   function updateFields(name: string, value: any) {
@@ -60,20 +59,27 @@ const Purchase: React.FC = ({navigation}: any) => {
     updateFields('date', currentDate);
   };
 
-  function validationToNextStep() {
-    return true;
+  async function handleNextStep() {
+    if (validationToNextStep()) {
+      const linkTo =
+        purchase.deliveryType === ShippingEnum.RETIRADA
+          ? 'pedido-transportadora'
+          : 'confirmar-pedido';
+
+      console.log('PURCHASE:::', purchase);
+      navigation.navigate(linkTo, {
+        purchaseOrder: purchase,
+      });
+    }
   }
 
   useEffect(() => {
     const sum = purchase?.qtdLiters * price;
     updateFields('totalPrice', sum);
   }, [purchase.qtdLiters]);
-  
 
   useEffect(() => {
     async function run() {
-      const user: User = JSON.parse(await AsyncStorage.getItem('@webgaz:user'));
-      
       const {price} = await loadPurchase({
         deliveryType: 'RETIRADA',
         fuelType: 'ETANOL',
@@ -81,11 +87,9 @@ const Purchase: React.FC = ({navigation}: any) => {
         fuelStationId: Number(user.id),
       });
 
-      purchase.qtdLiters = 1;
       setPrice(price);
-      updateFields('date', currentDate);
+      updateFields('totalPrice', price);
     }
-
     run();
   }, []);
 
@@ -193,7 +197,7 @@ const Purchase: React.FC = ({navigation}: any) => {
           />
         </S.Button>
       </S.Wrapper>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
