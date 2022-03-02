@@ -73,6 +73,7 @@ const Purchase: React.FC = ({navigation}: any) => {
   useEffect(() => {
     async function run() {
       const user: User = JSON.parse(await AsyncStorage.getItem('@webgaz:user'));
+      
       const {price} = await loadPurchase({
         deliveryType: 'RETIRADA',
         fuelType: 'ETANOL',

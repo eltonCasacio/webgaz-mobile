@@ -1,5 +1,8 @@
 import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
+import {Dimensions} from 'react-native';
+
+const {width} = Dimensions.get('screen');
 
 export const Wrapper = styled.View`
   background-color: ${Theme.colors.primary};
@@ -12,7 +15,6 @@ export const Label = styled.Text`
   font-size: 25px;
   font-weight: bold;
   align-self: center;
-
 `;
 
 export const Text = styled.Text`
@@ -64,7 +66,8 @@ export const LitersPrice = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 20px 0;
+  margin-top: 20px;
+  margin-bottom: ${width / 10}px;
 `;
 
 export const Liters = styled.View`
@@ -147,8 +150,9 @@ export const PaymentInputDate = styled.TouchableOpacity`
 `;
 
 export const MessageFreight = styled.View`
+  flex: 1;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const MessageFreightTitle = styled.Text`

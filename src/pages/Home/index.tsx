@@ -40,7 +40,7 @@ const Home: React.FC = props => {
       setHomePrice(data);
       const userJson = await AsyncStorage.getItem('@webgaz:user');
       const user: User = JSON.parse(userJson);
-      setIsActive(user.status === 'PENDING');
+      setIsActive(user.status === 'ACTIVE');
     }
     run();
   }, [props]);
@@ -107,7 +107,7 @@ const Home: React.FC = props => {
         </S.CardPriceFuel>
 
         <S.PurchaseButton
-          disabled={!isActive}
+          // disabled={!isActive}
           onPress={() => linkTo('/pedido')}>
           <S.PurchaseButtonText>FAZER PEDIDO</S.PurchaseButtonText>
         </S.PurchaseButton>

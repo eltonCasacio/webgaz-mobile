@@ -1,5 +1,8 @@
 import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
+import {Dimensions} from 'react-native';
+
+const {width} = Dimensions.get('screen')
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -16,12 +19,13 @@ export const Content = styled.View`
   align-items: center;
 `;
 
-export const LogoWrapper = styled.View``;
+export const LogoWrapper = styled.View`
+  margin: ${width / 6}px;
+`;
 export const Image = styled.Image`
-  width: 220px;
-  height: 220px;
+  width: ${width / 2};
+  height: ${width / 3};
   border-radius: 12px;
-  margin: 0 -10px;
 `;
 
 export const Label = styled.Text`
