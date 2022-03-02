@@ -9,6 +9,7 @@ import {ResponseProps} from '../../types/Home';
 import {User} from '../../types/Auth';
 import {Header, LinkWhatsapp} from '../../components';
 import {loadPrices} from '../../service/home';
+import {useAuth} from '../../contexts/auth';
 
 import * as S from './styles';
 
@@ -24,9 +25,13 @@ function renderItem({item}) {
 
 const Home: React.FC = props => {
   const linkTo = useLinkTo();
-  const [homePrice, setHomePrice] = React.useState<ResponseProps>();
+  const {user} = useAuth();
+
+  const [fuelStation, setFuelStation] = React.useState<ResponseProps>();
   const [isActive, setIsActive] = React.useState(Boolean);
-  const [messageInfo, setMessageInfo] = React.useState('');
+  const [messageInfo, setMessageInfo] = React.useState(
+    'Cadastro Pendente de Aprovação!',
+  );
 
   const handleWhatsApp = () => {
     Linking.openURL(
@@ -36,21 +41,13 @@ const Home: React.FC = props => {
 
   React.useEffect(() => {
     async function run() {
-      const data = await loadPrices(2);
-      setHomePrice(data);
-      const userJson = await AsyncStorage.getItem('@webgaz:user');
-      const user: User = JSON.parse(userJson);
-      setIsActive(user.status === 'ACTIVE');
+      loadPrices(2).then(res => {
+        setFuelStation(res);
+        setIsActive(user.status === 'ACTIVE');
+      });
     }
     run();
   }, [props]);
-
-  React.useEffect(() => {
-    async function run() {
-      setMessageInfo(isActive ? '' : 'Cadastro Pendente de Aprovação!');
-    }
-    run();
-  }, [isActive]);
 
   return (
     <S.Wrapper>
@@ -71,12 +68,16 @@ const Home: React.FC = props => {
         />
       </S.WrapperCarousel>
 
-      <TouchableOpacity onPress={handleWhatsApp}>
-        <LinkWhatsapp
-          text="enviar comprovante de pagamento"
-          phone="+5519971196825"
-        />
-      </TouchableOpacity>
+      {isActive ? (
+        <TouchableOpacity onPress={handleWhatsApp}>
+          <LinkWhatsapp
+            text="enviar comprovante de pagamento"
+            phone="+5519971196825"
+          />
+        </TouchableOpacity>
+      ) : (
+        <S.MessageError>{messageInfo}</S.MessageError>
+      )}
 
       <S.CardPrice>
         <S.CardPriceTitle>
@@ -97,13 +98,13 @@ const Home: React.FC = props => {
         </S.CardPriceDate>
 
         <S.CardPriceFuel>
-          <S.CardPriceFuelLabel>{homePrice?.fuelType}</S.CardPriceFuelLabel>
-          <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
+          <S.CardPriceFuelLabel>{fuelStation?.fuelType}</S.CardPriceFuelLabel>
+          <S.CardPriceFuelPrice>R$ {fuelStation?.price}</S.CardPriceFuelPrice>
         </S.CardPriceFuel>
 
         <S.CardPriceFuel>
-          <S.CardPriceFuelLabel>{homePrice?.fuelType}</S.CardPriceFuelLabel>
-          <S.CardPriceFuelPrice>R$ {homePrice?.price}</S.CardPriceFuelPrice>
+          <S.CardPriceFuelLabel>{fuelStation?.fuelType}</S.CardPriceFuelLabel>
+          <S.CardPriceFuelPrice>R$ {fuelStation?.price}</S.CardPriceFuelPrice>
         </S.CardPriceFuel>
 
         <S.PurchaseButton
@@ -112,8 +113,6 @@ const Home: React.FC = props => {
           <S.PurchaseButtonText>FAZER PEDIDO</S.PurchaseButtonText>
         </S.PurchaseButton>
       </S.CardPrice>
-
-      <S.MessageError>{messageInfo ? messageInfo : ''}</S.MessageError>
 
       <S.Operation>
         <S.OperationTitleText>Horário para Pedidos</S.OperationTitleText>

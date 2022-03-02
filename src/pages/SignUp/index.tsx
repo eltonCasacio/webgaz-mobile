@@ -45,8 +45,9 @@ const SignUp: React.FC = ({navigation}: any) => {
   const handleConfirm = async () => {
     if (isValid()) {
       const res = await signup(company);
-      alert(res.message);
-      navigation.navigate(res.url);
+      console.debug('SERVICE::RES?????', res);
+      // alert(res.message);
+      // navigation.navigate(res.url);
     }
   };
 

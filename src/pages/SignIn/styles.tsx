@@ -2,7 +2,7 @@ import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
 import {Dimensions} from 'react-native';
 
-const {width} = Dimensions.get('screen')
+const {width} = Dimensions.get('screen');
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -15,16 +15,16 @@ export const Wrapper = styled.SafeAreaView`
 
 export const Content = styled.View`
   flex: 1;
-  width: 100%;
   align-items: center;
 `;
 
 export const LogoWrapper = styled.View`
-  margin: ${width / 6}px;
+  margin: ${width / 20}px 0;
+  align-items: center;
 `;
 export const Image = styled.Image`
-  width: ${width / 2};
-  height: ${width / 3};
+  width: ${width / 2.5}px;
+  height: ${width / 2.5}px;
   border-radius: 12px;
 `;
 
@@ -32,6 +32,7 @@ export const Label = styled.Text`
   color: ${Theme.colors.white};
   font-size: 25px;
   font-weight: bold;
+  margin-bottom: ${width / 20}px;
 `;
 
 export const MessageError = styled.Text`
@@ -43,7 +44,7 @@ export const MessageError = styled.Text`
 type InputParams = {hasError: boolean};
 export const Input = styled.TextInput<InputParams>`
   ${({hasError = false}) => css`
-    width: 100%;
+    width: ${width - 30}px;
     border-radius: 12px;
     padding: 15px;
     font-size: 18px;
@@ -66,7 +67,7 @@ export const InputLabel = styled.Text`
 `;
 
 export const SignupForgotPassword = styled.View`
-  width: 100%;
+  width: ${width - 30}px;
   justify-content: space-between;
   flex-direction: row;
   margin-top: 15px;
@@ -78,8 +79,5 @@ export const SignupForgotPasswordText = styled.Text`
 `;
 
 export const Footer = styled.View`
-  width: 100%;
-  flex: auto;
-  justify-content: flex-end;
-  align-items: center;
+  margin-top: ${width / 6}px;
 `;

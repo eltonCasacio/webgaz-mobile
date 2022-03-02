@@ -6,7 +6,7 @@ import {
   PurchaseOrderStatus,
 } from '../types/Purchase';
 import {ShippingCompany} from '../types/ShippingCompany';
-import {formatDateUs} from '../utils'
+import {formatDate} from '../utils';
 import API from './api';
 
 export const loadPurchase = async (params: GetPurchase) => {
@@ -26,7 +26,13 @@ type confirmPurchaseProps = {
   shippingCompany: ShippingCompany;
 };
 export const confirmPurchase = async (params: confirmPurchaseProps) => {
-  params.deliveryDate = formatDateUs(params.deliveryDate) 
+  console.log("merda")
+  params.deliveryDate = formatDate(params.deliveryDate);
   const response = await API.post('purchase-order', params);
   return response.status;
+};
+
+export const getPurchases = async (fuelStationId: number) => {
+  const response = await API.get(`purchase-order/filter/${fuelStationId}`);
+  return response;
 };

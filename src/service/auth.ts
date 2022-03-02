@@ -4,10 +4,11 @@ import {CompanyProps} from '../types/Company';
 
 export async function signIn(params: SignInProps): Promise<ResponseSignIn> {
   try {
+    console.debug('SIGIN::', params)
     const {data} = await API.post('signin', params);
     return data;
   } catch (error) {
-    console.debug('SERVICE::SIGNIN::Erro', error?.response?.data);
+    console.debug('SERVICE::SIGNIN::Erro', error);
     return error?.response?.data;
   }
 }
@@ -16,6 +17,7 @@ export async function signup(params: CompanyProps): Promise<ResponseSignup> {
   let response = {} as ResponseSignup;
   try {
     await API.post('signup', params);
+    console.debug('SERVICE::SIGNUP::SUCESS');
     response.message = 'Empresa Cadastrada com Sucesso!';
     response.url = 'SignIn';
   } catch (error) {
