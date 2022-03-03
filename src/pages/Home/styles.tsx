@@ -1,10 +1,13 @@
 import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
+import {Dimensions} from 'react-native'
 
-export const Wrapper = styled.View`
+const {width, height} = Dimensions.get('screen')
+const fraction = width/width
+
+export const Wrapper = styled.SafeAreaView`
   flex: 1;
   justify-content: space-around;
-  padding: 0 10px;
   background-color: ${Theme.colors.primary};
 `;
 
@@ -13,7 +16,7 @@ export const WrapperCarousel = styled.View`
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    height: 25%;
+    height: ${width/2.5}px;
   `}
 `;
 
@@ -21,7 +24,7 @@ export const Image = styled.Image`
   width: auto;
   height: 100%;
   border-radius: 12px;
-  margin: 0 -10px;
+  margin: 0 -${fraction * 10}px;;
 `;
 
 export const Order = styled.TouchableOpacity`
@@ -58,7 +61,7 @@ export const CardPriceTitle = styled.View`
 export const CardPriceTitleText = styled.Text`
   color: ${Theme.colors.white};
   margin-left: 5px;
-  font-size: 26px;
+  font-size: ${height/height * 20}px;
   font-weight: bold;
 `;
 
@@ -123,7 +126,7 @@ export const CardPriceFuel = styled.View`
 export const CardPriceFuelLabel = styled.Text`
   ${() => css`
     color: ${Theme.colors.gray};
-    font-size: 24px;
+    font-size: ${height/height * 20}px;
     text-transform: uppercase;
   `}
 `;
@@ -131,7 +134,7 @@ export const CardPriceFuelLabel = styled.Text`
 export const CardPriceFuelPrice = styled.Text`
   ${() => css`
     color: ${Theme.colors.white};
-    font-size: 24px;
+    font-size: ${height/height * 20}px;
     font-weight: bold;
   `}
 `;
@@ -147,15 +150,15 @@ export const PurchaseButton = styled.TouchableOpacity``;
 
 export const PurchaseButtonText = styled.Text`
   color: ${Theme.colors.white};
-  font-size: 20px;
+  font-size: ${fraction * 16}px;
   font-weight: bold;
   border-top-width: 1px;
   border-top-color: #a4a2a24d;
   width: 100%;
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  margin-top: 10px;
+  padding-top: ${height/height * 16}px;
+  padding-bottom: ${height/height * 5}px;
+  margin-top: ${height/height * 10}px;
 `;
 
 export const OperationDateItem = styled.View`
@@ -170,7 +173,7 @@ export const Operation = styled.View`
 
 export const OperationTitleText = styled.Text`
   color: ${Theme.colors.white};
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 export const OperationDate = styled.View`
@@ -180,13 +183,12 @@ export const OperationDate = styled.View`
 export const OperationHourLabel = styled.Text`
   ${() => css`
     color: ${Theme.colors.lightGray};
-    font-size: 18px;
+    font-size: 14px;
   `}
 `;
 
 export const MessageError = styled.Text`
   color: ${Theme.colors.buttonDanger};
   font-size: 14px;
-  margin-top: 10%;
   text-align: center;
 `;

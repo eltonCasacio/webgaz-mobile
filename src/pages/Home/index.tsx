@@ -4,9 +4,9 @@ import Carousel from 'react-native-snap-carousel';
 import {useLinkTo} from '@react-navigation/native';
 
 import {ResponseProps} from '../../types/Home';
-import {Header, LinkWhatsapp} from '../../components';
 import {loadPrices} from '../../service/home';
 import {useAuth} from '../../contexts/auth';
+import {Header, LinkWhatsapp} from '../../components';
 
 import * as S from './styles';
 
@@ -24,19 +24,36 @@ const Home: React.FC = props => {
   const linkTo = useLinkTo();
   const {user} = useAuth();
 
+  const [hour, setHour] = React.useState(
+    `${new Date().getHours()}:${new Date().getMinutes()}`,
+  );
   const [fuelStation, setFuelStation] = React.useState<ResponseProps>();
   const [messageInfo, setMessageInfo] = React.useState(
     'Cadastro Pendente de Aprovação!',
   );
 
   React.useEffect(() => {
+    let response = null;
+    let updateData = null;
+    let currentDate = new Date().getMinutes();
     async function run() {
-      const response = await loadPrices(2)
+      response = await loadPrices(2);
       setFuelStation(response);
+
+      updateData = setInterval(async () => {
+        if (currentDate === new Date().getMinutes()) return;
+        currentDate = new Date().getMinutes();
+        setHour(`${new Date().getHours()}:${new Date().getMinutes()}`);
+        response = await loadPrices(2);
+        setFuelStation(response);
+      }, 1000);
     }
     run();
 
-    return () => setFuelStation(null)
+    return () => {
+      setFuelStation(null);
+      clearInterval(updateData);
+    };
   }, []);
 
   return (
@@ -78,12 +95,14 @@ const Home: React.FC = props => {
         <S.CardPriceDate>
           <S.CardPriceDateItem>
             <S.CardPriceDateHourLabel>hora</S.CardPriceDateHourLabel>
-            <S.CardPriceDateHour>16:00</S.CardPriceDateHour>
+            <S.CardPriceDateHour>{hour}</S.CardPriceDateHour>
           </S.CardPriceDateItem>
 
           <S.CardPriceDateItem>
             <S.CardPriceDateHourLabel>dia/mes</S.CardPriceDateHourLabel>
-            <S.CardPriceDateHour>21/02</S.CardPriceDateHour>
+            <S.CardPriceDateHour>
+              {new Date().toDateString().slice(3, -4)}
+            </S.CardPriceDateHour>
           </S.CardPriceDateItem>
         </S.CardPriceDate>
 
@@ -118,3 +137,6 @@ const Home: React.FC = props => {
 };
 
 export default Home;
+function updateHour(updateHour: any) {
+  throw new Error('Function not implemented.');
+}
