@@ -59,7 +59,6 @@ const Home: React.FC = props => {
 
   return (
     <S.Wrapper>
-      <Header />
       <S.WrapperCarousel>
         <Carousel
           data={images}

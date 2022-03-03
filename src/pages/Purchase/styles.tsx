@@ -3,17 +3,18 @@ import Theme from '../../styles/theme';
 import {Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('screen');
-const fraction = width / width;
+const wFraction = width / width;
+const hFraction = height / height;
 
 export const Wrapper = styled.SafeAreaView`
   background-color: ${Theme.colors.primary};
-  flex: 1;
   justify-content: space-around;
+  height: ${height- (hFraction*185)}px;
 `;
 
 export const Text = styled.Text`
   color: ${Theme.colors.lightGray};
-  font-size: ${fraction * 16}px;
+  font-size: ${wFraction * 16}px;
   font-weight: bold;
   padding-left: 2px;
   text-transform: uppercase;
@@ -32,7 +33,7 @@ export const Card = styled.View`
     border-radius: 10px;
     padding: 10px;
     border: solid 2px #a4a2a24d;
-    margin: 0 ${fraction * 15}px;
+    margin: 0 ${wFraction * 15}px;
   `}
 `;
 
@@ -62,7 +63,7 @@ export const LitersPrice = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  margin: 0 ${fraction * 15}px;
+  margin: 0 ${wFraction * 15}px;
 `;
 
 export const Liters = styled.View`
@@ -97,7 +98,7 @@ export const Payment = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 0 ${fraction * 15}px;
+  margin: 0 ${wFraction * 15}px;
 `;
 
 export const PaymentText = styled.Text`
@@ -148,12 +149,12 @@ export const PaymentInputDate = styled.TouchableOpacity`
 export const MessageFreight = styled.View`
   align-items: center;
   justify-content: center;
-  margin: 0 ${fraction * 15}px;
+  margin: 0 ${wFraction * 15}px;
 `;
 
 export const MessageFreightTitle = styled.Text`
   color: ${Theme.colors.warning};
-  font-size: ${fraction * 16}px;
+  font-size: ${wFraction * 16}px;
   margin-top: 5%;
 `;
 

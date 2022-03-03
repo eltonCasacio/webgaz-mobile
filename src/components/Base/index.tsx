@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './styles';
-import {Footer} from '../';
+import {Header, Footer} from '../';
 import {useAuth} from '../../contexts/auth';
 
 export type BaseProps = {
@@ -8,11 +8,12 @@ export type BaseProps = {
 };
 
 const Base: React.FC<BaseProps> = props => {
-  const {user} = useAuth();
+  const {user, signed} = useAuth();
   return (
     <S.Wrapper>
+      {!!signed && <Header />}
       {props.children}
-      {user.status === 'ACTIVE' && <Footer />}
+      {user?.status === 'ACTIVE' && <Footer />}
     </S.Wrapper>
   );
 };

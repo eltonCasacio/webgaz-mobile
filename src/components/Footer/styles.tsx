@@ -1,11 +1,15 @@
 import styled from 'styled-components/native';
-import Theme from '../../styles/theme';
+import {Dimensions} from 'react-native';
+
+const {width, height} = Dimensions.get('screen');
+const wFraction = width / width;
+const hFraction = height / height;
 
 export const Wrapper = styled.View`
   flex-direction: row;
   justify-content: space-around;
   background-color: #2f2c44;
-  height: 70px;
+  height: 65px;
 `;
 
 export const Menu = styled.TouchableOpacity`
@@ -13,14 +17,6 @@ export const Menu = styled.TouchableOpacity`
 `;
 
 export const Image = styled.Image`
-  width: 25px;
-  height: 25px;
-`;
-
-export const MenuTextView = styled.View``;
-
-export const MenuText = styled.Text`
-  padding: 5px 0;
-  font-size: 20px;
-  color: ${Theme.colors.white};
+  width: ${wFraction * 20}px;
+  height: ${hFraction * 20}px;
 `;
