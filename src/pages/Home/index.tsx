@@ -1,5 +1,4 @@
 import React from 'react';
-import {TouchableOpacity, Linking} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Carousel from 'react-native-snap-carousel';
 import {useLinkTo} from '@react-navigation/native';
@@ -26,7 +25,6 @@ const Home: React.FC = props => {
   const {user} = useAuth();
 
   const [fuelStation, setFuelStation] = React.useState<ResponseProps>();
-  const [isActive, setIsActive] = React.useState(Boolean);
   const [messageInfo, setMessageInfo] = React.useState(
     'Cadastro Pendente de Aprovação!',
   );
@@ -35,11 +33,12 @@ const Home: React.FC = props => {
     async function run() {
       loadPrices(2).then(res => {
         setFuelStation(res);
-        setIsActive(user.status === 'ACTIVE');
       });
     }
     run();
-  }, [props]);
+
+    return 
+  }, []);
 
   return (
     <S.Wrapper>
@@ -60,7 +59,7 @@ const Home: React.FC = props => {
         />
       </S.WrapperCarousel>
 
-      {isActive ? (
+      {user.status === 'ACTIVE' ? (
         <S.WhatsApp>
           <LinkWhatsapp
             text="enviar comprovante de pagamento"
