@@ -1,11 +1,10 @@
 import React from 'react';
 import {useState} from 'react';
-import {Input} from 'react-native-elements';
 import Buttom from '../../components/Buttom';
-import MyLink from '../../components/MyLink';
 import {useNavigation} from '@react-navigation/native';
 import * as S from './styles';
 import {resetPassword} from '../../service/resetPassword';
+
 const logo_com_nome = require('../../assets/logo-com-nome.png');
 
 const ResetPassword: React.FC = () => {

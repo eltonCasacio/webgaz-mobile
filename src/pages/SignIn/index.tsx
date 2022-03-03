@@ -6,7 +6,6 @@ import {useAuth} from '../../contexts/auth';
 
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
-import {ScrollView} from 'react-native-gesture-handler';
 
 const SignIn: React.FC = () => {
   const logo_com_nome = require('../../assets/logo-com-nome.png');

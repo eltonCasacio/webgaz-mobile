@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, Image, Linking, TouchableOpacity} from 'react-native';
 import Theme from '../../styles/theme';
+import env from "react-native-dotenv";
 
 export type WhatsAppProps = {
   text?: string;
@@ -9,7 +10,7 @@ export type WhatsAppProps = {
 
 const LinkWhatsapp: React.FC<WhatsAppProps> = ({
   text,
-  phone = '+5519971196825',
+  phone = env.WHATSAPP,
 }) => {
   const handleWhatsApp = () => {
     Linking.openURL(`whatsapp://send?text=${text}&phone=${phone}`);

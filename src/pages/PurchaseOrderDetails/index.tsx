@@ -1,5 +1,5 @@
 import React from 'react';
-import {Header, Footer, Buttom, LinkWhatsapp} from '../../components';
+import {Header, Footer, LinkWhatsapp} from '../../components';
 import * as S from './styles';
 
 import {Purchase} from '../../types/Purchase';

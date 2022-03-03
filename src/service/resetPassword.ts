@@ -1,5 +1,4 @@
 import API from '../service/api';
-import {responseMessage} from '../utils';
 
 export type ResetPasswordProps = {
   email: string;
@@ -10,13 +9,8 @@ type ResponseProps = {
   severity: string;
 };
 
-export async function resetPassword(
-  params: ResetPasswordProps,
-): Promise<ResponseProps> {
+export async function resetPassword(params: ResetPasswordProps): Promise<void> {
   try {
     await API.patch('reset-password', params);
-    return responseMessage('Senha criada, verificar email', 'success');
-  } catch (error) {
-    return responseMessage('Erro ao criar senha', 'error');
-  }
+  } catch (error) {}
 }
