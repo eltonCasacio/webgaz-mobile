@@ -1,10 +1,12 @@
 import styled, {css} from 'styled-components/native';
 import Theme from '../../../styles/theme';
 
+import {Dimensions} from 'react-native';
+
+const {width} = Dimensions.get('screen');
+
 export const UseInfo = styled.View`
-  width: 100%;
-  flex: 1;
-  height: 100%;
+  margin: 10px 0;
 `;
 
 export const WrapperPassword = styled.View`
@@ -13,20 +15,19 @@ export const WrapperPassword = styled.View`
 `;
 
 export const InputPassword = styled.View`
-  width: 47%;
-  margin-top: 25px;
+  width: ${width / 2.2}px;
 `;
 
 export const InputWrapper = styled.View`
   width: 100%;
-  margin-top: 25px;
+  margin: 10px 0;
 `;
 
 export const InputLabel = styled.Text`
   color: ${Theme.colors.white};
   margin-bottom: 2px;
   padding: 0 5px;
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 type InputParams = {hasError?: boolean};

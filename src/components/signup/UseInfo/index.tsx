@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './styles';
-import {CompanyProps} from '../../../types/Signup';
+import {CompanyProps} from '../../../types/Company';
 
 export type UserInfoProps = {
   handleUpdateProps: (nameProps: string, value: string) => void;
@@ -49,7 +49,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
             onChangeText={text =>
               props.handleUpdateProps('confirmPassword', text)
             }
-            value={props?.company?.confirmPassword}
+            value={props?.company?.passwordConfirmation}
           />
         </S.InputPassword>
       </S.WrapperPassword>

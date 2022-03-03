@@ -38,8 +38,8 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <S.Wrapper>
-      <S.ScrollView>
+    <S.SafeAreaView>
+      <S.Wrapper>
         <S.LogoWrapper>
           <S.Image source={logo_com_nome} />
         </S.LogoWrapper>
@@ -78,7 +78,6 @@ const SignIn: React.FC = () => {
         </S.Form>
 
         {messageError && <S.MessageError>{messageError}</S.MessageError>}
-        <S.MessageError>messageError</S.MessageError>
 
         <S.Footer>
           <Buttom
@@ -87,8 +86,8 @@ const SignIn: React.FC = () => {
             callback={handleSignIn}
           />
         </S.Footer>
-      </S.ScrollView>
-    </S.Wrapper>
+      </S.Wrapper>
+    </S.SafeAreaView>
   );
 };
 

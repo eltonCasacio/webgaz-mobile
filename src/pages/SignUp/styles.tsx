@@ -1,23 +1,26 @@
 import styled, {css} from 'styled-components/native';
+import {Dimensions} from 'react-native';
 import Theme from '../../styles/theme';
 
-export const Wrapper = styled.SafeAreaView`
-  flex: 1;
+const {width, height} = Dimensions.get('screen');
+
+export const Wrapper = styled.View`
   background-color: ${Theme.colors.primary};
+  align-content: space-between;
+  flex: 1;
 `;
 
-export const ScrollView = styled.ScrollView``;
+export const ScrollView = styled.ScrollView`
+  background-color: red;
+`;
 
 export const LogoWrapper = styled.View`
   align-items: center;
-  margin-bottom: 20px;
 `;
 
 export const Image = styled.Image`
-  width: 120px;
-  height: 120px;
-  border-radius: 12px;
-  margin: 0 -10px;
+  width: ${width / 3}px;
+  height: ${width / 3}px;
 `;
 
 export const WrapperSteps = styled.View`
@@ -36,6 +39,7 @@ export const Steps = styled.TouchableOpacity<StepProps>`
     border-radius: 200px;
   `}
 `;
+
 export const StepsIcon = styled.Image``;
 
 const stepModifier = {
@@ -55,22 +59,21 @@ export const StepsSelected = styled.View<StepSelectedProps>`
   ${({step = 'step1'}) => css`
     background-color: #fff;
     height: 4px;
-    width: 33.333%;
-    margin-top: -3.5px;
+    width: ${width / 3}px;
+    margin-top: -3px;
     ${stepModifier[step]()};
   `}
 `;
 
-export const Container = styled.View`
+export const Form = styled.View`
   padding: 0 15px;
+  flex: 1;
 `;
 
 export const Footer = styled.View`
-  width: 100%;
-  justify-content: flex-end;
-  align-items: center;
   padding: 0 15px;
   margin-top: 20px;
+  justify-self: flex-end;
 `;
 
 export const Goback = styled.TouchableOpacity`

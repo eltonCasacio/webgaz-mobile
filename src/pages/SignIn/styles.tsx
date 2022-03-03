@@ -4,9 +4,9 @@ import {Dimensions} from 'react-native';
 
 const {width} = Dimensions.get('screen');
 
-export const Wrapper = styled.SafeAreaView``;
+export const SafeAreaView = styled.SafeAreaView``;
 
-export const ScrollView = styled.SafeAreaView`
+export const Wrapper = styled.View`
   height: 100%;
   justify-content: space-around;
   align-items: center;

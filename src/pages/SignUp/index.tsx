@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
 import {CompanyProps} from '../../types/Company';
+import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 
 const logo_com_nome = require('../../assets/logo-com-nome.png');
 const signup_step1 = require('../../assets/signup-step1.png');
@@ -57,7 +58,7 @@ const SignUp: React.FC = ({navigation}: any) => {
 
   return (
     <S.Wrapper>
-      <S.ScrollView>
+      <ScrollView>
         <S.LogoWrapper>
           <S.Image source={logo_com_nome} />
         </S.LogoWrapper>
@@ -75,9 +76,10 @@ const SignUp: React.FC = ({navigation}: any) => {
             <S.StepsIcon source={signup_step3} />
           </S.Steps>
         </S.WrapperSteps>
+
         <S.StepsSelected step={step} />
 
-        <S.Container>
+        <S.Form>
           {step === STEP.step1 && (
             <UseInfo handleUpdateProps={handleUpdateProps} company={company} />
           )}
@@ -89,9 +91,8 @@ const SignUp: React.FC = ({navigation}: any) => {
           {step === STEP.step3 && (
             <Rede handleUpdateProps={handleUpdateProps} company={company} />
           )}
-        </S.Container>
-      </S.ScrollView>
-
+        </S.Form>
+      </ScrollView>
       {step === STEP.step1 && <S.Label>Cadastrar empresa</S.Label>}
       {step === STEP.step2 && <S.Label>Cadastrar endereço</S.Label>}
       {step === STEP.step3 && <S.Label>informações da rede</S.Label>}
