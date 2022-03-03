@@ -1,9 +1,10 @@
 import * as S from './styles';
 import React, {useEffect, useState} from 'react';
+import {ScrollView} from 'react-native';
+
 import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
 import {CompanyProps} from '../../types/Company';
-import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 
 const logo_com_nome = require('../../assets/logo-com-nome.png');
 const signup_step1 = require('../../assets/signup-step1.png');
@@ -47,8 +48,8 @@ const SignUp: React.FC = ({navigation}: any) => {
     if (isValid()) {
       const res = await signup(company);
       console.debug('SERVICE::RES?????', res);
-      // alert(res.message);
-      // navigation.navigate(res.url);
+      alert(res.message);
+      navigation.navigate(res.url);
     }
   };
 
