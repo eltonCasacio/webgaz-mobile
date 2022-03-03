@@ -1,17 +1,19 @@
 import React from 'react';
-import {Header, Footer} from '../../components';
+import {Header, Footer, Buttom, LinkWhatsapp} from '../../components';
 import * as S from './styles';
 
 import {Purchase} from '../../types/Purchase';
-import {formatNumber, formatDate} from '../../utils';
+import {ShippingCompany} from '../../types/ShippingCompany';
+import {formatCurrency, formatDate} from '../../utils';
 
 const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
   const {purchaseOrder} = route.params;
 
   const [purchase, setPurchase] = React.useState<Purchase>();
+  const [shipping, setShipping] = React.useState<ShippingCompany>();
 
   React.useEffect(() => {
-    console.log("seila", purchaseOrder)
+    console.log('seila', purchaseOrder);
     setPurchase(purchaseOrder);
   }, [purchaseOrder]);
 
@@ -34,7 +36,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
 
             <S.Line>
               <S.Description>Data da Entrega </S.Description>
-              <S.Value>{formatDate(new Date(purchase?.date))}</S.Value>
+              <S.Value>{formatDate(new Date(purchase?.deliveryDate))}</S.Value>
             </S.Line>
 
             <S.Line>
@@ -45,61 +47,68 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
             <S.DoubleInLine>
               <S.Line>
                 <S.Description>Litros: </S.Description>
-                <S.Value>{purchase?.liters}</S.Value>
+                <S.Value>{purchase?.qtdLiters}</S.Value>
               </S.Line>
 
               <S.Line>
                 <S.Description>Frete: </S.Description>
-                <S.Value>R${formatNumber(purchase?.totalPrice)}</S.Value>
+                <S.Value>R${formatCurrency(purchase?.totalPrice)}</S.Value>
               </S.Line>
             </S.DoubleInLine>
 
             <S.Line>
               <S.Description>TOTAL</S.Description>
-              <S.Value>R${formatNumber(purchase?.totalPrice)}</S.Value>
+              <S.Value>R${formatCurrency(purchase?.totalPrice)}</S.Value>
             </S.Line>
           </S.PurchaseWrapper>
 
-          {purchase?.deliveryType === 'RETIRADA' && (
-            <S.ShippingWrapper>
-              <S.Title>Detalhes da Transportadora</S.Title>
-              <S.Column>
-                <S.Description>Nome do Motorista</S.Description>
-                <S.Value>{purchase?.driverName}</S.Value>
-              </S.Column>
+          <S.ShippingWrapper>
+            <S.Title>Detalhes da Transportadora</S.Title>
+            <S.Column>
+              <S.Description>Nome do Motorista</S.Description>
+              <S.Value>{shipping?.driverName || '--'}</S.Value>
+            </S.Column>
 
-              <S.Column>
-                <S.Description>Transportadora</S.Description>
-                <S.Value>{purchase?.shippingName}</S.Value>
-              </S.Column>
+            <S.Column>
+              <S.Description>Transportadora</S.Description>
+              <S.Value>{shipping?.name || '--'}</S.Value>
+            </S.Column>
 
-              <S.DoubleInLine>
-                <S.Line>
-                  <S.Description>CNPJ </S.Description>
-                  <S.Value>{purchase?.cnpj}</S.Value>
-                </S.Line>
-
-                <S.Line>
-                  <S.Description>CNH </S.Description>
-                  <S.Value>{purchase?.cnh}</S.Value>
-                </S.Line>
-              </S.DoubleInLine>
+            <S.DoubleInLine>
+              <S.Line>
+                <S.Description>CNPJ </S.Description>
+                <S.Value>{shipping?.cnpj || '--'}</S.Value>
+              </S.Line>
 
               <S.Line>
-                <S.Description>
-                  Placa
-                  <S.Value> {purchase?.plate}</S.Value>
-                </S.Description>
+                <S.Description>CNH </S.Description>
+                <S.Value>{shipping?.cnh || '--'}</S.Value>
               </S.Line>
-            </S.ShippingWrapper>
-          )}
+            </S.DoubleInLine>
+
+            <S.Line>
+              <S.Description>
+                Placa
+                <S.Value> {shipping?.plateNumber || '--'}</S.Value>
+              </S.Description>
+            </S.Line>
+          </S.ShippingWrapper>
         </S.Content>
 
         <S.PaymentConfirmText>
-          Enviar Comprovante de Pagamento
+          <LinkWhatsapp
+            text="enviar comprovante de pagamento"
+            phone="+5519971196825"
+          />
         </S.PaymentConfirmText>
 
         <S.Button>
+          {/* <Buttom
+            color="buttonConfirm"
+            title="CONFIRMAR"
+            callback={handleConfirm}
+          /> */}
+
           <S.Goback onPress={() => navigation.goBack()}>
             <S.GobackText>VOLTAR</S.GobackText>
           </S.Goback>

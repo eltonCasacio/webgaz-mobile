@@ -26,7 +26,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const ModalUserInfo: React.FC<ModalUserInfoProps> = params => {
   const linkTo = useLinkTo();
-  const {signOut} = useAuth();
+  const {signOut, user} = useAuth();
 
   return (
     <Modal animationType="fade" transparent visible={params.modalVisible}>
@@ -35,31 +35,37 @@ const ModalUserInfo: React.FC<ModalUserInfoProps> = params => {
         <View style={styles.menu}>
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => linkTo('/Inicio')}>
-            <Feather name="dollar-sign" size={25} color="#ffffffde" />
-            <Text style={styles.modalMessageText}>- Tabela de Preços</Text>
+            onPress={() => linkTo('/perfil')}>
+            <AntDesign name="database" size={20} color="#fff" />
+            <Text style={styles.modalMessageText}>
+              - Informações do Usuário
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.menuItem}
-            onPress={() => linkTo('/Pedir')}>
-           <AntDesign name="shoppingcart" size={25} color="#fff" />
-            <Text style={styles.modalMessageText}>- Fazer Pedido</Text>
-          </TouchableOpacity>
+          {user.status === 'ACTIVE' && (
+            <>
+              <TouchableOpacity
+                style={styles.menuItem}
+                onPress={() => linkTo('/inicio')}>
+                <Feather name="dollar-sign" size={20} color="#ffffffde" />
+                <Text style={styles.modalMessageText}>- Tabela de Preços</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.menuItem}
-            onPress={() => linkTo('/Pedidos')}>
-            <Entypo name="list" size={25} color="#ffffffde" />
-            <Text style={styles.modalMessageText}>- Pedidos</Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.menuItem}
+                onPress={() => linkTo('/pedido')}>
+                <AntDesign name="shoppingcart" size={20} color="#fff" />
+                <Text style={styles.modalMessageText}>- Fazer Pedido</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.menuItem}
-            onPress={() => linkTo('/Perfil')}>
-            <AntDesign name="database" size={25} color="#fff" />
-            <Text style={styles.modalMessageText}>- Meus Dados</Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.menuItem}
+                onPress={() => linkTo('/pedidos')}>
+                <Entypo name="list" size={20} color="#ffffffde" />
+                <Text style={styles.modalMessageText}>- Pedidos</Text>
+              </TouchableOpacity>
+            </>
+          )}
         </View>
         <View style={styles.footer}>
           <TouchableOpacity onPress={signOut}>
@@ -70,7 +76,7 @@ const ModalUserInfo: React.FC<ModalUserInfoProps> = params => {
             onPress={() => {
               params.setModalVisible(!params.modalVisible);
             }}>
-            <AntDesign name="close" size={25} color="#fff" />
+            <AntDesign name="close" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     marginVertical: 10,
     padding: 10,
-    backgroundColor: '#ffffff47'
+    backgroundColor: '#ffffff47',
   },
   textStyle: {
     color: Theme.colors.buttonDanger,
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center'
+    alignItems: 'center',
   },
   menu: {
     flex: 1,

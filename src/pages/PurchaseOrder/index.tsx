@@ -1,31 +1,25 @@
 import React from 'react';
+import {useAuth} from '../../contexts/auth';
+import {PurchaseResponseProps} from '../../types/Purchase';
 import {CardPurchase, Footer, Header} from '../../components';
 import {getPurchases} from '../../service/purchase';
+
 import * as S from './styles';
-
-import {purchaseCardDatail} from '../../mocks/Purchases';
-import {useAuth} from '../../contexts/auth';
-
-export type PurchaseOrderProps = {
-  order: number;
-  date: Date;
-  status: string;
-  totalPrice: number;
-  fuelType: string;
-};
 
 const PurchaseOrder = ({navigation}) => {
   const {user} = useAuth();
-  const [purchases, setPurchases] =
-    React.useState<PurchaseOrderProps[]>(purchaseCardDatail);
+  const [purchases, setPurchases] = React.useState<PurchaseResponseProps[]>();
 
-  // React.useEffect(() => {
-  //   const result = async function run() {
-  //     getPurchases(user.id);
-  //   }
-  // setPurchases(result)
-  //   run();
-  // }, []);
+  React.useEffect(() => {
+    async function run() {
+      const result = await getPurchases(user.id);
+
+      if (result.status === 200) {
+        setPurchases(result?.data);
+      }
+    }
+    run();
+  }, []);
 
   return (
     <>
@@ -33,9 +27,9 @@ const PurchaseOrder = ({navigation}) => {
       <S.Wrapper>
         <S.Label>Pedidos</S.Label>
         <S.ScrollView>
-          {purchases.map(item => (
+          {purchases?.map(item => (
             <CardPurchase
-              key={item.order}
+              key={item.id}
               data={item}
               navigation={navigation}
             />

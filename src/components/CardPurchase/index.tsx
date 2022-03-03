@@ -1,40 +1,40 @@
 import React from 'react';
 import * as S from './styles';
-import {PurchaseOrderProps} from '../../pages/PurchaseOrder';
+import {PurchaseResponseProps} from '../../types/Purchase';
+import {formatDate, formatCurrency} from '../../utils';
 
 type CardPurchaseProps = {
-  data: PurchaseOrderProps;
+  data: PurchaseResponseProps;
   navigation: any;
 };
 
+enum StatusColor {
+  PENDENTE = '#aaaa0d',
+  CANCELADO = '#aa0d0d',
+  ENTREGUE = '#0c910c',
+}
+
 export default function CardPurchase({data, navigation}: CardPurchaseProps) {
   function openDetails() {
-    navigation.navigate('detalhes', {purchaseOrder: data.order});
+    navigation.navigate('detalhes', {purchaseOrder: data.id});
   }
-
-  React.useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <S.Wrapper>
       <S.Header>
-        <S.Text>{data?.order}</S.Text>
-        <S.Text>{data?.date}</S.Text>
+        <S.Text>Nº {data?.fuelStationId}</S.Text>
+        <S.Text>{formatDate(data?.deliveryDate)}</S.Text>
         <S.TouchableOpacity onPress={openDetails}>
           <S.Details source={require('../../assets/details.png')} />
         </S.TouchableOpacity>
       </S.Header>
       <S.Status>
-        <S.StatusColor
-          statusColor={
-            data.status === 'Em analise' ? '#aaaa0d' : '#0c910c'
-          }></S.StatusColor>
+        <S.StatusColor statusColor={StatusColor[data.status]}></S.StatusColor>
         <S.Text>{data?.status}</S.Text>
       </S.Status>
       <S.Description>
         <S.Text>{data.fuelType}</S.Text>
-        <S.Text>Total: R${data.totalPrice}</S.Text>
+        <S.Text>Total R${formatCurrency(data.totalPrice)}</S.Text>
       </S.Description>
     </S.Wrapper>
   );

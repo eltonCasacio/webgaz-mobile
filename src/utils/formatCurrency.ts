@@ -1,4 +1,4 @@
-export const formatNumber = (
+export const formatCurrency = (
   amount,
   decimalCount = 2,
   decimal = ',',

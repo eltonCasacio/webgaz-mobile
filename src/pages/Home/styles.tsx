@@ -136,10 +136,7 @@ export const CardPriceFuelPrice = styled.Text`
   `}
 `;
 
-export const WhatsApp = styled.TouchableOpacity`
-  align-items: center;
-  margin: 10% 0;
-`;
+export const WhatsApp = styled.View``;
 
 export const WhatsAppText = styled.Text`
   color: ${Theme.colors.white};

@@ -4,7 +4,7 @@ import * as S from './styles';
 
 import {Purchase} from '../../types/Purchase';
 import {ShippingCompany} from '../../types/ShippingCompany';
-import {formatNumber, formatDate} from '../../utils';
+import {formatCurrency, formatDate} from '../../utils';
 import {confirmPurchase} from '../../service/purchase';
 
 const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
@@ -66,13 +66,13 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
 
               <S.Line>
                 <S.Description>Frete: </S.Description>
-                <S.Value>R${formatNumber(purchase?.totalPrice)}</S.Value>
+                <S.Value>R${formatCurrency(purchase?.totalPrice)}</S.Value>
               </S.Line>
             </S.DoubleInLine>
 
             <S.Line>
               <S.Description>TOTAL</S.Description>
-              <S.Value>R${formatNumber(purchase?.totalPrice)}</S.Value>
+              <S.Value>R${formatCurrency(purchase?.totalPrice)}</S.Value>
             </S.Line>
           </S.PurchaseWrapper>
 

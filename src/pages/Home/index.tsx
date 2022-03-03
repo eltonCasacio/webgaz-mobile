@@ -2,11 +2,9 @@ import React from 'react';
 import {TouchableOpacity, Linking} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Carousel from 'react-native-snap-carousel';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useLinkTo} from '@react-navigation/native';
 
 import {ResponseProps} from '../../types/Home';
-import {User} from '../../types/Auth';
 import {Header, LinkWhatsapp} from '../../components';
 import {loadPrices} from '../../service/home';
 import {useAuth} from '../../contexts/auth';
@@ -32,12 +30,6 @@ const Home: React.FC = props => {
   const [messageInfo, setMessageInfo] = React.useState(
     'Cadastro Pendente de Aprovação!',
   );
-
-  const handleWhatsApp = () => {
-    Linking.openURL(
-      `whatsapp://send?text=${'Teste webgaz'}&phone=${'+5519971196825'}`,
-    );
-  };
 
   React.useEffect(() => {
     async function run() {
@@ -69,12 +61,12 @@ const Home: React.FC = props => {
       </S.WrapperCarousel>
 
       {isActive ? (
-        <TouchableOpacity onPress={handleWhatsApp}>
+        <S.WhatsApp>
           <LinkWhatsapp
             text="enviar comprovante de pagamento"
             phone="+5519971196825"
           />
-        </TouchableOpacity>
+        </S.WhatsApp>
       ) : (
         <S.MessageError>{messageInfo}</S.MessageError>
       )}
