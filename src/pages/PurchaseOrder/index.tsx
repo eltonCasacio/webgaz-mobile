@@ -1,14 +1,47 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {useAuth} from '../../contexts/auth';
+import {PurchaseResponseProps} from '../../types/Purchase';
+import {CardPurchase, Footer, Header} from '../../components';
+import {getPurchases} from '../../service/purchase';
 
-const PurchaseOrder = () => {
+import * as S from './styles';
+
+const PurchaseOrder = ({navigation}) => {
+  const {user} = useAuth();
+  const [purchases, setPurchases] = React.useState<PurchaseResponseProps[]>();
+
+  React.useEffect(() => {
+    async function run() {
+      const result = await getPurchases(user.id);
+
+      if (result.status === 200) {
+        setPurchases(result?.data);
+      }
+    }
+    run();
+  }, []);
+
   return (
-    <View>
-      <Text>PurchaseOrder</Text>
-    </View>
+    <>
+      <Header />
+      <S.Wrapper>
+        <S.Label>Pedidos</S.Label>
+        <S.ScrollView>
+          {purchases?.map(item => (
+            <CardPurchase
+              key={item.id}
+              data={item}
+              navigation={navigation}
+            />
+          ))}
+        </S.ScrollView>
+        <S.Goback onPress={() => navigation.goBack()}>
+          <S.GobackText>VOLTAR</S.GobackText>
+        </S.Goback>
+      </S.Wrapper>
+      <Footer />
+    </>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default PurchaseOrder;
