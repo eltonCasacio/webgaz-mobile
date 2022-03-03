@@ -27,13 +27,13 @@ const SignIn: React.FC = () => {
     return !!username && !!password;
   }
 
-  const {signIn, signed} = useAuth();
+  const {signIn, setUser} = useAuth();
 
   const handleSignIn = async () => {
     if (validate()) {
-      signIn({email: username, password}).then(res => {
-        setMessageError(signed ? '' : 'Usuário ou Senha Inválido!');
-      });
+      const response = await signIn({email: username, password});
+      setMessageError(!response && 'Usuário ou Senha Inválido')
+      if (response) setUser(response);
     }
   };
 
@@ -45,6 +45,8 @@ const SignIn: React.FC = () => {
         </S.LogoWrapper>
 
         <S.Label>Login</S.Label>
+
+        {messageError && <S.MessageError>{messageError}</S.MessageError>}
 
         <S.Form>
           <S.InputWrapper>
@@ -76,8 +78,6 @@ const SignIn: React.FC = () => {
             <MyLink screen="SignUp" title="Cadastrar" navigation={navigation} />
           </S.SignupForgotPassword>
         </S.Form>
-
-        {messageError && <S.MessageError>{messageError}</S.MessageError>}
 
         <S.Footer>
           <Buttom

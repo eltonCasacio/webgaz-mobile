@@ -31,13 +31,12 @@ const Home: React.FC = props => {
 
   React.useEffect(() => {
     async function run() {
-      loadPrices(2).then(res => {
-        setFuelStation(res);
-      });
+      const response = await loadPrices(2)
+      setFuelStation(response);
     }
     run();
 
-    return 
+    return () => setFuelStation(null)
   }, []);
 
   return (

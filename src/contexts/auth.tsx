@@ -9,8 +9,9 @@ interface AuthContextData {
   signed: boolean;
   user: User | null;
   loading: boolean;
-  signIn({}: SignInProps): Promise<void>;
+  signIn({}: SignInProps): Promise<User>;
   signOut(): void;
+  setUser({}: User): void;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -19,21 +20,25 @@ export const AuthProvider: React.FC = ({children}) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User>();
 
-  async function signIn(params: SignInProps): Promise<void> {
+  async function signIn(params: SignInProps): Promise<User> {
     const response = await auth.signIn(params);
 
     if (response.token) {
       api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
       let {id, name, status} = {...response.fuelStation};
-      
+
       await AsyncStorage.setItem('@webgaz:token', response.token);
       await AsyncStorage.setItem(
         '@webgaz:user',
         JSON.stringify({id, name, status}),
       );
-      setUser({id, name, status});
+      // setUser({id, name, status});
+
+      return {id, name, status};
     }
+
+    return null;
   }
 
   async function signOut() {
@@ -58,7 +63,7 @@ export const AuthProvider: React.FC = ({children}) => {
 
   return (
     <AuthContext.Provider
-      value={{signed: !!user, user, loading, signOut, signIn}}>
+      value={{signed: !!user, user, loading, signOut, signIn, setUser}}>
       {children}
     </AuthContext.Provider>
   );
