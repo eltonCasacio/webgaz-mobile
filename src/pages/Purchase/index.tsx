@@ -4,7 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {Purchase as PurchaseProps} from '../../types/Purchase';
 import {User} from '../../types/Auth';
-import {formatNumber, formatDate} from '../../utils';
+import {formatCurrency, formatDate} from '../../utils';
 
 import {Header, Footer, Buttom, SelectPurchase} from '../../components';
 import {loadPurchase} from '../../service/purchase';
@@ -94,111 +94,108 @@ const Purchase: React.FC = ({navigation}: any) => {
   }, []);
 
   return (
-    <>
+    <S.Wrapper>
       <Header />
-      <S.Wrapper>
+
+      <S.Card>
         <S.Text>Tipo de Combustivel</S.Text>
-        <S.Card>
-          <S.CardTitle
-            onPress={() => updateFields('fuelType', FuelEnum.GASOLINA)}>
-            <S.CardTitleText>Gasolina</S.CardTitleText>
-            <S.RadioButton active={FuelEnum.GASOLINA === purchase.fuelType} />
-          </S.CardTitle>
-          <S.Divider />
-          <S.CardTitle
-            onPress={() => updateFields('fuelType', FuelEnum.ETANOL)}>
-            <S.CardTitleText>Etanol</S.CardTitleText>
+        <S.CardTitle
+          onPress={() => updateFields('fuelType', FuelEnum.GASOLINA)}>
+          <S.CardTitleText>Gasolina</S.CardTitleText>
+          <S.RadioButton active={FuelEnum.GASOLINA === purchase.fuelType} />
+        </S.CardTitle>
+        <S.Divider />
+        <S.CardTitle onPress={() => updateFields('fuelType', FuelEnum.ETANOL)}>
+          <S.CardTitleText>Etanol</S.CardTitleText>
 
-            <S.RadioButton active={FuelEnum.ETANOL === purchase.fuelType} />
-          </S.CardTitle>
-        </S.Card>
+          <S.RadioButton active={FuelEnum.ETANOL === purchase.fuelType} />
+        </S.CardTitle>
+      </S.Card>
 
+      <S.Card>
         <S.Text>Tipo de Entrega</S.Text>
-        <S.Card>
-          <S.CardTitle
-            onPress={() => updateFields('deliveryType', ShippingEnum.RETIRADA)}>
-            <S.CardTitleText>Retirada</S.CardTitleText>
-            <S.RadioButton
-              active={ShippingEnum.RETIRADA === purchase.deliveryType}
-            />
-          </S.CardTitle>
-          <S.Divider />
-          <S.CardTitle
-            onPress={() => updateFields('deliveryType', ShippingEnum.COLACADO)}>
-            <S.CardTitleText>Colocada</S.CardTitleText>
-
-            <S.RadioButton
-              active={ShippingEnum.COLACADO === purchase.deliveryType}
-            />
-          </S.CardTitle>
-        </S.Card>
-
-        <S.LitersPrice>
-          <S.Liters>
-            <S.LitersText>
-              <S.LitersTitle>litros:</S.LitersTitle>
-            </S.LitersText>
-            <S.LitersInput
-              keyboardType="numeric"
-              onChangeText={text => updateFields('qtdLiters', text)}
-              value={String(purchase?.qtdLiters)}
-            />
-          </S.Liters>
-          <S.Price>R$ {formatNumber(purchase.totalPrice)}</S.Price>
-        </S.LitersPrice>
-
-        <S.Payment>
-          <S.PaymentInputWrapper>
-            <S.PaymentText>Forma de Pagamento</S.PaymentText>
-            <S.PaymentSelectWrapper>
-              <SelectPurchase
-                options={PaymentTypeList}
-                onChangeSelected={value => updateFields('paymentType', value)}
-                option={purchase?.paymentType}
-              />
-            </S.PaymentSelectWrapper>
-          </S.PaymentInputWrapper>
-
-          <S.PaymentInputWrapper>
-            <S.PaymentText>Data da Entrega</S.PaymentText>
-            <S.PaymentInputDate onPress={() => setShow(true)}>
-              <S.PaymentDateText>
-                {formatDate(new Date(purchase.deliveryDate))}
-              </S.PaymentDateText>
-            </S.PaymentInputDate>
-            {show && (
-              <DateTimePicker
-                minimumDate={currentDate}
-                testID="dateTimePicker"
-                value={new Date(purchase.deliveryDate)}
-                mode={'date'}
-                is24Hour={true}
-                display="default"
-                onChange={onChangeDatePicker}
-              />
-            )}
-          </S.PaymentInputWrapper>
-        </S.Payment>
-
-        {purchase.deliveryType === ShippingEnum.COLACADO && (
-          <S.MessageFreight>
-            <S.MessageFreightTitle>Atenção</S.MessageFreightTitle>
-            <S.MessageFreightMsg>
-              Informamos que tera um acrescimo no valor total referente ao frete
-            </S.MessageFreightMsg>
-          </S.MessageFreight>
-        )}
-
-        <S.Button>
-          <Buttom
-            color="buttonDefault"
-            title="PROXIMO"
-            callback={handleNextStep}
+        <S.CardTitle
+          onPress={() => updateFields('deliveryType', ShippingEnum.RETIRADA)}>
+          <S.CardTitleText>Retirada</S.CardTitleText>
+          <S.RadioButton
+            active={ShippingEnum.RETIRADA === purchase.deliveryType}
           />
-        </S.Button>
-      </S.Wrapper>
-      <Footer />
-    </>
+        </S.CardTitle>
+        <S.Divider />
+        <S.CardTitle
+          onPress={() => updateFields('deliveryType', ShippingEnum.COLACADO)}>
+          <S.CardTitleText>Colocada</S.CardTitleText>
+
+          <S.RadioButton
+            active={ShippingEnum.COLACADO === purchase.deliveryType}
+          />
+        </S.CardTitle>
+      </S.Card>
+
+      <S.LitersPrice>
+        <S.Liters>
+          <S.LitersText>
+            <S.LitersTitle>litros:</S.LitersTitle>
+          </S.LitersText>
+          <S.LitersInput
+            keyboardType="numeric"
+            onChangeText={text => updateFields('qtdLiters', text)}
+            value={String(purchase?.qtdLiters)}
+          />
+        </S.Liters>
+        <S.Price>R$ {formatCurrency(purchase.totalPrice)}</S.Price>
+      </S.LitersPrice>
+
+      <S.Payment>
+        <S.PaymentInputWrapper>
+          <S.PaymentText>Forma de Pagamento</S.PaymentText>
+          <S.PaymentSelectWrapper>
+            <SelectPurchase
+              options={PaymentTypeList}
+              onChangeSelected={value => updateFields('paymentType', value)}
+              option={purchase?.paymentType}
+            />
+          </S.PaymentSelectWrapper>
+        </S.PaymentInputWrapper>
+
+        <S.PaymentInputWrapper>
+          <S.PaymentText>Data da Entrega</S.PaymentText>
+          <S.PaymentInputDate onPress={() => setShow(true)}>
+            <S.PaymentDateText>
+              {formatDate(new Date(purchase.deliveryDate))}
+            </S.PaymentDateText>
+          </S.PaymentInputDate>
+          {show && (
+            <DateTimePicker
+              minimumDate={currentDate}
+              testID="dateTimePicker"
+              value={new Date(purchase.deliveryDate)}
+              mode={'date'}
+              is24Hour={true}
+              display="default"
+              onChange={onChangeDatePicker}
+            />
+          )}
+        </S.PaymentInputWrapper>
+      </S.Payment>
+
+      {purchase.deliveryType === ShippingEnum.COLACADO && (
+        <S.MessageFreight>
+          <S.MessageFreightTitle>Atenção</S.MessageFreightTitle>
+          <S.MessageFreightMsg>
+            Informamos que tera um acrescimo no valor total referente ao frete
+          </S.MessageFreightMsg>
+        </S.MessageFreight>
+      )}
+
+      <S.Button>
+        <Buttom
+          color="buttonDefault"
+          title="PROXIMO"
+          callback={handleNextStep}
+        />
+      </S.Button>
+    </S.Wrapper>
   );
 };
 

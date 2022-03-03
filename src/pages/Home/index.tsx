@@ -6,6 +6,7 @@ import {useLinkTo} from '@react-navigation/native';
 import {ResponseProps} from '../../types/Home';
 import {loadPrices} from '../../service/home';
 import {useAuth} from '../../contexts/auth';
+import {formatCurrency} from '../../utils/formatCurrency';
 import {Header, LinkWhatsapp} from '../../components';
 
 import * as S from './styles';
@@ -108,12 +109,16 @@ const Home: React.FC = props => {
 
         <S.CardPriceFuel>
           <S.CardPriceFuelLabel>{fuelStation?.fuelType}</S.CardPriceFuelLabel>
-          <S.CardPriceFuelPrice>R$ {fuelStation?.price}</S.CardPriceFuelPrice>
+          <S.CardPriceFuelPrice>
+            R$ {formatCurrency(fuelStation?.price)}
+          </S.CardPriceFuelPrice>
         </S.CardPriceFuel>
 
         <S.CardPriceFuel>
           <S.CardPriceFuelLabel>{fuelStation?.fuelType}</S.CardPriceFuelLabel>
-          <S.CardPriceFuelPrice>R$ {fuelStation?.price}</S.CardPriceFuelPrice>
+          <S.CardPriceFuelPrice>
+            R$ {formatCurrency(fuelStation?.price)}
+          </S.CardPriceFuelPrice>
         </S.CardPriceFuel>
 
         <S.PurchaseButton
@@ -137,6 +142,3 @@ const Home: React.FC = props => {
 };
 
 export default Home;
-function updateHour(updateHour: any) {
-  throw new Error('Function not implemented.');
-}

@@ -2,25 +2,19 @@ import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
 import {Dimensions} from 'react-native';
 
-const {width} = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
+const fraction = width / width;
 
-export const Wrapper = styled.View`
+export const Wrapper = styled.SafeAreaView`
   background-color: ${Theme.colors.primary};
   flex: 1;
-  padding: 0 15px;
-`;
-
-export const Label = styled.Text`
-  color: ${Theme.colors.white};
-  font-size: 25px;
-  font-weight: bold;
-  align-self: center;
+  justify-content: space-around;
 `;
 
 export const Text = styled.Text`
   color: ${Theme.colors.lightGray};
-  font-size: 14px;
-  margin-top: 20px;
+  font-size: ${fraction * 16}px;
+  font-weight: bold;
   padding-left: 2px;
   text-transform: uppercase;
 `;
@@ -38,6 +32,7 @@ export const Card = styled.View`
     border-radius: 10px;
     padding: 10px;
     border: solid 2px #a4a2a24d;
+    margin: 0 ${fraction * 15}px;
   `}
 `;
 
@@ -66,8 +61,8 @@ export const LitersPrice = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: ${width / 10}px;
+
+  margin: 0 ${fraction * 15}px;
 `;
 
 export const Liters = styled.View`
@@ -102,6 +97,7 @@ export const Payment = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 0 ${fraction * 15}px;
 `;
 
 export const PaymentText = styled.Text`
@@ -150,14 +146,14 @@ export const PaymentInputDate = styled.TouchableOpacity`
 `;
 
 export const MessageFreight = styled.View`
-  flex: 1;
   align-items: center;
   justify-content: center;
+  margin: 0 ${fraction * 15}px;
 `;
 
 export const MessageFreightTitle = styled.Text`
   color: ${Theme.colors.warning};
-  font-size: 20px;
+  font-size: ${fraction * 16}px;
   margin-top: 5%;
 `;
 
@@ -168,9 +164,8 @@ export const MessageFreightMsg = styled.Text`
 `;
 
 export const Button = styled.View`
-  justify-content: flex-end;
-  flex: 1;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-bottom: ${(height / height) * 5}px;
 `;
 
 export type RadioProps = {active: boolean};
