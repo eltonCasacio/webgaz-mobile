@@ -6,7 +6,6 @@ import {useAuth} from '../../contexts/auth';
 
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
-import {KeyboardAvoidingView, Platform} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 const SignIn: React.FC = () => {
@@ -40,13 +39,14 @@ const SignIn: React.FC = () => {
 
   return (
     <S.Wrapper>
-      <ScrollView>
+      <S.ScrollView>
         <S.LogoWrapper>
           <S.Image source={logo_com_nome} />
         </S.LogoWrapper>
-        <S.Content>
-          <S.Label>Login</S.Label>
 
+        <S.Label>Login</S.Label>
+
+        <S.Form>
           <S.InputWrapper>
             <S.InputLabel>Nome do Usuário</S.InputLabel>
             <S.Input
@@ -75,13 +75,19 @@ const SignIn: React.FC = () => {
 
             <MyLink screen="SignUp" title="Cadastrar" navigation={navigation} />
           </S.SignupForgotPassword>
+        </S.Form>
 
-          {messageError && <S.MessageError>{messageError}</S.MessageError>}
-        </S.Content>
-      <S.Footer>
-        <Buttom color="buttonDefault" title="ENTRAR" callback={handleSignIn} />
-      </S.Footer>
-      </ScrollView>
+        {messageError && <S.MessageError>{messageError}</S.MessageError>}
+        <S.MessageError>messageError</S.MessageError>
+
+        <S.Footer>
+          <Buttom
+            color="buttonDefault"
+            title="ENTRAR"
+            callback={handleSignIn}
+          />
+        </S.Footer>
+      </S.ScrollView>
     </S.Wrapper>
   );
 };

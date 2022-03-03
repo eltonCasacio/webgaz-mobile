@@ -4,27 +4,24 @@ import {Dimensions} from 'react-native';
 
 const {width} = Dimensions.get('screen');
 
-export const Wrapper = styled.SafeAreaView`
-  flex: 1;
-  justify-content: center;
+export const Wrapper = styled.SafeAreaView``;
+
+export const ScrollView = styled.SafeAreaView`
+  height: 100%;
+  justify-content: space-around;
   align-items: center;
   padding: 0 15px;
-  padding-bottom: 35px;
   background-color: ${Theme.colors.primary};
 `;
 
-export const Content = styled.View`
-  flex: 1;
+export const Form = styled.View`
   align-items: center;
 `;
 
 export const LogoWrapper = styled.View`
-  margin: ${width / 20}px 0;
   align-items: center;
 `;
 export const Image = styled.Image`
-  width: ${width / 2.5}px;
-  height: ${width / 2.5}px;
   border-radius: 12px;
 `;
 
@@ -38,7 +35,6 @@ export const Label = styled.Text`
 export const MessageError = styled.Text`
   color: ${Theme.colors.buttonDanger};
   font-size: 14px;
-  margin-top: 10%;
 `;
 
 type InputParams = {hasError: boolean};
@@ -78,6 +74,4 @@ export const SignupForgotPasswordText = styled.Text`
   font-size: 14px;
 `;
 
-export const Footer = styled.View`
-  margin-top: ${width / 6}px;
-`;
+export const Footer = styled.View``;
