@@ -1,5 +1,5 @@
 import React from 'react';
-import {CompanyProps} from '../../../types/Signup';
+import {CompanyProps} from '../../../types/Company';
 import * as S from './styles';
 
 export type RedeProps = {
