@@ -1,5 +1,6 @@
 import React from 'react';
-import {Header, Footer, Buttom} from '../../components';
+import {ScrollView} from 'react-native';
+import {Buttom} from '../../components';
 import {ShippingCompany} from '../../types/ShippingCompany';
 
 import * as S from './styles';
@@ -7,35 +8,49 @@ import * as S from './styles';
 const PurchaseShipping: React.FC = ({route, navigation}: any) => {
   const {purchaseOrder} = route.params;
   const [shipping, setShipping] = React.useState<ShippingCompany>();
+  const [fieldsErrors, setFieldsErrors] = React.useState<any>();
 
-  function handleNextStep() {
-    if (validationToNextStep()) {
-      navigation.navigate('confirmar-pedido', {
-        purchaseOrder: purchaseOrder,
-        shippingCompany: shipping,
-      });
-    }
-  }
+  function validateFields() {
+    setFieldsErrors({
+      cnh: !!shipping?.cnh,
+      cnpj: !!shipping?.cnpj,
+      driverName: !!shipping?.driverName,
+      name: !!shipping?.name,
+      plateNumber: !!shipping?.plateNumber,
+    });
 
-  function validationToNextStep() {
-    return true;
+    return (
+      !!shipping?.cnh &&
+      !!shipping?.cnpj &&
+      !!shipping?.driverName &&
+      !!shipping?.name &&
+      !!shipping?.plateNumber
+    );
   }
 
   function handleUpdateProps(name: string, value: string) {
     setShipping({...shipping, [name]: value});
   }
 
+  function handleNextStep() {
+    if (validateFields()) {
+      // navigation.navigate('confirmar-pedido', {
+      //   purchaseOrder: purchaseOrder,
+      //   shippingCompany: shipping,
+      // });
+    }
+  }
+
   return (
-    <>
-      <Header />
+    <ScrollView>
       <S.Wrapper>
         <S.Label>Transportadora</S.Label>
 
-        <S.ShippingInfo>
+        <S.Form>
           <S.InputWrapper>
             <S.InputLabel>Nome do Motorista</S.InputLabel>
             <S.Input
-              hasError={false}
+              hasError={!fieldsErrors?.driverName}
               onChangeText={text => handleUpdateProps('driverName', text)}
               value={shipping?.driverName}
             />
@@ -44,7 +59,7 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
           <S.InputWrapper>
             <S.InputLabel>Nome da Transportadora</S.InputLabel>
             <S.Input
-              hasError={false}
+              hasError={!fieldsErrors?.name}
               onChangeText={text => handleUpdateProps('name', text)}
               value={shipping?.name}
             />
@@ -54,7 +69,7 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
             <S.InputCnpjCnh>
               <S.InputLabel>CNPJ</S.InputLabel>
               <S.Input
-                hasError={false}
+                hasError={!fieldsErrors?.cnpj}
                 onChangeText={text => handleUpdateProps('cnpj', text)}
                 value={shipping?.cnpj}
               />
@@ -63,7 +78,7 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
             <S.InputCnpjCnh>
               <S.InputLabel>CNH</S.InputLabel>
               <S.Input
-                hasError={false}
+                hasError={!fieldsErrors?.cnh}
                 secureTextEntry
                 onChangeText={text => handleUpdateProps('cnh', text)}
                 value={shipping?.cnh}
@@ -73,26 +88,25 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
 
           <S.InputLabel>Placa</S.InputLabel>
           <S.Input
-            hasError={false}
+            hasError={!fieldsErrors?.plateNumber}
             onChangeText={text => handleUpdateProps('plateNumber', text)}
             value={shipping?.plateNumber}
           />
+        </S.Form>
 
-          <S.Button>
-            <Buttom
-              color="buttonDefault"
-              title="PROXIMO"
-              callback={handleNextStep}
-            />
+        <S.Button>
+          <Buttom
+            color="buttonDefault"
+            title="PROXIMO"
+            callback={handleNextStep}
+          />
 
-            <S.Goback onPress={() => navigation.goBack()}>
-              <S.GobackText>VOLTAR</S.GobackText>
-            </S.Goback>
-          </S.Button>
-        </S.ShippingInfo>
+          <S.Goback onPress={() => navigation.goBack()}>
+            <S.GobackText>VOLTAR</S.GobackText>
+          </S.Goback>
+        </S.Button>
       </S.Wrapper>
-      <Footer />
-    </>
+    </ScrollView>
   );
 };
 
