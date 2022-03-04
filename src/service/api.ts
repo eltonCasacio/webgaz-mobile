@@ -1,8 +1,7 @@
 import axios from 'axios';
-import env from 'react-native-dotenv';
 
 const api = axios.create({
-  baseURL: env.API_URL_LOCAL,
+  baseURL: 'http://192.168.15.5:8080/api',
   headers: {
     'Content-Type': 'application/json',
   },

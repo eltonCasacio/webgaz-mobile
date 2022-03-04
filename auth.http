@@ -39,3 +39,7 @@ Content-Type: application/json
 {
   "email": "5@teste.com"
 }
+
+###
+GET  http://api.devmaykinho.click/api/helth
+Content-Type: application/json

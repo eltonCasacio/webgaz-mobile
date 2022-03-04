@@ -1,16 +1,19 @@
-import {Platform, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {Platform, ScrollView} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import {Purchase as PurchaseProps} from '../../types/Purchase';
+import {
+  DeliveryType,
+  GetPurchase,
+  Purchase as PurchaseProps,
+} from '../../types/Purchase';
 import {formatCurrency, formatDate} from '../../utils';
 
-import {Header, Buttom, SelectPurchase} from '../../components';
+import {Buttom, SelectPurchase} from '../../components';
 import {loadPurchase} from '../../service/purchase';
 import * as S from './styles';
 
 import {useAuth} from '../../contexts/auth';
-import {ScrollView} from 'react-native-gesture-handler';
 
 enum FuelEnum {
   GASOLINA = 'GASOLINA',
@@ -23,12 +26,11 @@ enum ShippingEnum {
 }
 
 const PaymentTypeList = ['ANTECIPADO', 'À VISTA', '7 DIAS', '10 DIAS'];
+const currentDate = new Date();
+currentDate.setDate(currentDate.getDate() + 1);
 
 const Purchase: React.FC = ({navigation}: any) => {
   const {user} = useAuth();
-  const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() + 1);
-
   const [show, setShow] = useState(false);
   const [price, setPrice] = useState(0);
   const [purchase, setPurchase] = useState({
@@ -45,8 +47,22 @@ const Purchase: React.FC = ({navigation}: any) => {
     return true;
   }
 
+  async function handleNextStep() {
+    console.debug('PROXIMO::', purchase, price);
+    // if (validate()) {
+    //   const linkTo =
+    //     purchase.deliveryType === ShippingEnum.RETIRADA
+    //       ? 'pedido-transportadora'
+    //       : 'confirmar-pedido';
+
+    //   navigation.navigate(linkTo, {
+    //     purchaseOrder: purchase,
+    //   });
+    // }
+  }
+
   function updateFields(name: string, value: any) {
-    setPurchase({...purchase, [name]: value});
+    setPurchase({...purchase, [name]: value, totalPrice: price});
   }
 
   const onChangeDatePicker = (event: any, selectedDate: any) => {
@@ -55,38 +71,14 @@ const Purchase: React.FC = ({navigation}: any) => {
     updateFields('deliveryDate', currentDate);
   };
 
-  async function handleNextStep() {
-    if (validate()) {
-      const linkTo =
-        purchase.deliveryType === ShippingEnum.RETIRADA
-          ? 'pedido-transportadora'
-          : 'confirmar-pedido';
-
-      navigation.navigate(linkTo, {
-        purchaseOrder: purchase,
-      });
-    }
+  async function updatePrice(params: GetPurchase) {
+    const {price} = await loadPurchase(params);
+    setPrice(price * purchase.qtdLiters);
   }
 
   useEffect(() => {
-    const sum = purchase?.qtdLiters * price;
-    updateFields('totalPrice', sum);
-  }, [purchase.qtdLiters]);
-
-  useEffect(() => {
-    async function run() {
-      const {price} = await loadPurchase({
-        deliveryType: 'RETIRADA',
-        fuelType: 'ETANOL',
-        paymentType: 'ANTECIPADO',
-        fuelStationId: Number(user.id),
-      });
-
-      setPrice(price);
-      updateFields('totalPrice', price);
-    }
-    run();
-  }, []);
+    updatePrice(purchase);
+  }, [purchase]);
 
   return (
     <ScrollView>
@@ -138,7 +130,7 @@ const Purchase: React.FC = ({navigation}: any) => {
               value={String(purchase?.qtdLiters)}
             />
           </S.Liters>
-          <S.Price>R$ {formatCurrency(purchase.totalPrice)}</S.Price>
+          <S.Price>R$ {formatCurrency(price)}</S.Price>
         </S.LitersPrice>
 
         <S.Payment>
