@@ -1,10 +1,16 @@
 import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
+import {Dimensions} from 'react-native';
+
+const {width, height} = Dimensions.get('screen');
+const wFraction = width / width;
+const hFraction = height / height;
 
 export const Wrapper = styled.View`
-  flex: 1;
   padding: 15px;
   background-color: ${Theme.colors.primary};
+  height: ${height - hFraction * 185}px;
+  justify-content: space-around;
 `;
 
 export const Label = styled.Text`
@@ -14,39 +20,33 @@ export const Label = styled.Text`
   align-self: center;
 `;
 
-export const ShippingInfo = styled.View`
-  flex: 1;
-  width: 100%;
-`;
+export const Form = styled.View``;
 
 export const WrapperCnpjCnh = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: ${hFraction * 20}px;
 `;
 
 export const InputCnpjCnh = styled.View`
-  width: 47%;
-  margin-top: 25px;
+  width: ${width / 2.25}px;
 `;
 
 export const InputWrapper = styled.View`
   width: 100%;
-  margin-top: 25px;
+  margin-bottom: ${hFraction * 20}px;
 `;
 
 export const InputLabel = styled.Text`
   color: ${Theme.colors.white};
-  margin-bottom: 2px;
-  padding: 0 5px;
   font-size: 16px;
 `;
 
 type InputParams = {hasError?: boolean};
 export const Input = styled.TextInput<InputParams>`
   ${({hasError = false}) => css`
-    width: 100%;
-    border-radius: 12px;
-    padding: 15px;
+    border-radius: 7px;
+    padding: 10px;
     font-size: 18px;
     color: ${Theme.colors.white};
     background-color: ${Theme.colors.bgInput};

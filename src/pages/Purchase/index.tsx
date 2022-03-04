@@ -2,18 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {Platform, ScrollView} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import {
-  DeliveryType,
-  GetPurchase,
-  Purchase as PurchaseProps,
-} from '../../types/Purchase';
+import {GetPurchase, Purchase as PurchaseProps} from '../../types/Purchase';
 import {formatCurrency, formatDate} from '../../utils';
+import {loadPurchase} from '../../service/purchase';
+import {useAuth} from '../../contexts/auth';
 
 import {Buttom, SelectPurchase} from '../../components';
-import {loadPurchase} from '../../service/purchase';
 import * as S from './styles';
-
-import {useAuth} from '../../contexts/auth';
 
 enum FuelEnum {
   GASOLINA = 'GASOLINA',
@@ -48,17 +43,16 @@ const Purchase: React.FC = ({navigation}: any) => {
   }
 
   async function handleNextStep() {
-    console.debug('PROXIMO::', purchase, price);
-    // if (validate()) {
-    //   const linkTo =
-    //     purchase.deliveryType === ShippingEnum.RETIRADA
-    //       ? 'pedido-transportadora'
-    //       : 'confirmar-pedido';
+    if (validate()) {
+      const linkTo =
+        purchase.deliveryType === ShippingEnum.RETIRADA
+          ? 'pedido-transportadora'
+          : 'confirmar-pedido';
 
-    //   navigation.navigate(linkTo, {
-    //     purchaseOrder: purchase,
-    //   });
-    // }
+      navigation.navigate(linkTo, {
+        purchaseOrder: purchase,
+      });
+    }
   }
 
   function updateFields(name: string, value: any) {
