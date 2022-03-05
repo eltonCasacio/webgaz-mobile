@@ -43,7 +43,11 @@ const Purchase: React.FC = ({navigation}: any) => {
   }
 
   async function handleNextStep() {
+    purchase.totalPrice = price;
+    purchase.deliveryDate = formatDate(purchase.deliveryDate);
+
     if (validate()) {
+      console.debug('ENVIANDO PURCHASE...', purchase);
       const linkTo =
         purchase.deliveryType === ShippingEnum.RETIRADA
           ? 'pedido-transportadora'
@@ -67,11 +71,15 @@ const Purchase: React.FC = ({navigation}: any) => {
 
   async function updatePrice(params: GetPurchase) {
     const {price} = await loadPurchase(params);
-    setPrice(price * purchase.qtdLiters);
+    setPrice(price * purchase?.qtdLiters);
   }
 
   useEffect(() => {
     updatePrice(purchase);
+
+    return () => {
+      setPurchase(null);
+    };
   }, [purchase]);
 
   return (
@@ -83,33 +91,39 @@ const Purchase: React.FC = ({navigation}: any) => {
             <S.CardTitle
               onPress={() => updateFields('fuelType', FuelEnum.GASOLINA)}>
               <S.CardTitleText>Gasolina</S.CardTitleText>
-              <S.RadioButton active={FuelEnum.GASOLINA === purchase.fuelType} />
+              <S.RadioButton
+                active={FuelEnum.GASOLINA === purchase?.fuelType}
+              />
             </S.CardTitle>
             <S.Divider />
             <S.CardTitle
               onPress={() => updateFields('fuelType', FuelEnum.ETANOL)}>
               <S.CardTitleText>Etanol</S.CardTitleText>
 
-              <S.RadioButton active={FuelEnum.ETANOL === purchase.fuelType} />
+              <S.RadioButton active={FuelEnum.ETANOL === purchase?.fuelType} />
             </S.CardTitle>
           </S.Card>
 
           <S.Card>
             <S.Text>Tipo de Entrega</S.Text>
             <S.CardTitle
-              onPress={() => updateFields('deliveryType', ShippingEnum.RETIRADA)}>
+              onPress={() =>
+                updateFields('deliveryType', ShippingEnum.RETIRADA)
+              }>
               <S.CardTitleText>Retirada</S.CardTitleText>
               <S.RadioButton
-                active={ShippingEnum.RETIRADA === purchase.deliveryType}
+                active={ShippingEnum.RETIRADA === purchase?.deliveryType}
               />
             </S.CardTitle>
             <S.Divider />
             <S.CardTitle
-              onPress={() => updateFields('deliveryType', ShippingEnum.COLACADO)}>
+              onPress={() =>
+                updateFields('deliveryType', ShippingEnum.COLACADO)
+              }>
               <S.CardTitleText>Colocada</S.CardTitleText>
 
               <S.RadioButton
-                active={ShippingEnum.COLACADO === purchase.deliveryType}
+                active={ShippingEnum.COLACADO === purchase?.deliveryType}
               />
             </S.CardTitle>
           </S.Card>
@@ -145,14 +159,14 @@ const Purchase: React.FC = ({navigation}: any) => {
             <S.PaymentText>Data da Entrega</S.PaymentText>
             <S.PaymentInputDate onPress={() => setShow(true)}>
               <S.PaymentDateText>
-                {formatDate(new Date(purchase.deliveryDate))}
+                {formatDate(new Date(purchase?.deliveryDate))}
               </S.PaymentDateText>
             </S.PaymentInputDate>
             {show && (
               <DateTimePicker
                 minimumDate={currentDate}
                 testID="dateTimePicker"
-                value={new Date(purchase.deliveryDate)}
+                value={new Date(purchase?.deliveryDate)}
                 mode={'date'}
                 is24Hour={true}
                 display="default"
@@ -161,15 +175,6 @@ const Purchase: React.FC = ({navigation}: any) => {
             )}
           </S.PaymentInputWrapper>
         </S.Payment>
-
-        {/* {purchase.deliveryType === ShippingEnum.COLACADO && (
-          <S.MessageFreight>
-            <S.MessageFreightTitle>Atenção</S.MessageFreightTitle>
-            <S.MessageFreightMsg>
-              Informamos que tera um acrescimo no valor total referente ao frete
-            </S.MessageFreightMsg>
-          </S.MessageFreight>
-        )} */}
         <S.Button>
           <Buttom
             color="buttonDefault"

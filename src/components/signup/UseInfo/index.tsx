@@ -47,7 +47,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
             hasError={false}
             secureTextEntry
             onChangeText={text =>
-              props.handleUpdateProps('confirmPassword', text)
+              props.handleUpdateProps('passwordConfirmation', text)
             }
             value={props?.company?.passwordConfirmation}
           />

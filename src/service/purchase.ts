@@ -9,8 +9,14 @@ export const loadPurchase = async (params: GetPurchase) => {
 
 export const confirmPurchase = async (params: confirmPurchaseProps) => {
   params.deliveryDate = formatDate(params.deliveryDate);
-  const response = await API.post('purchase-order', params);
-  return response.status;
+  try {
+    const response = await API.post('purchase-order', params);
+    console.debug('CONFIRME SUCESS', response);
+    return response.status;
+  } catch (error) {
+    console.error('CONFIRME ERROR', error.response.data);
+    return error.response.data;
+  }
 };
 
 export const getPurchases = async (fuelStationId: number) => {

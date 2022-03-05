@@ -1,18 +1,24 @@
 import React from 'react';
-import {Header, Footer, Buttom} from '../../components';
-import * as S from './styles';
 
 import {Purchase} from '../../types/Purchase';
 import {ShippingCompany} from '../../types/ShippingCompany';
 import {formatCurrency, formatDate} from '../../utils';
 import {confirmPurchase} from '../../service/purchase';
 
+import {useAuth} from '../../contexts/auth';
+
+import {Buttom} from '../../components';
+import * as S from './styles';
+
 const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
   const data = route.params;
+  const {user} = useAuth();
 
   const [purchase, setPurchase] = React.useState<Purchase>();
   const [shipping, setShipping] = React.useState<ShippingCompany>();
-  const [message, setMessage] = React.useState<string>('Pedido Realizado com Sucesso!');
+  const [message, setMessage] = React.useState<string>(
+    'Pedido Realizado com Sucesso!',
+  );
 
   React.useEffect(() => {
     setPurchase(data?.purchaseOrder);
@@ -20,15 +26,16 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
   }, [data]);
 
   async function handleConfirm() {
-    const status = await confirmPurchase({
-      ...purchase,
-      shippingCompany: shipping,
-    });
+    if (user.status === 'ACTIVE') {
+      const status = await confirmPurchase({
+        ...purchase,
+        status: 'PENDENTE',
+        shippingCompany: shipping,
+      });
 
-    if (status === 201) navigation.navigate('pedido');
-
-    setMessage('Não foi Possivel Realizar Pedido')
-
+      if (status === 201) navigation.navigate('inicio');
+      setMessage('Não foi Possivel Realizar Pedido');
+    }
   }
 
   return (
@@ -60,11 +67,6 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
             <S.Line>
               <S.Description>Litros: </S.Description>
               <S.Value>{purchase?.qtdLiters}</S.Value>
-            </S.Line>
-
-            <S.Line>
-              <S.Description>Frete: </S.Description>
-              <S.Value>R${formatCurrency(purchase?.totalPrice)}</S.Value>
             </S.Line>
           </S.DoubleInLine>
 
@@ -108,10 +110,6 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
           </S.ShippingWrapper>
         )}
       </S.Content>
-
-      <S.PaymentConfirmText>
-        Enviar Comprovante de Pagamento
-      </S.PaymentConfirmText>
 
       <S.Button>
         <Buttom

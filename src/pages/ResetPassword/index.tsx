@@ -16,7 +16,6 @@ const ResetPassword: React.FC = () => {
   const handleResetPassword = async () => {
     if (isValid()) {
       const res = await resetPassword({email});
-      console.log('reset senha', res);
       alert(JSON.stringify(res));
     }
   };

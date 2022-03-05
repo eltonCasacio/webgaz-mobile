@@ -1,5 +1,4 @@
 import React from 'react';
-import {Header, Footer, LinkWhatsapp} from '../../components';
 import * as S from './styles';
 
 import {Purchase} from '../../types/Purchase';
@@ -13,7 +12,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
   const [shipping, setShipping] = React.useState<ShippingCompany>();
 
   React.useEffect(() => {
-    console.log('seila', purchaseOrder);
+    console.debug("purchaseOrder::", purchaseOrder)
     setPurchase(purchaseOrder);
   }, [purchaseOrder]);
 

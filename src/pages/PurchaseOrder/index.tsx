@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAuth} from '../../contexts/auth';
 import {PurchaseResponseProps} from '../../types/Purchase';
-import {CardPurchase, Footer, Header} from '../../components';
+import {CardPurchase} from '../../components';
 import {getPurchases} from '../../service/purchase';
 
 import * as S from './styles';

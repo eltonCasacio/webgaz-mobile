@@ -7,7 +7,7 @@ import {ResponseProps} from '../../types/Home';
 import {loadPrices} from '../../service/home';
 import {useAuth} from '../../contexts/auth';
 import {formatCurrency} from '../../utils/formatCurrency';
-import {Header, LinkWhatsapp} from '../../components';
+import {LinkWhatsapp} from '../../components';
 
 import * as S from './styles';
 
@@ -45,9 +45,7 @@ const Home: React.FC = props => {
         if (currentDate === new Date().getMinutes()) return;
         currentDate = new Date().getMinutes();
         setHour(`${new Date().getHours()}:${new Date().getMinutes()}`);
-        response = await loadPrices(2);
-        setFuelStation(response);
-      }, 1000);
+      }, 5000);
     }
     run();
 
@@ -121,7 +119,7 @@ const Home: React.FC = props => {
         </S.CardPriceFuel>
 
         <S.PurchaseButton
-          // disabled={!isActive}
+          disabled={user.status !== 'ACTIVE'}
           onPress={() => linkTo('/pedido')}>
           <S.PurchaseButtonText>FAZER PEDIDO</S.PurchaseButtonText>
         </S.PurchaseButton>

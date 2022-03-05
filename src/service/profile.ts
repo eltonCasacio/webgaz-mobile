@@ -25,7 +25,6 @@ type ResponseProps = {
 };
 
 export async function profile(params: ProfileProps): Promise<void> {
-  console.log('PERFIL', params);
   try {
     // await API.post('profile', params);
   } catch (error) {}
