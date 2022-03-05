@@ -24,6 +24,7 @@ export const ImageUser = styled.TouchableOpacity`
   background-color: #ffffff67;
 `;
 export const Location = styled.Text`
+  align-self: center;
   color: aliceblue;
   font-size: 18px;
   font-weight: 600;

@@ -22,25 +22,21 @@ const PurchaseOrder = ({navigation}) => {
   }, []);
 
   return (
-    <>
-      <Header />
-      <S.Wrapper>
-        <S.Label>Pedidos</S.Label>
-        <S.ScrollView>
-          {purchases?.map(item => (
-            <CardPurchase
-              key={item.id}
-              data={item}
-              navigation={navigation}
-            />
-          ))}
-        </S.ScrollView>
-        <S.Goback onPress={() => navigation.goBack()}>
-          <S.GobackText>VOLTAR</S.GobackText>
-        </S.Goback>
-      </S.Wrapper>
-      <Footer />
-    </>
+    <S.Wrapper>
+      <S.Label>Pedidos</S.Label>
+      <S.ScrollView>
+        {purchases?.map(item => (
+          <CardPurchase
+            key={item.id}
+            data={item}
+            navigation={navigation}
+          />
+        ))}
+      </S.ScrollView>
+      <S.Goback onPress={() => navigation.goBack()}>
+        <S.GobackText>VOLTAR</S.GobackText>
+      </S.Goback>
+    </S.Wrapper>
   );
 };
 

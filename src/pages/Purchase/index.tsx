@@ -77,41 +77,43 @@ const Purchase: React.FC = ({navigation}: any) => {
   return (
     <ScrollView>
       <S.Wrapper>
-        <S.Card>
-          <S.Text>Tipo de Combustivel</S.Text>
-          <S.CardTitle
-            onPress={() => updateFields('fuelType', FuelEnum.GASOLINA)}>
-            <S.CardTitleText>Gasolina</S.CardTitleText>
-            <S.RadioButton active={FuelEnum.GASOLINA === purchase.fuelType} />
-          </S.CardTitle>
-          <S.Divider />
-          <S.CardTitle
-            onPress={() => updateFields('fuelType', FuelEnum.ETANOL)}>
-            <S.CardTitleText>Etanol</S.CardTitleText>
+        <S.CardWrapper>
+          <S.Card>
+            <S.Text>Tipo de Combustivel</S.Text>
+            <S.CardTitle
+              onPress={() => updateFields('fuelType', FuelEnum.GASOLINA)}>
+              <S.CardTitleText>Gasolina</S.CardTitleText>
+              <S.RadioButton active={FuelEnum.GASOLINA === purchase.fuelType} />
+            </S.CardTitle>
+            <S.Divider />
+            <S.CardTitle
+              onPress={() => updateFields('fuelType', FuelEnum.ETANOL)}>
+              <S.CardTitleText>Etanol</S.CardTitleText>
 
-            <S.RadioButton active={FuelEnum.ETANOL === purchase.fuelType} />
-          </S.CardTitle>
-        </S.Card>
+              <S.RadioButton active={FuelEnum.ETANOL === purchase.fuelType} />
+            </S.CardTitle>
+          </S.Card>
 
-        <S.Card>
-          <S.Text>Tipo de Entrega</S.Text>
-          <S.CardTitle
-            onPress={() => updateFields('deliveryType', ShippingEnum.RETIRADA)}>
-            <S.CardTitleText>Retirada</S.CardTitleText>
-            <S.RadioButton
-              active={ShippingEnum.RETIRADA === purchase.deliveryType}
-            />
-          </S.CardTitle>
-          <S.Divider />
-          <S.CardTitle
-            onPress={() => updateFields('deliveryType', ShippingEnum.COLACADO)}>
-            <S.CardTitleText>Colocada</S.CardTitleText>
+          <S.Card>
+            <S.Text>Tipo de Entrega</S.Text>
+            <S.CardTitle
+              onPress={() => updateFields('deliveryType', ShippingEnum.RETIRADA)}>
+              <S.CardTitleText>Retirada</S.CardTitleText>
+              <S.RadioButton
+                active={ShippingEnum.RETIRADA === purchase.deliveryType}
+              />
+            </S.CardTitle>
+            <S.Divider />
+            <S.CardTitle
+              onPress={() => updateFields('deliveryType', ShippingEnum.COLACADO)}>
+              <S.CardTitleText>Colocada</S.CardTitleText>
 
-            <S.RadioButton
-              active={ShippingEnum.COLACADO === purchase.deliveryType}
-            />
-          </S.CardTitle>
-        </S.Card>
+              <S.RadioButton
+                active={ShippingEnum.COLACADO === purchase.deliveryType}
+              />
+            </S.CardTitle>
+          </S.Card>
+        </S.CardWrapper>
 
         <S.LitersPrice>
           <S.Liters>
@@ -160,14 +162,14 @@ const Purchase: React.FC = ({navigation}: any) => {
           </S.PaymentInputWrapper>
         </S.Payment>
 
-        {purchase.deliveryType === ShippingEnum.COLACADO && (
+        {/* {purchase.deliveryType === ShippingEnum.COLACADO && (
           <S.MessageFreight>
             <S.MessageFreightTitle>Atenção</S.MessageFreightTitle>
             <S.MessageFreightMsg>
               Informamos que tera um acrescimo no valor total referente ao frete
             </S.MessageFreightMsg>
           </S.MessageFreight>
-        )}
+        )} */}
         <S.Button>
           <Buttom
             color="buttonDefault"

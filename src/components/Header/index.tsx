@@ -24,14 +24,14 @@ const Header = () => {
 
       <S.Location>Webgaz</S.Location>
      
-      <S.Notification onPress={() => setModalVisible(true)}>
+      {/* <S.Notification onPress={() => setModalVisible(true)}>
         <NotificationIcon
           name="notifications-outline"
           size={30}
           color="#fcfcfc"
         />
         {notification && <S.NotificationCircle />}
-      </S.Notification>
+      </S.Notification> */}
 
       <CardNotification
         modalVisible={modaVisible}

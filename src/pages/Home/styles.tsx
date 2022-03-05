@@ -40,11 +40,14 @@ export const OrderIcon = styled.View``;
 
 export const CardPrice = styled.View`
   ${() => css`
+    align-self: center;
     justify-content: space-between;
     border-radius: 15px;
     padding: 10px;
     border: solid 2px #a4a2a24d;
     background-color: ${Theme.colors.secondary};
+    height: ${height / 2.5}px;
+    width: ${width - 20}px;
   `}
 `;
 
@@ -169,6 +172,7 @@ export const OperationDateItem = styled.View`
 
 export const Operation = styled.View`
   align-items: center;
+  margin: 20px;
 `;
 
 export const OperationTitleText = styled.Text`
