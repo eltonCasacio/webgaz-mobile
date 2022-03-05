@@ -50,7 +50,7 @@ export const CardTitle = styled.Pressable`
 export const CardTitleText = styled.Text`
   color: ${Theme.colors.lightGray};
   margin-left: 5px;
-  font-size: 18px;
+  font-size: ${hFraction * 10}px;
   padding: 5px 0;
 `;
 

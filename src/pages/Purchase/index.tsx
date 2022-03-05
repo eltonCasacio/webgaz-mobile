@@ -83,7 +83,6 @@ const Purchase: React.FC = ({navigation}: any) => {
   }, [purchase]);
 
   return (
-    <ScrollView>
       <S.Wrapper>
         <S.CardWrapper>
           <S.Card>
@@ -183,7 +182,6 @@ const Purchase: React.FC = ({navigation}: any) => {
           />
         </S.Button>
       </S.Wrapper>
-    </ScrollView>
   );
 };
 
