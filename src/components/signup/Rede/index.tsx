@@ -22,8 +22,17 @@ const Rede: React.FC<RedeProps> = props => (
       <S.InputLabel>Nome da Rede</S.InputLabel>
       <S.Input
         hasError={false}
-        onChangeText={text => props.handleUpdateProps('network', text)}
+        onChangeText={text => props.handleUpdateProps('networkName', text)}
         value={props?.company?.networkName}
+      />
+    </S.InputWrapper>
+
+    <S.InputWrapper>
+      <S.InputLabel>Bandeira</S.InputLabel>
+      <S.Input
+        hasError={false}
+        onChangeText={text => props.handleUpdateProps('flag', text)}
+        value={props?.company?.flag}
       />
     </S.InputWrapper>
   </S.Wrapper>

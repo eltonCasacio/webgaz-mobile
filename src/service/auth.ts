@@ -18,10 +18,11 @@ export async function signup(params: CompanyProps): Promise<ResponseSignup> {
   console.debug('SERVICE::SIGNUP:', params);
   try {
     await API.post('signup', params);
+    console.debug('SERVICE::SIGNUP:', params);
     response.message = 'Empresa Cadastrada com Sucesso!';
     response.url = 'SignIn';
   } catch (error) {
-    console.debug('SERVICE::SIGNUP::Erro', error.response.status);
+    console.debug('SERVICE::SIGNUP::Erro', error.response.data);
     response.message = 'Houve um Erro ao Tentar Cadastrar a Empresa';
     response.url = '#';
   } finally {

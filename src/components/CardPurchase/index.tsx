@@ -16,14 +16,14 @@ enum StatusColor {
 
 export default function CardPurchase({data, navigation}: CardPurchaseProps) {
   function openDetails() {
-    navigation.navigate('detalhes', {purchaseOrder: data.id});
+    navigation.navigate('detalhes', {purchaseOrder: data});
   }
 
   return (
     <S.Wrapper>
       <S.Header>
         <S.Text>Nº {data?.fuelStationId}</S.Text>
-        <S.Text>{formatDate(data?.deliveryDate)}</S.Text>
+        <S.Text>{data?.deliveryDate}</S.Text>
         <S.TouchableOpacity onPress={openDetails}>
           <S.Details source={require('../../assets/details.png')} />
         </S.TouchableOpacity>
@@ -34,7 +34,7 @@ export default function CardPurchase({data, navigation}: CardPurchaseProps) {
       </S.Status>
       <S.Description>
         <S.Text>{data.fuelType}</S.Text>
-        <S.Text>Total R${formatCurrency(data.totalPrice)}</S.Text>
+        <S.Text>Total R$ {formatCurrency(data.totalPrice)}</S.Text>
       </S.Description>
     </S.Wrapper>
   );

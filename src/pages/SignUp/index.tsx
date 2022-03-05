@@ -46,6 +46,7 @@ const SignUp: React.FC = ({navigation}: any) => {
 
   const handleConfirm = async () => {
     if (isValid()) {
+      company.isNetwork = company.networkName ? 'SIM' : 'NÃO';
       const res = await signup(company);
       console.debug('SERVICE::RES?????', res);
       alert(res.message);

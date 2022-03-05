@@ -34,10 +34,11 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
 
   function handleNextStep() {
     if (validateFields()) {
-      // navigation.navigate('confirmar-pedido', {
-      //   purchaseOrder: purchaseOrder,
-      //   shippingCompany: shipping,
-      // });
+      // console.debug("HANDLE NEXT::", purchaseOrder, shipping)
+      navigation.navigate('confirmar-pedido', {
+        purchaseOrder: purchaseOrder,
+        shippingCompany: shipping,
+      });
     }
   }
 
@@ -79,7 +80,6 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
               <S.InputLabel>CNH</S.InputLabel>
               <S.Input
                 hasError={!fieldsErrors?.cnh}
-                secureTextEntry
                 onChangeText={text => handleUpdateProps('cnh', text)}
                 value={shipping?.cnh}
               />

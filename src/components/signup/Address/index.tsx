@@ -1,5 +1,5 @@
 import React from 'react';
-import {CompanyProps} from '../../../types/Signup';
+import {CompanyProps} from '../../../types/Company';
 import * as S from './styles';
 
 export type UserInfoProps = {
@@ -42,7 +42,7 @@ const Address: React.FC<UserInfoProps> = props => (
         <S.Input
           keyboardType="numeric"
           hasError={false}
-          onChangeText={text => props.handleUpdateProps('number', text)}
+          onChangeText={text => props.handleUpdateProps('fuelStationNumber', text)}
           value={props?.company?.fuelStationNumber}
         />
       </S.Number>
