@@ -33,8 +33,9 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
         shippingCompany: shipping,
       });
 
-      if (status === 201) navigation.navigate('inicio');
-      setMessage('Não foi Possivel Realizar Pedido');
+      status === 201
+        ? navigation.navigate('inicio')
+        : setMessage('Não foi Possivel Realizar Pedido');
     }
   }
 
@@ -65,15 +66,15 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
 
           <S.DoubleInLine>
             <S.Line>
-              <S.Description>Litros: </S.Description>
+              <S.Description>Litros </S.Description>
               <S.Value>{purchase?.qtdLiters}</S.Value>
             </S.Line>
-          </S.DoubleInLine>
 
-          <S.Line>
-            <S.Description>TOTAL</S.Description>
-            <S.Value>R${formatCurrency(purchase?.totalPrice)}</S.Value>
-          </S.Line>
+            <S.Line>
+              <S.Description>TOTAL </S.Description>
+              <S.Value>R$ {formatCurrency(purchase?.totalPrice)}</S.Value>
+            </S.Line>
+          </S.DoubleInLine>
         </S.PurchaseWrapper>
 
         {purchase?.deliveryType === 'RETIRADA' && (
