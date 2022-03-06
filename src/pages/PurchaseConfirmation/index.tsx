@@ -12,32 +12,54 @@ import * as S from './styles';
 
 const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
   const data = route.params;
-  const {user} = useAuth();
+  const {user, showToast} = useAuth();
 
   const [purchase, setPurchase] = React.useState<Purchase>();
   const [shipping, setShipping] = React.useState<ShippingCompany>();
-  const [message, setMessage] = React.useState<string>(
-    'Pedido Realizado com Sucesso!',
-  );
 
-  React.useEffect(() => {
-    setPurchase(data?.purchaseOrder);
-    setShipping(data?.shippingCompany);
-  }, [data]);
+  function validate() {
+    return user.status === 'ACTIVE';
+  }
 
   async function handleConfirm() {
-    if (user.status === 'ACTIVE') {
+    if (validate()) {
       const status = await confirmPurchase({
         ...purchase,
         status: 'PENDENTE',
         shippingCompany: shipping,
       });
 
-      status === 201
-        ? navigation.navigate('inicio')
-        : setMessage('Não foi Possivel Realizar Pedido');
+      if (status === 201) {
+        showToast({
+          type: 'success',
+          title: 'PEDIDO REALIZADO',
+          message:
+            'Enviar comprovante de pagamento para confirmação do pedido!',
+        });
+        navigation.navigate('inicio');
+      } else {
+        showToast({
+          type: 'error',
+          title: '',
+          message: 'Não foi Possivel Realizar Pedido!',
+        });
+      }
     }
   }
+
+  React.useEffect(() => {
+    !data?.shippingCompany
+      ? setShipping({
+          cnh: '00000',
+          cnpj: '00000',
+          driverName: 'any_driver',
+          name: 'any_name',
+          plateNumber: '00000000',
+        })
+      : setShipping(data?.shippingCompany);
+
+    setPurchase(data?.purchaseOrder);
+  }, [data]);
 
   return (
     <S.Wrapper>

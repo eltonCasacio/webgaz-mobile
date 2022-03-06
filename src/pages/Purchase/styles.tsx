@@ -17,10 +17,10 @@ export const CardWrapper = styled.View`
 
 export const Text = styled.Text`
   color: ${Theme.colors.lightGray};
-  font-size: ${hFraction * 15}px;
+  font-size: ${hFraction * 16}px;
   font-weight: bold;
-  padding-left: 2px;
   text-transform: uppercase;
+  margin-bottom: 5px;
 `;
 
 export const LitersTitle = styled.Text`
@@ -50,7 +50,7 @@ export const CardTitle = styled.Pressable`
 export const CardTitleText = styled.Text`
   color: ${Theme.colors.lightGray};
   margin-left: 5px;
-  font-size: ${hFraction * 10}px;
+  font-size: ${hFraction * 16}px;
   padding: 5px 0;
 `;
 

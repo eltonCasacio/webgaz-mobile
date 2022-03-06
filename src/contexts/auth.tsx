@@ -1,10 +1,16 @@
 import React, {createContext, useEffect, useState, useContext} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
+
 import * as auth from '../service/auth';
 import api from '../service/api';
-
 import {User, SignInProps as SignInProps} from '../types/Auth';
 
+type toast = {
+  type: 'success' | 'info' | 'error';
+  title: string;
+  message: string;
+};
 interface AuthContextData {
   signed: boolean;
   user: User | null;
@@ -12,6 +18,7 @@ interface AuthContextData {
   signIn({}: SignInProps): Promise<User>;
   signOut(): void;
   setUser({}: User): void;
+  showToast({}: toast): void;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -46,6 +53,14 @@ export const AuthProvider: React.FC = ({children}) => {
     setUser(null);
   }
 
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Hello',
+      text2: 'This is some something 👋',
+    });
+  };
+
   useEffect(() => {
     async function loadStorageData() {
       const dataUser = await AsyncStorage.getItem('@webgaz:user');
@@ -63,7 +78,15 @@ export const AuthProvider: React.FC = ({children}) => {
 
   return (
     <AuthContext.Provider
-      value={{signed: !!user, user, loading, signOut, signIn, setUser}}>
+      value={{
+        signed: !!user,
+        user,
+        loading,
+        signOut,
+        signIn,
+        setUser,
+        showToast,
+      }}>
       {children}
     </AuthContext.Provider>
   );

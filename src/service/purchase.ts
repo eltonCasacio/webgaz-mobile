@@ -1,4 +1,4 @@
-import {GetPurchase, confirmPurchaseProps} from '../types/Purchase';
+import {GetPurchase, ConfirmPurchaseProps} from '../types/Purchase';
 import {formatDate} from '../utils';
 import API from './api';
 
@@ -7,14 +7,15 @@ export const loadPurchase = async (params: GetPurchase) => {
   return response.data;
 };
 
-export const confirmPurchase = async (params: confirmPurchaseProps) => {
+export const confirmPurchase = async (params: ConfirmPurchaseProps) => {
+  console.debug("AIAII", params)
   params.deliveryDate = formatDate(params.deliveryDate);
   try {
     const response = await API.post('purchase-order', params);
-    console.debug('CONFIRME SUCESS', response);
+    if (response.status === 201)
     return response.status;
   } catch (error) {
-    console.error('CONFIRME ERROR', error.response.data);
+    console.error('ERRO AO CONFIRMAR PEDIDO', error.response.data);
     return error.response.data;
   }
 };
