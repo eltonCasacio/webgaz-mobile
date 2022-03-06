@@ -10,7 +10,7 @@ export type UserInfoProps = {
 const Address: React.FC<UserInfoProps> = props => (
   <S.Address>
     <S.InputWrapper>
-      <S.InputLabel>Cidade</S.InputLabel>
+      <S.InputLabel>Cidade*</S.InputLabel>
       <S.Input
         hasError={false}
         onChangeText={text => props.handleUpdateProps('city', text)}
@@ -19,7 +19,7 @@ const Address: React.FC<UserInfoProps> = props => (
     </S.InputWrapper>
 
     <S.InputWrapper>
-      <S.InputLabel>Bairro</S.InputLabel>
+      <S.InputLabel>Bairro*</S.InputLabel>
       <S.Input
         hasError={false}
         onChangeText={text => props.handleUpdateProps('district', text)}
@@ -29,7 +29,7 @@ const Address: React.FC<UserInfoProps> = props => (
 
     <S.HorizontalDirection>
       <S.Street>
-        <S.InputLabel>Rua</S.InputLabel>
+        <S.InputLabel>Rua*</S.InputLabel>
         <S.Input
           hasError={false}
           onChangeText={text => props.handleUpdateProps('street', text)}
@@ -38,7 +38,7 @@ const Address: React.FC<UserInfoProps> = props => (
       </S.Street>
 
       <S.Number>
-        <S.InputLabel>Número</S.InputLabel>
+        <S.InputLabel>Número*</S.InputLabel>
         <S.Input
           keyboardType="numeric"
           hasError={false}
@@ -50,7 +50,7 @@ const Address: React.FC<UserInfoProps> = props => (
 
     <S.HorizontalDirection>
       <S.Telephone>
-        <S.InputLabel>Telefone</S.InputLabel>
+        <S.InputLabel>Telefone*</S.InputLabel>
         <S.Input
           keyboardType="phone-pad"
           hasError={false}
@@ -60,7 +60,7 @@ const Address: React.FC<UserInfoProps> = props => (
       </S.Telephone>
 
       <S.Cep>
-        <S.InputLabel>Cep</S.InputLabel>
+        <S.InputLabel>Cep*</S.InputLabel>
         <S.Input
           keyboardType="numeric"
           hasError={false}

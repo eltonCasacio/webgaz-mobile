@@ -11,7 +11,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
   return (
     <S.UseInfo>
       <S.InputWrapper>
-        <S.InputLabel>CNPJ</S.InputLabel>
+        <S.InputLabel>CNPJ*</S.InputLabel>
         <S.Input
           hasError={false}
           keyboardType="numeric"
@@ -21,7 +21,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
       </S.InputWrapper>
 
       <S.InputWrapper>
-        <S.InputLabel>E-mail</S.InputLabel>
+        <S.InputLabel>E-mail*</S.InputLabel>
         <S.Input
           hasError={false}
           keyboardType="email-address"
@@ -32,7 +32,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
 
       <S.WrapperPassword>
         <S.InputPassword>
-          <S.InputLabel>Senha</S.InputLabel>
+          <S.InputLabel>Senha*</S.InputLabel>
           <S.Input
             hasError={false}
             secureTextEntry
@@ -42,7 +42,7 @@ const UserInfo: React.FC<UserInfoProps> = props => {
         </S.InputPassword>
 
         <S.InputPassword>
-          <S.InputLabel>Confirmar Senha</S.InputLabel>
+          <S.InputLabel>Confirmar Senha*</S.InputLabel>
           <S.Input
             hasError={false}
             secureTextEntry

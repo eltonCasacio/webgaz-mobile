@@ -5,6 +5,7 @@ import {ScrollView} from 'react-native';
 import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
 import {CompanyProps} from '../../types/Company';
+import {toast} from '../../types/Utils';
 
 import {useAuth} from '../../contexts/auth';
 
@@ -24,14 +25,20 @@ const SignUp: React.FC = ({navigation}: any) => {
   const [step, setStep] = useState<STEP>();
   const {showToast} = useAuth();
 
+  function showMessageAlert(param: toast) {
+    showToast({
+      type: param.type,
+      title: param.title || 'Preencha Todos Os Campos',
+      message: param.message || 'Os Campos com * são Obrigatórios',
+    });
+  }
+
   function nextStep() {
-    if (isValid()) {
-      if (step === STEP.step1) {
-        setStep(STEP.step2);
-      }
-      if (step === STEP.step2) {
-        setStep(STEP.step3);
-      }
+    if (step === STEP.step1) {
+      if (validateUseInfo()) setStep(STEP.step2);
+    }
+    if (step === STEP.step2) {
+      if (validateAddress()) setStep(STEP.step3);
     }
   }
 
@@ -45,38 +52,53 @@ const SignUp: React.FC = ({navigation}: any) => {
     setCompany({...company, [nameProps]: value});
   }
 
-  function isValid() {
-    if (company.password !== company.passwordConfirmation) {
-      showToast({
-        type: 'error',
-        title: 'As senhas devem ser iguais!',
-        message: '',
-      });
+  function validateUseInfo() {
+    if (
+      !company.password ||
+      !company.passwordConfirmation ||
+      company.password !== company.passwordConfirmation
+    ) {
+      showMessageAlert({type: 'error'});
       return false;
     }
 
-    if (!company.password || !company.passwordConfirmation) {
-      showToast({
-        type: 'error',
-        title: 'O Campo Senha Deve ser Preenchido!',
-        message: '',
-      });
+    return true;
+  }
+
+  function validateAddress() {
+    if (
+      !company.city ||
+      !company.district ||
+      !company.street ||
+      !company.fuelStationNumber ||
+      !company.telephone ||
+      !company.cep
+    ) {
+      showMessageAlert({type: 'error'});
+      return false;
+    }
+    return true;
+  }
+
+  function validateConfirm() {
+    if (!company.name) {
+      showMessageAlert({type: 'error'});
       return false;
     }
     return true;
   }
 
   const handleConfirm = async () => {
-    if (isValid()) {
-      company.isNetwork = company.networkName ? 'SIM' : 'NÃO';
-      const res = await signup(company);
-      showToast({
-        type: 'success',
-        title: 'CADASTRAR EMPRESA',
-        message: res.message,
-      });
-      navigation.navigate(res.url);
-    }
+    if (!validateConfirm()) return;
+
+    company.isNetwork = company.networkName ? 'SIM' : 'NÃO';
+    const res = await signup(company);
+    showToast({
+      type: 'success',
+      title: 'CADASTRAR EMPRESA',
+      message: res.message,
+    });
+    navigation.navigate(res.url);
   };
 
   useEffect(() => {

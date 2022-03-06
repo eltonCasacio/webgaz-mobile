@@ -10,7 +10,7 @@ export type RedeProps = {
 const Rede: React.FC<RedeProps> = props => (
   <S.Wrapper>
     <S.InputWrapper>
-      <S.InputLabel>Nome da Empresa</S.InputLabel>
+      <S.InputLabel>Nome da Empresa*</S.InputLabel>
       <S.Input
         hasError={false}
         onChangeText={text => props.handleUpdateProps('name', text)}
