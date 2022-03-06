@@ -5,12 +5,8 @@ import Toast from 'react-native-toast-message';
 import * as auth from '../service/auth';
 import api from '../service/api';
 import {User, SignInProps as SignInProps} from '../types/Auth';
+import {toast as ToastType} from '../types/Utils';
 
-type toast = {
-  type: 'success' | 'info' | 'error';
-  title: string;
-  message: string;
-};
 interface AuthContextData {
   signed: boolean;
   user: User | null;
@@ -18,7 +14,7 @@ interface AuthContextData {
   signIn({}: SignInProps): Promise<User>;
   signOut(): void;
   setUser({}: User): void;
-  showToast({}: toast): void;
+  showToast({}: ToastType): void;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -40,12 +36,9 @@ export const AuthProvider: React.FC = ({children}) => {
         '@webgaz:user',
         JSON.stringify({id, name, status}),
       );
-      // setUser({id, name, status});
-
       return {id, name, status};
     }
-
-    return null;
+    return;
   }
 
   async function signOut() {
@@ -53,11 +46,11 @@ export const AuthProvider: React.FC = ({children}) => {
     setUser(null);
   }
 
-  const showToast = () => {
+  const showToast = ({type, title, message}: ToastType) => {
     Toast.show({
-      type: 'success',
-      text1: 'Hello',
-      text2: 'This is some something 👋',
+      type,
+      text1: title,
+      text2: message,
     });
   };
 
@@ -88,6 +81,7 @@ export const AuthProvider: React.FC = ({children}) => {
         showToast,
       }}>
       {children}
+      <Toast position="top" />
     </AuthContext.Provider>
   );
 };

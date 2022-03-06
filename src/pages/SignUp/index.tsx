@@ -6,6 +6,8 @@ import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
 import {CompanyProps} from '../../types/Company';
 
+import {useAuth} from '../../contexts/auth';
+
 const logo_com_nome = require('../../assets/logo-com-nome.png');
 const signup_step1 = require('../../assets/signup-step1.png');
 const signup_step2 = require('../../assets/signup-step2.png');
@@ -20,18 +22,17 @@ enum STEP {
 const SignUp: React.FC = ({navigation}: any) => {
   const [company, setCompany] = useState({} as CompanyProps);
   const [step, setStep] = useState<STEP>();
+  const {showToast} = useAuth();
 
   function nextStep() {
-    if (step === STEP.step1) {
-      setStep(STEP.step2);
+    if (isValid()) {
+      if (step === STEP.step1) {
+        setStep(STEP.step2);
+      }
+      if (step === STEP.step2) {
+        setStep(STEP.step3);
+      }
     }
-    if (step === STEP.step2) {
-      setStep(STEP.step3);
-    }
-  }
-
-  function handleUpdateProps(nameProps: string, value: string) {
-    setCompany({...company, [nameProps]: value});
   }
 
   function goBack() {
@@ -40,7 +41,28 @@ const SignUp: React.FC = ({navigation}: any) => {
     if (step === STEP.step3) setStep(STEP.step2);
   }
 
+  function handleUpdateProps(nameProps: string, value: string) {
+    setCompany({...company, [nameProps]: value});
+  }
+
   function isValid() {
+    if (company.password !== company.passwordConfirmation) {
+      showToast({
+        type: 'error',
+        title: 'As senhas devem ser iguais!',
+        message: '',
+      });
+      return false;
+    }
+
+    if (!company.password || !company.passwordConfirmation) {
+      showToast({
+        type: 'error',
+        title: 'O Campo Senha Deve ser Preenchido!',
+        message: '',
+      });
+      return false;
+    }
     return true;
   }
 
@@ -48,8 +70,11 @@ const SignUp: React.FC = ({navigation}: any) => {
     if (isValid()) {
       company.isNetwork = company.networkName ? 'SIM' : 'NÃO';
       const res = await signup(company);
-      console.debug('SERVICE::RES?????', res);
-      alert(res.message);
+      showToast({
+        type: 'success',
+        title: 'CADASTRAR EMPRESA',
+        message: res.message,
+      });
       navigation.navigate(res.url);
     }
   };
