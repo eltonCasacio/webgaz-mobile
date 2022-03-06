@@ -18,12 +18,11 @@ const Header = () => {
 
   return (
     <S.Wrapper>
+      <S.Location>Webgaz</S.Location>
       <S.ImageUser onPress={() => setModaUserInfoVisible(true)}>
         <UserIcon name="user" size={20} color="#fcfcfc" />
       </S.ImageUser>
 
-      <S.Location>Webgaz</S.Location>
-     
       {/* <S.Notification onPress={() => setModalVisible(true)}>
         <NotificationIcon
           name="notifications-outline"
@@ -38,12 +37,11 @@ const Header = () => {
         setModalVisible={setModalVisible}
         handleNotificationRead={handleNotificationRead}
       />
-      
+
       <ModalUserInfo
         modalVisible={modaUserInfoVisible}
         setModalVisible={setModaUserInfoVisible}
       />
-
     </S.Wrapper>
   );
 };

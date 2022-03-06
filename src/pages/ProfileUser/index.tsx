@@ -1,74 +1,50 @@
 import React from 'react';
 import * as S from './styles';
-import {Title, Footer, Header} from '../../components';
-import {CompanyMocks} from '../../mocks/Company';
 
-const Profile: React.FC = () => {
-  const handleEdit = () => {
-    alert('Implementar Editar');
-  };
-  return (
-    <S.Wrapper>
-      <S.ScrollView>
-        <S.WrapperLine>
-          <S.LabelKey>Nome</S.LabelKey>
-          <S.LabelValue>{CompanyMocks?.info?.name}</S.LabelValue>
-        </S.WrapperLine>
+const Profile: React.FC = ({navigation}: any) => (
+  <S.Wrapper>
+    <S.Label>Meus Dados</S.Label>
+    <S.Content>
+      <S.Card>
+        <S.Text>Empresa*</S.Text>
+        <S.CardTitleText>CNPJ:</S.CardTitleText>
+        <S.Divider />
 
-        <S.WrapperPhoneCnpj>
-          <S.ViewWrapper>
-            <S.LabelKey>Telefone:</S.LabelKey>
-            <S.LabelValue>{CompanyMocks?.info?.telephone}</S.LabelValue>
-          </S.ViewWrapper>
-          <S.ViewWrapper>
-            <S.LabelKey>CNPJ:</S.LabelKey>
-            <S.LabelValue>{CompanyMocks?.info?.cnpj}</S.LabelValue>
-          </S.ViewWrapper>
-        </S.WrapperPhoneCnpj>
+        <S.CardTitleText>Email:</S.CardTitleText>
+      </S.Card>
 
-        <S.WrapperLine>
-          <S.LabelKey>Rua</S.LabelKey>
-          <S.LabelValue numberOfLines={1}>
-            {CompanyMocks?.address?.street}
-          </S.LabelValue>
-        </S.WrapperLine>
+      <S.Card>
+        <S.Text>Localização*</S.Text>
+        <S.CardTitleText>Cidade:</S.CardTitleText>
+        <S.Divider />
 
-        <S.WrapperPhoneCnpj>
-          <S.ViewWrapper>
-            <S.LabelKey>Cidade</S.LabelKey>
-            <S.LabelValue>{CompanyMocks?.address?.city}</S.LabelValue>
-          </S.ViewWrapper>
-          <S.ViewWrapper>
-            <S.LabelKey>UF</S.LabelKey>
-            <S.LabelValue>{CompanyMocks?.address?.state}</S.LabelValue>
-          </S.ViewWrapper>
-        </S.WrapperPhoneCnpj>
+        <S.CardTitleText>Bairro:</S.CardTitleText>
+        <S.Divider />
 
-        <S.WrapperPhoneCnpj>
-          <S.ViewWrapper>
-            <S.LabelKey>CEP:</S.LabelKey>
-            <S.LabelValue>{CompanyMocks?.address?.cep}</S.LabelValue>
-          </S.ViewWrapper>
-          <S.ViewWrapper>
-            <S.LabelKey>Número</S.LabelKey>
-            <S.LabelValue>{CompanyMocks?.address?.number}</S.LabelValue>
-          </S.ViewWrapper>
-        </S.WrapperPhoneCnpj>
+        <S.CardTitleText>Rua:</S.CardTitleText>
+        <S.Divider />
 
-        <S.WrapperLine>
-          <S.LabelKey>Complemento</S.LabelKey>
-          <S.LabelValue>{CompanyMocks?.address?.complement}</S.LabelValue>
-        </S.WrapperLine>
+        <S.CardTitleText>Telefone:</S.CardTitleText>
+        <S.Divider />
 
-        <S.WrapperLine>
-          <S.LabelKey>Email</S.LabelKey>
-          <S.LabelValue>{CompanyMocks?.userAuth?.email}</S.LabelValue>
-        </S.WrapperLine>
+        <S.CardTitleText>Cep:</S.CardTitleText>
+      </S.Card>
 
-        <S.Editar title="Editar" onPress={handleEdit}></S.Editar>
-      </S.ScrollView>
-    </S.Wrapper>
-  );
-};
+      <S.Card>
+        <S.Text>Rede*</S.Text>
+        <S.CardTitleText>Bandeira:</S.CardTitleText>
+        <S.Divider />
+
+        <S.CardTitleText>Rede:</S.CardTitleText>
+        <S.Divider />
+
+        <S.CardTitleText>Nome da rede:</S.CardTitleText>
+      </S.Card>
+    </S.Content>
+    <S.Goback onPress={() => navigation.goBack()}>
+      <S.GobackText>VOLTAR</S.GobackText>
+    </S.Goback>
+  </S.Wrapper>
+);
 
 export default Profile;
