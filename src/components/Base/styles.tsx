@@ -3,8 +3,7 @@ import Theme from '../../styles/theme';
 
 export const Wrapper = styled.View`
   ${() => css`
-    flex: 1;
-    justify-content: space-between;
+    height: 100%;
     background-color: ${Theme.colors.primary};
   `}
 `;

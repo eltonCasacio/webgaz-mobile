@@ -12,15 +12,14 @@ export const Wrapper = styled.SafeAreaView`
   height: 100%;
 `;
 
-export const CardWrapper = styled.View`
-`;
+export const CardWrapper = styled.View``;
 
 export const Text = styled.Text`
   color: ${Theme.colors.lightGray};
-  font-size: ${hFraction * 15}px;
+  font-size: ${hFraction * 16}px;
   font-weight: bold;
-  padding-left: 2px;
   text-transform: uppercase;
+  margin-bottom: 5px;
 `;
 
 export const LitersTitle = styled.Text`
@@ -50,7 +49,7 @@ export const CardTitle = styled.Pressable`
 export const CardTitleText = styled.Text`
   color: ${Theme.colors.lightGray};
   margin-left: 5px;
-  font-size: 18px;
+  font-size: ${hFraction * 16}px;
   padding: 5px 0;
 `;
 
@@ -75,7 +74,6 @@ export const Liters = styled.View`
 
 export const LitersText = styled.View`
   margin-right: 10px;
-  padding-left: 2px;
 `;
 
 export const LitersInput = styled.TextInput`
@@ -110,15 +108,13 @@ export const PaymentText = styled.Text`
 `;
 
 export const PaymentSelectWrapper = styled.View`
-  height: 50px;
-  width: 100%;
   background-color: ${Theme.colors.bgInput};
   border-radius: 4px;
 `;
 
 export const PaymentDateText = styled.Text`
   color: ${Theme.colors.lightGray};
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const PaymentDate = styled.TouchableOpacity`
@@ -145,7 +141,7 @@ export const PaymentInputDate = styled.TouchableOpacity`
   border-radius: 4px;
   width: 100%;
   color: ${Theme.colors.white};
-  padding: 12px;
+  padding: 10px;
 `;
 
 export const MessageFreight = styled.View`
@@ -164,11 +160,6 @@ export const MessageFreightMsg = styled.Text`
   color: ${Theme.colors.lightGray};
   font-size: 16px;
   text-align: center;
-`;
-
-export const Button = styled.View`
-  align-items: center;
-  margin: 10px;
 `;
 
 export type RadioProps = {active: boolean};

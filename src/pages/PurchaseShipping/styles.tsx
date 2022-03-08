@@ -8,9 +8,9 @@ const hFraction = height / height;
 
 export const Wrapper = styled.View`
   padding: 15px;
-  background-color: ${Theme.colors.primary};
-  height: ${height - hFraction * 185}px;
+  flex: 1;
   justify-content: space-around;
+  background-color: ${Theme.colors.primary};
 `;
 
 export const Label = styled.Text`
@@ -20,7 +20,7 @@ export const Label = styled.Text`
   align-self: center;
 `;
 
-export const Form = styled.View``;
+export const Form = styled.ScrollView``;
 
 export const WrapperCnpjCnh = styled.View`
   flex-direction: row;
@@ -45,9 +45,10 @@ export const InputLabel = styled.Text`
 type InputParams = {hasError?: boolean};
 export const Input = styled.TextInput<InputParams>`
   ${({hasError = false}) => css`
-    border-radius: 7px;
-    padding: 10px;
-    font-size: 18px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
     color: ${Theme.colors.white};
     background-color: ${Theme.colors.bgInput};
     border: ${hasError ? 'solid 1px #D27A7A' : 'none'};
@@ -56,7 +57,8 @@ export const Input = styled.TextInput<InputParams>`
 
 export const Button = styled.View`
   width: 100%;
-  margin-top: 30px;
+  height: 50px;
+  margin-top: 10px;
 `;
 
 export const Goback = styled.TouchableOpacity`

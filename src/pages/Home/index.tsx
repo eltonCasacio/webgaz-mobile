@@ -1,79 +1,54 @@
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import Carousel from 'react-native-snap-carousel';
 import {useLinkTo} from '@react-navigation/native';
 
+import {formatCurrency, getHour} from '../../utils';
 import {ResponseProps} from '../../types/Home';
 import {loadPrices} from '../../service/home';
 import {useAuth} from '../../contexts/auth';
-import {formatCurrency} from '../../utils/formatCurrency';
-import {LinkWhatsapp} from '../../components';
+
+import {LinkWhatsapp, Carousel} from '../../components';
 
 import * as S from './styles';
 
-const images = [
-  {image: require('../../assets/combustivel1.jpeg')},
-  {image: require('../../assets/combustivel2.jpeg')},
-  {image: require('../../assets/combustivel3.jpeg')},
-];
-
-function renderItem({item}) {
-  return <S.Image source={item.image} />;
-}
-
-const Home: React.FC = props => {
+const Home: React.FC = () => {
   const linkTo = useLinkTo();
   const {user} = useAuth();
 
-  const [hour, setHour] = React.useState(
-    `${new Date().getHours()}:${new Date().getMinutes()}`,
-  );
+  const [hour, setHour] = React.useState<string>(getHour());
   const [fuelStation, setFuelStation] = React.useState<ResponseProps>();
   const [messageInfo, setMessageInfo] = React.useState(
     'Cadastro Pendente de Aprovação!',
   );
 
+  function startTimer() {
+    return setInterval(async () => {
+      setHour(getHour());
+    }, 40000);
+  }
+
   React.useEffect(() => {
     let response = null;
-    let updateData = null;
-    let currentDate = new Date().getMinutes();
+    let intervalStartTimer = null;
     async function run() {
       response = await loadPrices(2);
       setFuelStation(response);
-
-      updateData = setInterval(async () => {
-        if (currentDate === new Date().getMinutes()) return;
-        currentDate = new Date().getMinutes();
-        setHour(`${new Date().getHours()}:${new Date().getMinutes()}`);
-      }, 5000);
+      intervalStartTimer = startTimer();
     }
     run();
-
     return () => {
       setFuelStation(null);
-      clearInterval(updateData);
+      clearInterval(intervalStartTimer);
     };
   }, []);
 
   return (
     <S.Wrapper>
       <S.WrapperCarousel>
-        <Carousel
-          data={images}
-          sliderWidth={400}
-          itemWidth={240}
-          renderItem={renderItem}
-          autoplay={true}
-          enableMomentum={false}
-          lockScrollWhileSnapping={true}
-          autoplayDelay={100}
-          autoplayInterval={10000}
-          loop
-          inactiveSlideScale={0.7}
-        />
+        <Carousel />
       </S.WrapperCarousel>
 
-      {user.status === 'ACTIVE' ? (
+      {user?.status === 'ACTIVE' ? (
         <S.WhatsApp>
           <LinkWhatsapp
             text="enviar comprovante de pagamento"
@@ -86,7 +61,7 @@ const Home: React.FC = props => {
 
       <S.CardPrice>
         <S.CardPriceTitle>
-          <Entypo name="price-tag" color={'#fcfcfc'} size={16} />
+          <Entypo name="price-tag" color={'#fcfcfc'} size={12} />
           <S.CardPriceTitleText>Preços do dia</S.CardPriceTitleText>
         </S.CardPriceTitle>
 
@@ -105,7 +80,9 @@ const Home: React.FC = props => {
         </S.CardPriceDate>
 
         <S.CardPriceFuel>
-          <S.CardPriceFuelLabel>{fuelStation?.fuelType}</S.CardPriceFuelLabel>
+          <S.CardPriceFuelLabel>
+            ETANOL{fuelStation?.fuelType}
+          </S.CardPriceFuelLabel>
           <S.CardPriceFuelPrice>
             R$ {formatCurrency(fuelStation?.price)}
           </S.CardPriceFuelPrice>
@@ -119,7 +96,7 @@ const Home: React.FC = props => {
         </S.CardPriceFuel>
 
         <S.PurchaseButton
-          disabled={user.status !== 'ACTIVE'}
+          disabled={user?.status !== 'ACTIVE'}
           onPress={() => linkTo('/pedido')}>
           <S.PurchaseButtonText>FAZER PEDIDO</S.PurchaseButtonText>
         </S.PurchaseButton>

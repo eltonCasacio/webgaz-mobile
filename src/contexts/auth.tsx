@@ -1,9 +1,11 @@
 import React, {createContext, useEffect, useState, useContext} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
+
 import * as auth from '../service/auth';
 import api from '../service/api';
-
 import {User, SignInProps as SignInProps} from '../types/Auth';
+import {toast as ToastType} from '../types/Utils';
 
 interface AuthContextData {
   signed: boolean;
@@ -12,6 +14,7 @@ interface AuthContextData {
   signIn({}: SignInProps): Promise<User>;
   signOut(): void;
   setUser({}: User): void;
+  showToast({}: ToastType): void;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -23,7 +26,7 @@ export const AuthProvider: React.FC = ({children}) => {
   async function signIn(params: SignInProps): Promise<User> {
     const response = await auth.signIn(params);
 
-    if (response.token) {
+    if (response?.token) {
       api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
       let {id, name, status} = {...response.fuelStation};
@@ -33,18 +36,23 @@ export const AuthProvider: React.FC = ({children}) => {
         '@webgaz:user',
         JSON.stringify({id, name, status}),
       );
-      // setUser({id, name, status});
-
       return {id, name, status};
     }
-
-    return null;
+    return;
   }
 
   async function signOut() {
     await AsyncStorage.clear();
     setUser(null);
   }
+
+  const showToast = ({type, title, message}: ToastType) => {
+    Toast.show({
+      type,
+      text1: title,
+      text2: message,
+    });
+  };
 
   useEffect(() => {
     async function loadStorageData() {
@@ -63,8 +71,17 @@ export const AuthProvider: React.FC = ({children}) => {
 
   return (
     <AuthContext.Provider
-      value={{signed: !!user, user, loading, signOut, signIn, setUser}}>
+      value={{
+        signed: !!user,
+        user,
+        loading,
+        signOut,
+        signIn,
+        setUser,
+        showToast,
+      }}>
       {children}
+      <Toast position="top" />
     </AuthContext.Provider>
   );
 };

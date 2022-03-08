@@ -31,7 +31,7 @@ export type GetPurchase = {
   fuelStationId: number;
 };
 
-export type confirmPurchaseProps = {
+export type ConfirmPurchaseProps = {
   status: PurchaseOrderStatus;
   fuelStationId: number;
   fuelType: FuelType;

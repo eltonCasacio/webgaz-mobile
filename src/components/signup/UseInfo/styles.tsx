@@ -15,7 +15,7 @@ export const WrapperPassword = styled.View`
 `;
 
 export const InputPassword = styled.View`
-  width: ${width / 2.2}px;
+  width: ${width / 2.3}px;
 `;
 
 export const InputWrapper = styled.View`
@@ -34,9 +34,9 @@ type InputParams = {hasError?: boolean};
 export const Input = styled.TextInput<InputParams>`
   ${({hasError = false}) => css`
     width: 100%;
-    border-radius: 12px;
-    padding: 15px;
-    font-size: 18px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
     color: ${Theme.colors.white};
     background-color: ${Theme.colors.bgInput};
     border: ${hasError ? 'solid 1px #D27A7A' : 'none'};

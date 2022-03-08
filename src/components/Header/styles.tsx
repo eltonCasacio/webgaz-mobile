@@ -7,26 +7,24 @@ const wFraction = width / width;
 const hFraction = height / height;
 
 export const Wrapper = styled.View`
-  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   background-color: ${Theme.colors.primary};
-  padding: ${(hFraction) * 15}px ${(wFraction) * 15}px;
+  padding: ${hFraction * 20}px ${wFraction * 20}px;
 `;
 export const ImageUser = styled.TouchableOpacity`
-  display: flex;
   justify-content: center;
   align-items: center;
-  width: ${(wFraction) * 35}px;
-  height: ${(hFraction) * 35}px;
+  width: ${wFraction * 30}px;
+  height: ${hFraction * 30}px;
   border-radius: 300px;
   background-color: #ffffff67;
 `;
 export const Location = styled.Text`
-  align-self: center;
   color: aliceblue;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 `;
 

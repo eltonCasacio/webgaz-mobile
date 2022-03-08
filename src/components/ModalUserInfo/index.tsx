@@ -42,7 +42,7 @@ const ModalUserInfo: React.FC<ModalUserInfoProps> = params => {
             </Text>
           </TouchableOpacity>
 
-          {user.status === 'ACTIVE' && (
+          {user?.status === 'ACTIVE' && (
             <>
               <TouchableOpacity
                 style={styles.menuItem}
@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
   modalView: {
     height: windowHeight / 2,
     width: windowWidth / 1.2,
-    marginTop: 45,
-    marginHorizontal: 20,
+    marginTop: windowHeight * 0.065,
+    marginHorizontal: windowWidth * 0.095,
     backgroundColor: Theme.colors.bgInput,
-    borderRadius: 10,
+    borderRadius: 5,
     paddingTop: 15,
     paddingHorizontal: 15,
     justifyContent: 'space-between',
