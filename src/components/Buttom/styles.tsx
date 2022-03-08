@@ -1,21 +1,18 @@
 import styled, {css} from 'styled-components/native';
 import Theme from '../../styles/theme';
-import {Dimensions} from 'react-native';
-
-const {width} = Dimensions.get('screen');
 
 export type WrapperParams = {
   color: 'buttonDefault' | 'buttonDanger' | 'buttonConfirm';
 };
 export const Wrapper = styled.TouchableOpacity<WrapperParams>`
   ${({color}) => css`
-    width: ${width - 30}px;
-    height: ${width / 7}px;
-    max-height: 50px;
-
-    background-color: ${Theme.colors[color]};
-    border-radius: 12px;
+    width: 100%;
+    height: 40px;
     justify-content: center;
+    align-items: center;
+    background-color: ${Theme.colors[color]};
+    border-radius: 5px;
+    margin: 15px 0;
   `}
 `;
 

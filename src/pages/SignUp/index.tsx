@@ -53,12 +53,16 @@ const SignUp: React.FC = ({navigation}: any) => {
   }
 
   function validateUseInfo() {
-    if (
-      !company.password ||
-      !company.passwordConfirmation ||
-      company.password !== company.passwordConfirmation
-    ) {
+    if (!company.password || !company.passwordConfirmation) {
       showMessageAlert({type: 'error'});
+      return false;
+    }
+
+    if (company.password !== company.passwordConfirmation) {
+      showMessageAlert({
+        type: 'error',
+        title: 'As senhas devem ser iguais',
+      });
       return false;
     }
 
@@ -94,7 +98,7 @@ const SignUp: React.FC = ({navigation}: any) => {
     company.isNetwork = company.networkName ? 'SIM' : 'NÃO';
     const res = await signup(company);
     showToast({
-      type: 'success',
+      type: res.url === 'Signin' ? 'success' : 'error',
       title: 'CADASTRAR EMPRESA',
       message: res.message,
     });

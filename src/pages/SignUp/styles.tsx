@@ -35,12 +35,16 @@ type StepProps = {active?: boolean};
 export const Steps = styled.TouchableOpacity<StepProps>`
   ${({active}) => css`
     background-color: ${active ? '#867AD2' : '#C4C4C4'};
-    padding: 15px;
-    border-radius: 200px;
+    padding: 10px;
+    border-radius: ${height}px;
+    
   `}
 `;
 
-export const StepsIcon = styled.Image``;
+export const StepsIcon = styled.Image`
+width: ${width/width * 22}px;
+height: ${width/width * 22}px;
+`;
 
 const stepModifier = {
   step1: () => css`

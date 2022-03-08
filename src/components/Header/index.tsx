@@ -20,7 +20,7 @@ const Header = () => {
     <S.Wrapper>
       <S.Location>Webgaz</S.Location>
       <S.ImageUser onPress={() => setModaUserInfoVisible(true)}>
-        <UserIcon name="user" size={20} color="#fcfcfc" />
+        <UserIcon name="user" size={15} color="#fcfcfc" />
       </S.ImageUser>
 
       {/* <S.Notification onPress={() => setModalVisible(true)}>

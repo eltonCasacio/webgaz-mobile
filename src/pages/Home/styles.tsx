@@ -3,7 +3,7 @@ import Theme from '../../styles/theme';
 import {Dimensions} from 'react-native'
 
 const {width, height} = Dimensions.get('screen')
-const fraction = width/width
+const wFraction = width/width
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -24,7 +24,7 @@ export const Image = styled.Image`
   width: auto;
   height: 100%;
   border-radius: 12px;
-  margin: 0 -${fraction * 10}px;;
+  margin: 0 -${wFraction * 10}px;;
 `;
 
 export const Order = styled.TouchableOpacity`
@@ -64,7 +64,7 @@ export const CardPriceTitle = styled.View`
 export const CardPriceTitleText = styled.Text`
   color: ${Theme.colors.white};
   margin-left: 5px;
-  font-size: ${height/height * 20}px;
+  font-size: ${height/height * 22}px;
   font-weight: bold;
 `;
 
@@ -88,17 +88,17 @@ export const CardPriceDate = styled.View`
   ${() => css`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin: 20px 0 10px;
+    justify-content: space-between;
+    margin: 15px 0 0;
   `}
 `;
 
 export const CardPriceDateItem = styled.View`
   ${() => css`
     align-items: center;
-    width: 45%;
-    border-radius: 15px;
-    padding: 5px;
+    width: 48%;
+    border-radius: 5px;
+    padding: 5px 0;
     border: solid 2px #a4a2a24d;
   `}
 `;
@@ -106,14 +106,14 @@ export const CardPriceDateItem = styled.View`
 export const CardPriceDateHourLabel = styled.Text`
   ${() => css`
     color: ${Theme.colors.gray};
-    font-size: 18px;
+    font-size: ${wFraction * 14}px;
   `}
 `;
 
 export const CardPriceDateHour = styled.Text`
   ${() => css`
     color: ${Theme.colors.white};
-    font-size: 20px;
+    font-size: ${wFraction * 16}px;
   `}
 `;
 
@@ -122,7 +122,7 @@ export const CardPriceFuel = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px;
+    margin: 10px 0;
   `}
 `;
 
@@ -153,15 +153,12 @@ export const PurchaseButton = styled.TouchableOpacity``;
 
 export const PurchaseButtonText = styled.Text`
   color: ${Theme.colors.white};
-  font-size: ${fraction * 16}px;
+  font-size: ${wFraction * 16}px;
   font-weight: bold;
+  text-align: center;
   border-top-width: 1px;
   border-top-color: #a4a2a24d;
-  width: 100%;
-  text-align: center;
   padding-top: ${height/height * 16}px;
-  padding-bottom: ${height/height * 5}px;
-  margin-top: ${height/height * 10}px;
 `;
 
 export const OperationDateItem = styled.View`

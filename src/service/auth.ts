@@ -7,22 +7,23 @@ export async function signIn(params: SignInProps): Promise<ResponseSignIn> {
     const {data} = await API.post('signin', params);
     return data;
   } catch (error) {
-    console.debug('SERVICE::SIGNIN::Erro', error);
+    console.debug('SERVICE::SIGNIN::Erro', JSON.stringify(error));
     return error?.response?.data;
   }
 }
 
 export async function signup(params: CompanyProps): Promise<ResponseSignup> {
-  let response = {} as ResponseSignup;
-
   try {
     await API.post('signup', params);
-    response.message = 'Empresa Cadastrada com Sucesso!';
-    response.url = 'SignIn';
+    return {
+      message: 'Empresa Cadastrada com Sucesso!',
+      url: 'SignIn',
+    };
   } catch (error) {
-    response.message = 'Houve um Erro ao Tentar Cadastrar a Empresa';
-    response.url = 'SignUp';
-  } finally {
-    return response;
+    console.debug('Erro ao criar empresa', JSON.stringify(error));
+    return {
+      message: 'Houve um Erro ao Tentar Cadastrar a Empresa',
+      url: 'SignUp',
+    };
   }
 }

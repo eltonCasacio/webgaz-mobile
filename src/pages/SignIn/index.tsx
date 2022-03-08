@@ -6,6 +6,7 @@ import {useAuth} from '../../contexts/auth';
 
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
+import {ScrollView} from 'react-native';
 
 const SignIn: React.FC = () => {
   const logo_com_nome = require('../../assets/logo-com-nome.png');
@@ -31,13 +32,13 @@ const SignIn: React.FC = () => {
   const handleSignIn = async () => {
     if (validate()) {
       const response = await signIn({email: username, password});
-      setMessageError(!response && 'Usuário ou Senha Inválido')
-      if (response) setUser(response);
+      setMessageError(!response && 'Usuário ou Senha Inválido');
+      if (response) setUser(response)
     }
   };
 
   return (
-    <S.SafeAreaView>
+    <ScrollView style={{backgroundColor: 'red'}}>
       <S.Wrapper>
         <S.LogoWrapper>
           <S.Image source={logo_com_nome} />
@@ -77,7 +78,6 @@ const SignIn: React.FC = () => {
             <MyLink screen="SignUp" title="Cadastrar" navigation={navigation} />
           </S.SignupForgotPassword>
         </S.Form>
-
         <S.Footer>
           <Buttom
             color="buttonDefault"
@@ -86,7 +86,7 @@ const SignIn: React.FC = () => {
           />
         </S.Footer>
       </S.Wrapper>
-    </S.SafeAreaView>
+    </ScrollView>
   );
 };
 

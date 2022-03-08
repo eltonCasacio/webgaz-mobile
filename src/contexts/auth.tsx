@@ -26,7 +26,7 @@ export const AuthProvider: React.FC = ({children}) => {
   async function signIn(params: SignInProps): Promise<User> {
     const response = await auth.signIn(params);
 
-    if (response.token) {
+    if (response?.token) {
       api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
 
       let {id, name, status} = {...response.fuelStation};

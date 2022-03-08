@@ -1,45 +1,42 @@
-POST http://api.devmaykinho.click/api/signin
+
+###
+GET  http://192.168.15.5:8080/api/health
+
+###
+POST http://192.168.15.5:8080/api/signup
 Content-Type: application/json
 
 {
-    "email": "5@teste.com",
-    "password": "123"
+  "name": "any_name",
+  "cnpj": "any_cnpj",
+  "email": "teste@teste.com",
+  "telephone": "any_telephone",
+  "city": "any_city",
+  "district": "any_district",
+  "street": "any_street",
+  "fuelStationNumber": "any_fuelStationNumber",
+  "cep": "any_cep",
+  "flag": "any_flag",
+  "isNetwork": "SIM",
+  "networkName": "any_networkName",
+  "password": "1",
+  "passwordConfirmation": "1"
 }
 
 ###
-POST http://api.devmaykinho.click/api/signup
+POST http://192.168.15.5:8080/api/signin
 Content-Type: application/json
 
 {
-  "userAuth": {
-    "email": "5@teste.com",
-    "password": "123",
-    "passwordConfirmation": "123"
-  },
-  "info": {
-    "name": "valid_name",
-    "cnpj": "valid_cnpj",
-    "telephone": "valid_cnpj"
-  },
-  "address": {
-    "cep": "any_cep",
-    "city": "any_city",
-    "state": "any_state",
-    "street": "any_street",
-    "number": "any_number",
-    "complement": "any_complament"
-  }
+    "email": "s@s.com",
+    "password": "1"
 }
 
-
 ###
-PATCH http://api.devmaykinho.click/api/reset-password
+PATCH http://192.168.15.5:8080/api/reset-password
 Content-Type: application/json
 
 {
   "email": "5@teste.com"
 }
 
-###
-GET  http://api.devmaykinho.click/api/helth
-Content-Type: application/json

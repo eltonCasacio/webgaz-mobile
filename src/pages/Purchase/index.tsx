@@ -7,7 +7,7 @@ import {formatCurrency, formatDate} from '../../utils';
 import {loadPurchase} from '../../service/purchase';
 import {useAuth} from '../../contexts/auth';
 
-import {Buttom, SelectPurchase} from '../../components';
+import {Buttom, SelectPurchase, Header} from '../../components';
 import * as S from './styles';
 
 enum FuelEnum {
@@ -35,7 +35,7 @@ const Purchase: React.FC = ({navigation}: any) => {
     paymentType: 'ANTECIPADO',
     deliveryDate: String(currentDate),
     totalPrice: 0,
-    fuelStationId: user.id,
+    fuelStationId: user?.id,
   } as PurchaseProps);
 
   function validate() {
@@ -163,13 +163,11 @@ const Purchase: React.FC = ({navigation}: any) => {
           )}
         </S.PaymentInputWrapper>
       </S.Payment>
-      <S.Button>
         <Buttom
           color="buttonDefault"
           title="PROXIMO"
           callback={handleNextStep}
         />
-      </S.Button>
     </S.Wrapper>
   );
 };

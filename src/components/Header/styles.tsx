@@ -17,14 +17,14 @@ export const Wrapper = styled.View`
 export const ImageUser = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
-  width: ${wFraction * 35}px;
-  height: ${hFraction * 35}px;
+  width: ${wFraction * 30}px;
+  height: ${hFraction * 30}px;
   border-radius: 300px;
   background-color: #ffffff67;
 `;
 export const Location = styled.Text`
   color: aliceblue;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 600;
 `;
 

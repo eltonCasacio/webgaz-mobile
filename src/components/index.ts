@@ -16,6 +16,7 @@ import CardPurchaseDetails from './CardPurchaseDetails';
 import CardNotification from './CardNotification';
 import LinkWhatsapp from './LinkWhatsapp';
 import SelectPurchase from './SelectPurchase';
+import Carousel from './Carousel';
 
 export {
   Address,
@@ -36,4 +37,5 @@ export {
   CardNotification,
   LinkWhatsapp,
   SelectPurchase,
+  Carousel
 };

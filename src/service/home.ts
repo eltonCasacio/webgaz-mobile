@@ -10,7 +10,6 @@ export async function loadPrices(
       const {data} = result;
       return data;
     }
-
     return undefined;
   } catch (error) {
     console.error('Erro ao Carregar Preços', error);

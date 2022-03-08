@@ -18,7 +18,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
   const [shipping, setShipping] = React.useState<ShippingCompany>();
 
   function validate() {
-    return user.status === 'ACTIVE';
+    return user?.status === 'ACTIVE';
   }
 
   async function handleConfirm() {

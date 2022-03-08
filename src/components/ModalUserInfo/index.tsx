@@ -42,7 +42,7 @@ const ModalUserInfo: React.FC<ModalUserInfoProps> = params => {
             </Text>
           </TouchableOpacity>
 
-          {user.status === 'ACTIVE' && (
+          {user?.status === 'ACTIVE' && (
             <>
               <TouchableOpacity
                 style={styles.menuItem}

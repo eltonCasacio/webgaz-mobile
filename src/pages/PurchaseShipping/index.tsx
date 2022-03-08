@@ -1,5 +1,4 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
 import {Buttom} from '../../components';
 import {ShippingCompany} from '../../types/ShippingCompany';
 
@@ -48,70 +47,62 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
   }
 
   return (
-    <ScrollView>
-      <S.Wrapper>
-        <S.Label>Transportadora</S.Label>
+    <S.Wrapper>
+      <S.Label>Transportadora</S.Label>
 
-        <S.Form>
-          <S.InputWrapper>
-            <S.InputLabel>Nome do Motorista</S.InputLabel>
-            <S.Input
-              hasError={fieldsErrors?.driverName}
-              onChangeText={text => handleUpdateProps('driverName', text)}
-              value={shipping?.driverName}
-            />
-          </S.InputWrapper>
-
-          <S.InputWrapper>
-            <S.InputLabel>Nome da Transportadora</S.InputLabel>
-            <S.Input
-              hasError={fieldsErrors?.name}
-              onChangeText={text => handleUpdateProps('name', text)}
-              value={shipping?.name}
-            />
-          </S.InputWrapper>
-
-          <S.WrapperCnpjCnh>
-            <S.InputCnpjCnh>
-              <S.InputLabel>CNPJ</S.InputLabel>
-              <S.Input
-                hasError={fieldsErrors?.cnpj}
-                onChangeText={text => handleUpdateProps('cnpj', text)}
-                value={shipping?.cnpj}
-              />
-            </S.InputCnpjCnh>
-
-            <S.InputCnpjCnh>
-              <S.InputLabel>CNH</S.InputLabel>
-              <S.Input
-                hasError={fieldsErrors?.cnh}
-                onChangeText={text => handleUpdateProps('cnh', text)}
-                value={shipping?.cnh}
-              />
-            </S.InputCnpjCnh>
-          </S.WrapperCnpjCnh>
-
-          <S.InputLabel>Placa</S.InputLabel>
+      <S.Form>
+        <S.InputWrapper>
+          <S.InputLabel>Nome do Motorista</S.InputLabel>
           <S.Input
-            hasError={fieldsErrors?.plateNumber}
-            onChangeText={text => handleUpdateProps('plateNumber', text)}
-            value={shipping?.plateNumber}
+            hasError={fieldsErrors?.driverName}
+            onChangeText={text => handleUpdateProps('driverName', text)}
+            value={shipping?.driverName}
           />
-        </S.Form>
+        </S.InputWrapper>
 
-        <S.Button>
-          <Buttom
-            color="buttonDefault"
-            title="PROXIMO"
-            callback={handleNextStep}
+        <S.InputWrapper>
+          <S.InputLabel>Nome da Transportadora</S.InputLabel>
+          <S.Input
+            hasError={fieldsErrors?.name}
+            onChangeText={text => handleUpdateProps('name', text)}
+            value={shipping?.name}
           />
+        </S.InputWrapper>
 
-          <S.Goback onPress={() => navigation.goBack()}>
-            <S.GobackText>VOLTAR</S.GobackText>
-          </S.Goback>
-        </S.Button>
-      </S.Wrapper>
-    </ScrollView>
+        <S.WrapperCnpjCnh>
+          <S.InputCnpjCnh>
+            <S.InputLabel>CNPJ</S.InputLabel>
+            <S.Input
+              hasError={fieldsErrors?.cnpj}
+              onChangeText={text => handleUpdateProps('cnpj', text)}
+              value={shipping?.cnpj}
+            />
+          </S.InputCnpjCnh>
+
+          <S.InputCnpjCnh>
+            <S.InputLabel>CNH</S.InputLabel>
+            <S.Input
+              hasError={fieldsErrors?.cnh}
+              onChangeText={text => handleUpdateProps('cnh', text)}
+              value={shipping?.cnh}
+            />
+          </S.InputCnpjCnh>
+        </S.WrapperCnpjCnh>
+
+        <S.InputLabel>Placa</S.InputLabel>
+        <S.Input
+          hasError={fieldsErrors?.plateNumber}
+          onChangeText={text => handleUpdateProps('plateNumber', text)}
+          value={shipping?.plateNumber}
+        />
+      </S.Form>
+
+      <Buttom color="buttonDefault" title="PROXIMO" callback={handleNextStep} />
+
+      <S.Goback onPress={() => navigation.goBack()}>
+        <S.GobackText>VOLTAR</S.GobackText>
+      </S.Goback>
+    </S.Wrapper>
   );
 };
 

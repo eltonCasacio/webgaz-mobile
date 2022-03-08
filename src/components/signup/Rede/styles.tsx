@@ -2,10 +2,7 @@ import styled, {css} from 'styled-components/native';
 import Theme from '../../../styles/theme';
 
 export const Wrapper = styled.View`
-  width: 100%;
   flex: 1;
-  height: 100%;
-  margin-top: 28%;
 `;
 
 export const InputWrapper = styled.View`
@@ -24,9 +21,9 @@ type InputParams = {hasError?: boolean};
 export const Input = styled.TextInput<InputParams>`
   ${({hasError = false}) => css`
     width: 100%;
-    border-radius: 12px;
-    padding: 15px;
-    font-size: 18px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
     color: ${Theme.colors.white};
     background-color: ${Theme.colors.bgInput};
     border: ${hasError ? 'solid 1px #D27A7A' : 'none'};
