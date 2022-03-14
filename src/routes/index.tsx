@@ -12,15 +12,13 @@ const Routes: React.FC = () => {
 
   if (loading) return <Loading size="small" color="#f00" />;
 
-  return <AppRoutes />
-  // return signed ? (
-  //   <Base>
-  //     <AppRoutes />
-  //   </Base>
-  // ) : (
-  //   <AuthRoutes />
-  // );
-
+  return signed ? (
+    <Base>
+      <AppRoutes />
+    </Base>
+  ) : (
+    <AuthRoutes />
+  );
 };
 
 export default Routes;
