@@ -1,6 +1,6 @@
 import * as S from './styles';
 import React, {useEffect, useState} from 'react';
-import {ScrollView} from 'react-native';
+import {View} from 'react-native';
 
 import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
@@ -61,7 +61,8 @@ const SignUp: React.FC = ({navigation}: any) => {
     if (company.password !== company.passwordConfirmation) {
       showMessageAlert({
         type: 'error',
-        title: 'As senhas devem ser iguais',
+        title: 'Verifique as Senhas',
+        message: 'As senhas devem ser iguais',
       });
       return false;
     }
@@ -98,24 +99,53 @@ const SignUp: React.FC = ({navigation}: any) => {
     company.isNetwork = company.networkName ? 'SIM' : 'NÃO';
     const res = await signup(company);
     showToast({
-      type: res.url === 'Signin' ? 'success' : 'error',
+      type: res.url === 'SignIn' ? 'success' : 'error',
       title: 'CADASTRAR EMPRESA',
       message: res.message,
     });
     navigation.navigate(res.url);
   };
 
+  function clearForm() {
+    setStep(STEP.step1);
+
+    setCompany({
+      name: '',
+      password: '',
+      passwordConfirmation: '',
+      networkName: '',
+      isNetwork: '',
+      cep: '',
+      city: '',
+      district: '',
+      street: '',
+      fuelStationNumber: '',
+      telephone: '',
+      cnpj: '',
+      email:'',
+      flag: '',
+    });
+  }
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      clearForm();
+    });
+    return unsubscribe;
+  }, [navigation]);
+
   useEffect(() => {
     setStep(STEP.step1);
   }, [navigation]);
 
   return (
-    <S.Wrapper>
-      <ScrollView>
+    <S.ScrollView>
+      <S.Wrapper>
         <S.LogoWrapper>
           <S.Image source={logo_com_nome} />
         </S.LogoWrapper>
-
+        {step === STEP.step1 && <S.Label>Cadastrar empresa</S.Label>}
+        {step === STEP.step2 && <S.Label>Cadastrar endereço</S.Label>}
+        {step === STEP.step3 && <S.Label>informações da rede</S.Label>}
         <S.WrapperSteps>
           <S.Steps active>
             <S.StepsIcon source={signup_step1} />
@@ -145,25 +175,22 @@ const SignUp: React.FC = ({navigation}: any) => {
             <Rede handleUpdateProps={handleUpdateProps} company={company} />
           )}
         </S.Form>
-      </ScrollView>
-      {step === STEP.step1 && <S.Label>Cadastrar empresa</S.Label>}
-      {step === STEP.step2 && <S.Label>Cadastrar endereço</S.Label>}
-      {step === STEP.step3 && <S.Label>informações da rede</S.Label>}
-      <S.Footer>
-        {step === STEP.step3 ? (
-          <Buttom
-            color="buttonConfirm"
-            title="SALVAR"
-            callback={handleConfirm}
-          />
-        ) : (
-          <Buttom color="buttonDefault" title="PROXIMO" callback={nextStep} />
-        )}
-        <S.Goback onPress={goBack}>
-          <S.GobackText>VOLTAR</S.GobackText>
-        </S.Goback>
-      </S.Footer>
-    </S.Wrapper>
+        <S.Footer>
+          {step === STEP.step3 ? (
+            <Buttom
+              color="buttonConfirm"
+              title="SALVAR"
+              callback={handleConfirm}
+            />
+          ) : (
+            <Buttom color="buttonDefault" title="PROXIMO" callback={nextStep} />
+          )}
+          <S.Goback onPress={goBack}>
+            <S.GobackText>VOLTAR</S.GobackText>
+          </S.Goback>
+        </S.Footer>
+      </S.Wrapper>
+    </S.ScrollView>
   );
 };
 

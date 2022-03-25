@@ -36,17 +36,19 @@ export const HorizontalDirection = styled.View`
 `;
 
 export const Street = styled(InputWrapper)`
-  width: 70%;
+  flex: 1;
 `;
 
 export const Number = styled(InputWrapper)`
   width: 25%;
+  margin-left: 10px;
 `;
 
 export const Telephone = styled(InputWrapper)`
-  width: 55%;
+   flex: 1;
 `;
 
 export const Cep = styled(InputWrapper)`
   width: 40%;
+  margin-left: 10px;
 `;

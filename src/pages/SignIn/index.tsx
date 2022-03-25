@@ -1,5 +1,5 @@
 import * as S from './styles';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 import {useAuth} from '../../contexts/auth';
@@ -8,10 +8,10 @@ import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
 import {ScrollView} from 'react-native';
 
-const SignIn: React.FC = () => {
+const SignIn: React.FC = ({navigation}: any) => {
   const logo_com_nome = require('../../assets/logo-com-nome.png');
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [usernameError, setUsernameError] = useState(false);
 
@@ -33,13 +33,27 @@ const SignIn: React.FC = () => {
     if (validate()) {
       const response = await signIn({email: username, password});
       setMessageError(!response && 'Usuário ou Senha Inválido');
-      if (response) setUser(response)
+      if (response) setUser(response);
     }
   };
 
+  function clearForm() {
+    setUsername('');
+    setPassword('');
+    setPasswordError(false);
+    setUsernameError(false);
+  }
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      clearForm();
+    });
+    return unsubscribe;
+  }, [navigation]);
+
   return (
-    <ScrollView style={{backgroundColor: 'red'}}>
-      <S.Wrapper>
+    <S.Wrapper>
+      <ScrollView>
         <S.LogoWrapper>
           <S.Image source={logo_com_nome} />
         </S.LogoWrapper>
@@ -78,15 +92,11 @@ const SignIn: React.FC = () => {
             <MyLink screen="SignUp" title="Cadastrar" navigation={navigation} />
           </S.SignupForgotPassword>
         </S.Form>
-        <S.Footer>
-          <Buttom
-            color="buttonDefault"
-            title="ENTRAR"
-            callback={handleSignIn}
-          />
-        </S.Footer>
-      </S.Wrapper>
-    </ScrollView>
+      </ScrollView>
+      <S.Footer>
+        <Buttom color="buttonDefault" title="ENTRAR" callback={handleSignIn} />
+      </S.Footer>
+    </S.Wrapper>
   );
 };
 

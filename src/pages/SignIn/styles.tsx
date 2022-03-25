@@ -8,26 +8,26 @@ export const SafeAreaView = styled.SafeAreaView``;
 
 export const Wrapper = styled.View`
   padding: 0 15px;
-  justify-content: space-around;
-  height: ${height}px;
   background-color: ${Theme.colors.primary};
+  flex: 1;
 `;
 
 export const Form = styled.View`
   align-items: center;
+  margin-bottom: 20px;
 `;
 
 export const LogoWrapper = styled.View`
   align-items: center;
 `;
 export const Image = styled.Image`
-  width: ${width * 0.3}px;
-  height: ${width * 0.3}px;
+  width: ${width * 0.4}px;
+  height: ${width * 0.4}px;
 `;
 
 export const Label = styled.Text`
   color: ${Theme.colors.white};
-  font-size: ${width * 0.08}px;
+  font-size: 24px;
   font-weight: bold;
   align-self: center;
 `;
@@ -35,6 +35,7 @@ export const Label = styled.Text`
 export const MessageError = styled.Text`
   color: ${Theme.colors.buttonDanger};
   font-size: 14px;
+  text-align: center;
 `;
 
 type InputParams = {hasError: boolean};
