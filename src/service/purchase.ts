@@ -8,7 +8,6 @@ export const loadPurchase = async (params: GetPurchase) => {
 };
 
 export const confirmPurchase = async (params: ConfirmPurchaseProps) => {
-  console.debug("AIAII", params)
   params.deliveryDate = formatDate(params.deliveryDate);
   try {
     const response = await API.post('purchase-order', params);

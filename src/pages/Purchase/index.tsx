@@ -68,6 +68,7 @@ const Purchase: React.FC = ({navigation}: any) => {
   };
 
   async function updatePrice(params: GetPurchase) {
+    console.debug("updatePrice", params);
     let {price} = await loadPurchase(params);
     price = price || 0;
     setPrice(price * purchase?.qtdLiters);
@@ -108,7 +109,7 @@ const Purchase: React.FC = ({navigation}: any) => {
           <S.Divider />
           <S.CardTitle
             onPress={() => updateFields('deliveryType', ShippingEnum.COLACADO)}>
-            <S.CardTitleText>Colocada</S.CardTitleText>
+            <S.CardTitleText>Colocado</S.CardTitleText>
 
             <S.RadioButton
               active={ShippingEnum.COLACADO === purchase?.deliveryType}

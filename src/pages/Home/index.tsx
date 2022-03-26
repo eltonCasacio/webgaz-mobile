@@ -11,7 +11,7 @@ import {LinkWhatsapp, Carousel} from '../../components';
 
 import * as S from './styles';
 
-const Home: React.FC = () => {
+const Home: React.FC = ({navigation}: any) => {
   const linkTo = useLinkTo();
   const {user} = useAuth();
 
@@ -24,23 +24,28 @@ const Home: React.FC = () => {
   function startTimer() {
     return setInterval(async () => {
       setHour(getHour());
-    }, 40000);
+    }, 1000);
   }
 
   React.useEffect(() => {
-    let response = null;
     let intervalStartTimer = null;
-    async function run() {
-      response = await loadPrices(2);
-      setFuelStation(response);
-      intervalStartTimer = startTimer();
-    }
-    run();
+    intervalStartTimer = startTimer();
     return () => {
-      setFuelStation(null);
       clearInterval(intervalStartTimer);
     };
   }, []);
+
+  React.useEffect(() => {
+    let response = null;
+    const unsubscribe = navigation.addListener('focus', () => {
+      async function run() {
+        response = await loadPrices(2);
+        setFuelStation(response);
+      }
+      run();
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <S.Wrapper>
@@ -81,17 +86,19 @@ const Home: React.FC = () => {
 
         <S.CardPriceFuel>
           <S.CardPriceFuelLabel>
-            ETANOL{fuelStation?.fuelType}
+            {fuelStation && fuelStation[0]?.fuelType}
           </S.CardPriceFuelLabel>
           <S.CardPriceFuelPrice>
-            R$ {formatCurrency(fuelStation?.price)}
+            R$ {formatCurrency(fuelStation && fuelStation[0]?.price)}
           </S.CardPriceFuelPrice>
         </S.CardPriceFuel>
 
         <S.CardPriceFuel>
-          <S.CardPriceFuelLabel>{fuelStation?.fuelType}</S.CardPriceFuelLabel>
+          <S.CardPriceFuelLabel>
+            {fuelStation && fuelStation[1]?.fuelType}
+          </S.CardPriceFuelLabel>
           <S.CardPriceFuelPrice>
-            R$ {formatCurrency(fuelStation?.price)}
+            R$ {formatCurrency(fuelStation && fuelStation[1]?.price)}
           </S.CardPriceFuelPrice>
         </S.CardPriceFuel>
 
