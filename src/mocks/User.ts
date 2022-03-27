@@ -1,0 +1,16 @@
+export const UserMocks = {
+  name: 'valid_name',
+  cnpj: 'valid_cnpj',
+  email: 'adm@adm.com',
+  telephone: 'valid_telephone',
+  city: 'valid_city',
+  district: 'valid_district',
+  street: 'valid_street',
+  fuelStationNumber: 'valid_fuelStationNumber',
+  cep: 'valid_cep',
+  flag: 'valid_flag',
+  isNetwork: 'valid_isNetwork',
+  networkName: 'valid_networkName',
+  password: 'valid_password',
+  passwordConfirmation: 'valid_passwordConfirmation',
+};

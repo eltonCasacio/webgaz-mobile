@@ -55,6 +55,13 @@ export const CardTitleText = styled.Text`
   padding: 5px 0;
 `;
 
+export const CardSubTitleText = styled.Text`
+  color: ${Theme.colors.lightGray};
+  margin-left: 5px;
+  font-size: ${hFraction * 14}px;
+  padding: 5px 0;
+`;
+
 export const Divider = styled.View`
   border: solid 1px #a4a2a24d;
   width: 100%;

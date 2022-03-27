@@ -1,10 +1,10 @@
 import React from 'react';
-import {CompanyProps} from '../../../types/Company';
+import {UserProps} from '../../../types/User';
 import * as S from './styles';
 
 export type UserInfoProps = {
   handleUpdateProps: (nameProps: string, value: string) => void;
-  company: CompanyProps;
+  company: UserProps;
 };
 
 const Address: React.FC<UserInfoProps> = props => (
