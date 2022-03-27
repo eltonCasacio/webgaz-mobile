@@ -28,6 +28,10 @@ const ModalUserInfo: React.FC<ModalUserInfoProps> = params => {
   const linkTo = useLinkTo();
   const {signOut, user} = useAuth();
 
+  function navigateTo(url: string) {
+    linkTo(url);
+    params.setModalVisible(false);
+  }
   return (
     <Modal animationType="fade" transparent visible={params.modalVisible}>
       <View style={styles.modalView}>
@@ -35,7 +39,7 @@ const ModalUserInfo: React.FC<ModalUserInfoProps> = params => {
         <View style={styles.menu}>
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => linkTo('/perfil')}>
+            onPress={() => navigateTo('/perfil')}>
             <AntDesign name="database" size={20} color="#fff" />
             <Text style={styles.modalMessageText}>
               - Informações do Usuário
@@ -46,21 +50,21 @@ const ModalUserInfo: React.FC<ModalUserInfoProps> = params => {
             <>
               <TouchableOpacity
                 style={styles.menuItem}
-                onPress={() => linkTo('/inicio')}>
+                onPress={() => navigateTo('/inicio')}>
                 <Feather name="dollar-sign" size={20} color="#ffffffde" />
                 <Text style={styles.modalMessageText}>- Tabela de Preços</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.menuItem}
-                onPress={() => linkTo('/pedido')}>
+                onPress={() => navigateTo('/pedido')}>
                 <AntDesign name="shoppingcart" size={20} color="#fff" />
                 <Text style={styles.modalMessageText}>- Fazer Pedido</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.menuItem}
-                onPress={() => linkTo('/pedidos')}>
+                onPress={() => navigateTo('/pedidos')}>
                 <Entypo name="list" size={20} color="#ffffffde" />
                 <Text style={styles.modalMessageText}>- Pedidos</Text>
               </TouchableOpacity>
