@@ -1,4 +1,4 @@
-export type CompanyProps = {
+export type UserProps = {
   name: string;
   cnpj: string;
   email: string;

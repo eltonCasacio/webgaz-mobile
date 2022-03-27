@@ -1,6 +1,6 @@
 import API from '../service/api';
 import {ResponseSignup, SignInProps, ResponseSignIn} from '../types/Auth';
-import {CompanyProps} from '../types/Company';
+import {UserProps} from '../types/User';
 
 export async function signIn(params: SignInProps): Promise<ResponseSignIn> {
   try {
@@ -12,7 +12,7 @@ export async function signIn(params: SignInProps): Promise<ResponseSignIn> {
   }
 }
 
-export async function signup(params: CompanyProps): Promise<ResponseSignup> {
+export async function signup(params: UserProps): Promise<ResponseSignup> {
   try {
     await API.post('signup', params);
     return {
