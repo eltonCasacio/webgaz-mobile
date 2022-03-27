@@ -1,6 +1,6 @@
 
 ###
-GET  http://192.168.15.5:8080/api/health
+GET  http://44.200.156.154:8080/api/health
 
 ###
 POST http://192.168.15.5:8080/api/signup

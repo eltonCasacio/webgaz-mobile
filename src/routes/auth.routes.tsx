@@ -11,7 +11,7 @@ const AuthRoutes: React.FC = () => (
   <AuthStack.Navigator
     screenOptions={{
       headerShown: false,
-      contentStyle: {backgroundColor: 'transparent'},
+      contentStyle: {backgroundColor: '#1C1A29'},
       animation: 'none',
     }}>
     <AuthStack.Screen

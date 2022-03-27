@@ -78,7 +78,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
 
           <S.Line>
             <S.Description>Data da Entrega </S.Description>
-            <S.Value>{formatDate(new Date(purchase?.deliveryDate))}</S.Value>
+            <S.Value>{purchase?.deliveryDate}</S.Value>
           </S.Line>
 
           <S.Line>
@@ -125,10 +125,8 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
             </S.DoubleInLine>
 
             <S.Line>
-              <S.Description>
-                Placa
-                <S.Value> {shipping?.plateNumber}</S.Value>
-              </S.Description>
+              <S.Description>Placa </S.Description>
+              <S.Value> {shipping?.plateNumber}</S.Value>
             </S.Line>
           </S.ShippingWrapper>
         )}

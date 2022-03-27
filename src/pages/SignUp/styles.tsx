@@ -4,23 +4,19 @@ import Theme from '../../styles/theme';
 
 const {width, height} = Dimensions.get('screen');
 
-export const Wrapper = styled.View`
+export const ScrollView = styled.ScrollView`
   background-color: ${Theme.colors.primary};
-  align-content: space-between;
-  flex: 1;
 `;
 
-export const ScrollView = styled.ScrollView`
-  background-color: red;
-`;
+export const Wrapper = styled.View``;
 
 export const LogoWrapper = styled.View`
   align-items: center;
 `;
 
 export const Image = styled.Image`
-  width: ${width / 3}px;
-  height: ${width / 3}px;
+  width: ${width * 0.4}px;
+  height: ${width * 0.4}px;
 `;
 
 export const WrapperSteps = styled.View`
@@ -37,13 +33,12 @@ export const Steps = styled.TouchableOpacity<StepProps>`
     background-color: ${active ? '#867AD2' : '#C4C4C4'};
     padding: 10px;
     border-radius: ${height}px;
-    
   `}
 `;
 
 export const StepsIcon = styled.Image`
-width: ${width/width * 22}px;
-height: ${width/width * 22}px;
+  width: ${(width / width) * 22}px;
+  height: ${(width / width) * 22}px;
 `;
 
 const stepModifier = {
@@ -71,13 +66,11 @@ export const StepsSelected = styled.View<StepSelectedProps>`
 
 export const Form = styled.View`
   padding: 0 15px;
-  flex: 1;
 `;
 
 export const Footer = styled.View`
   padding: 0 15px;
   margin-top: 20px;
-  justify-self: flex-end;
 `;
 
 export const Goback = styled.TouchableOpacity`
@@ -92,9 +85,9 @@ export const GobackText = styled.Text`
 `;
 
 export const Label = styled.Text`
-  align-self: center;
   color: ${Theme.colors.white};
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  text-transform: uppercase;
+  align-self: center;
+  margin-bottom: 20px;
 `;
