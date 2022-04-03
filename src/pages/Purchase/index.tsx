@@ -7,7 +7,7 @@ import {formatCurrency, formatDate} from '../../utils';
 import {loadPurchase} from '../../service/purchase';
 import {useAuth} from '../../contexts/auth';
 
-import {Buttom, SelectPurchase, Header} from '../../components';
+import {Buttom, SelectPurchase} from '../../components';
 import * as S from './styles';
 
 enum FuelEnum {

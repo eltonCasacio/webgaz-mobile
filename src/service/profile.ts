@@ -1,16 +1,11 @@
-import API from './api';
-import {UserMocks} from '../mocks/User';
+import {UserProps} from '../types/User';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export async function loadUserData(
-  fuelStationId: number,
-): Promise<typeof UserMocks> {
+export async function loadUserData(): Promise<UserProps> {
   try {
-    // const result = await API.get(`client/${fuelStationId}`);
-    // if (result.status === 200) {
-    //   const {data} = result;
-    //   return data;
-    // }
-    return UserMocks;
+    const dataUser = await AsyncStorage.getItem('@webgaz:fullUser');
+    if (!dataUser) throw new Error('User not found');
+    return JSON.parse(dataUser);
   } catch (error) {
     console.error('Erro ao Carregar Preços', error);
   }

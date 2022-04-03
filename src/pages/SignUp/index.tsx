@@ -4,7 +4,7 @@ import {View} from 'react-native';
 
 import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
-import {CompanyProps} from '../../types/Company';
+import {UserProps} from '../../types/User';
 import {toast} from '../../types/Utils';
 
 import {useAuth} from '../../contexts/auth';
@@ -21,7 +21,7 @@ enum STEP {
 }
 
 const SignUp: React.FC = ({navigation}: any) => {
-  const [company, setCompany] = useState({} as CompanyProps);
+  const [company, setCompany] = useState({} as UserProps);
   const [step, setStep] = useState<STEP>();
   const {showToast} = useAuth();
 
