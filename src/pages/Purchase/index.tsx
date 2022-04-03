@@ -17,10 +17,10 @@ enum FuelEnum {
 
 enum ShippingEnum {
   RETIRADA = 'RETIRADA',
-  COLACADO = 'COLACADO',
+  COLOCADO = 'COLOCADO',
 }
 
-const PaymentTypeList = ['ANTECIPADO', 'À VISTA', '7 DIAS', '10 DIAS'];
+const PaymentTypeList = ['ANTECIPADO', 'AVISTA', '7DIAS', '10DIAS'];
 const currentDate = new Date();
 currentDate.setDate(currentDate.getDate() + 1);
 
@@ -108,11 +108,11 @@ const Purchase: React.FC = ({navigation}: any) => {
           </S.CardTitle>
           <S.Divider />
           <S.CardTitle
-            onPress={() => updateFields('deliveryType', ShippingEnum.COLACADO)}>
+            onPress={() => updateFields('deliveryType', ShippingEnum.COLOCADO)}>
             <S.CardTitleText>Colocado</S.CardTitleText>
 
             <S.RadioButton
-              active={ShippingEnum.COLACADO === purchase?.deliveryType}
+              active={ShippingEnum.COLOCADO === purchase?.deliveryType}
             />
           </S.CardTitle>
         </S.Card>
