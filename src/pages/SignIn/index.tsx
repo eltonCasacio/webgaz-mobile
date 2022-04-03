@@ -1,9 +1,6 @@
 import * as S from './styles';
 import React, {useEffect, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
-
 import {useAuth} from '../../contexts/auth';
-
 import MyLink from '../../components/MyLink';
 import Buttom from '../../components/Buttom';
 import {ScrollView} from 'react-native';
@@ -11,13 +8,10 @@ import {ScrollView} from 'react-native';
 const SignIn: React.FC = ({navigation}: any) => {
   const logo_com_nome = require('../../assets/logo-com-nome.png');
 
-  // const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [usernameError, setUsernameError] = useState(false);
-
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
-
   const [messageError, setMessageError] = useState<string>();
 
   function validate() {

@@ -9,7 +9,8 @@ const Profile: React.FC = ({navigation}: any) => {
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       async function run() {
-        const res = await loadUserData(1);
+        const res = await loadUserData();
+        console.log('DADOS USUARIO', res);
         setUser(res);
       }
       run();
@@ -74,9 +75,6 @@ const Profile: React.FC = ({navigation}: any) => {
             <S.CardSubTitleText>{user?.flag}</S.CardSubTitleText>
           </S.CardTitle>
           <S.Divider />
-
-          {/* <S.CardTitleText>Rede: {user?.networkName}</S.CardTitleText>
-          <S.Divider /> */}
 
           <S.CardTitle>
             <S.CardTitleText>Nome da rede</S.CardTitleText>
