@@ -20,9 +20,9 @@ export async function signup(params: UserProps): Promise<ResponseSignup> {
       url: 'SignIn',
     };
   } catch (error) {
-    console.debug('Erro ao criar empresa', JSON.stringify(error));
+    console.debug('Erro ao cadastrar empresa', JSON.stringify(error));
     return {
-      message: 'Houve um Erro ao Tentar Cadastrar a Empresa',
+      message: 'Houve um Erro ao Cadastrar a Empresa',
       url: 'SignUp',
     };
   }

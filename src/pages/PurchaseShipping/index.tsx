@@ -1,11 +1,13 @@
 import React from 'react';
 import {Buttom} from '../../components';
+import {useAuth} from '../../contexts/auth';
 import {ShippingCompany} from '../../types/ShippingCompany';
 
 import * as S from './styles';
 
 const PurchaseShipping: React.FC = ({route, navigation}: any) => {
   const {purchaseOrder} = route.params;
+  const {showToast} = useAuth();
   const [shipping, setShipping] = React.useState<ShippingCompany>();
   const [fieldsErrors, setFieldsErrors] = React.useState({
     shippingDriverCnh: false,
@@ -38,12 +40,18 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
   }
 
   function handleNextStep() {
-    if (validateFields()) {
-      navigation.navigate('confirmar-pedido', {
-        purchaseOrder: purchaseOrder,
-        shippingCompany: shipping,
+    if (!validateFields()) {
+      showToast({
+        type: 'error',
+        title: 'Preencha Todos Os Campos',
+        message: 'Os Campos com * são Obrigatórios',
       });
+      return
     }
+    navigation.navigate('confirmar-pedido', {
+      purchaseOrder: purchaseOrder,
+      shippingCompany: shipping,
+    });
   }
 
   return (
@@ -83,7 +91,9 @@ const PurchaseShipping: React.FC = ({route, navigation}: any) => {
             <S.InputLabel>CNH</S.InputLabel>
             <S.Input
               hasError={fieldsErrors?.shippingDriverCnh}
-              onChangeText={text => handleUpdateProps('shippingDriverCnh', text)}
+              onChangeText={text =>
+                handleUpdateProps('shippingDriverCnh', text)
+              }
               value={shipping?.shippingDriverCnh}
             />
           </S.InputCnpjCnh>
