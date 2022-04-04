@@ -10,6 +10,7 @@ export const loadPurchase = async (params: GetPurchase) => {
 export const confirmPurchase = async (params: ConfirmPurchaseProps) => {
   params.deliveryDate = formatDate(params.deliveryDate);
   try {
+    console.log('paramtros:::::', params)
     const response = await API.post('purchase-order', params);
     if (response.status === 201)
     return response.status;
