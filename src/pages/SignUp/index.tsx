@@ -1,6 +1,5 @@
 import * as S from './styles';
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
 
 import {Buttom, UseInfo, Address, Rede} from '../../components';
 import {signup} from '../../service/auth';
@@ -126,6 +125,7 @@ const SignUp: React.FC = ({navigation}: any) => {
       flag: '',
     });
   }
+  
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       clearForm();
