@@ -13,7 +13,6 @@ const PurchaseOrder = ({navigation}) => {
   React.useEffect(() => {
     async function run() {
       const result = await getPurchases(user.id);
-
       if (result.status === 200) {
         setPurchases(result?.data);
       }
@@ -26,11 +25,7 @@ const PurchaseOrder = ({navigation}) => {
       <S.Label>Pedidos</S.Label>
       <S.ScrollView>
         {purchases?.map(item => (
-          <CardPurchase
-            key={item.id}
-            data={item}
-            navigation={navigation}
-          />
+          <CardPurchase key={item.id} data={item} navigation={navigation} />
         ))}
       </S.ScrollView>
       <S.Goback onPress={() => navigation.goBack()}>

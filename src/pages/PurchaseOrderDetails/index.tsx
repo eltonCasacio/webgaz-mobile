@@ -12,7 +12,6 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
   const [shipping, setShipping] = React.useState<ShippingCompany>();
 
   React.useEffect(() => {
-    console.debug("purchaseOrder::", purchaseOrder)
     setPurchase(purchaseOrder);
   }, [purchaseOrder]);
 

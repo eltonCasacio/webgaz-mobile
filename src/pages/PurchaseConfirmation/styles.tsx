@@ -16,7 +16,9 @@ export const Content = styled.View`
 
 export const PurchaseWrapper = styled.View``;
 
-export const ShippingWrapper = styled.View``;
+export const ShippingWrapper = styled.View`
+  margin-top: 20px;
+`;
 
 export const Line = styled.View`
   flex-direction: row;
