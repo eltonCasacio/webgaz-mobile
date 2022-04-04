@@ -13,6 +13,7 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
 
   React.useEffect(() => {
     setPurchase(purchaseOrder);
+    setShipping(purchaseOrder.shippingCompany)
   }, [purchaseOrder]);
 
   return (
@@ -62,30 +63,30 @@ const PurchaseConfirmation: React.FC = ({route, navigation}: any) => {
           <S.Title>Detalhes da Transportadora</S.Title>
           <S.Column>
             <S.Description>Nome do Motorista</S.Description>
-            <S.Value>{shipping?.driverName || '--'}</S.Value>
+            <S.Value>{shipping?.shippingDriverName || '--'}</S.Value>
           </S.Column>
 
           <S.Column>
             <S.Description>Transportadora</S.Description>
-            <S.Value>{shipping?.name || '--'}</S.Value>
+            <S.Value>{shipping?.shippingName || '--'}</S.Value>
           </S.Column>
 
           <S.DoubleInLine>
             <S.Line>
               <S.Description>CNPJ </S.Description>
-              <S.Value>{shipping?.cnpj || '--'}</S.Value>
+              <S.Value>{shipping?.shippingCnpj || '--'}</S.Value>
             </S.Line>
 
             <S.Line>
               <S.Description>CNH </S.Description>
-              <S.Value>{shipping?.cnh || '--'}</S.Value>
+              <S.Value>{shipping?.shippingDriverCnh || '--'}</S.Value>
             </S.Line>
           </S.DoubleInLine>
 
           <S.Line>
             <S.Description>
               Placa
-              <S.Value> {shipping?.plateNumber || '--'}</S.Value>
+              <S.Value> {shipping?.shippingPlateNumber || '--'}</S.Value>
             </S.Description>
           </S.Line>
         </S.ShippingWrapper>
