@@ -96,6 +96,7 @@ const SignUp: React.FC = ({navigation}: any) => {
     if (!validateConfirm()) return;
 
     company.isNetwork = company.networkName ? 'SIM' : 'NÃO';
+    console.debug("FLAG????", company);
     const res = await signup(company);
     showToast({
       type: res.url === 'SignIn' ? 'success' : 'error',
