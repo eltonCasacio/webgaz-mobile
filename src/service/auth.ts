@@ -8,7 +8,7 @@ export async function signIn(params: SignInProps): Promise<ResponseSignIn> {
     return data;
   } catch (error) {
     console.debug('SERVICE::SIGNIN::Erro', JSON.stringify(error));
-    return error?.response?.data;
+    return error;
   }
 }
 

@@ -10,7 +10,6 @@ const Profile: React.FC = ({navigation}: any) => {
     const unsubscribe = navigation.addListener('focus', () => {
       async function run() {
         const res = await loadUserData();
-        console.log('DADOS USUARIO', res);
         setUser(res);
       }
       run();

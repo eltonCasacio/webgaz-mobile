@@ -1,6 +1,6 @@
 
 ###
-GET  http://44.200.156.154:8080/api/health
+GET  http://192.168.15.6:8080/api/health
 
 ###
 POST http://192.168.15.6:8080/api/signup
@@ -24,7 +24,8 @@ Content-Type: application/json
 }
 
 ###
-POST http://192.168.15.5:8080/api/signin
+
+POST http://44.200.156.154:8080/api/signin
 Content-Type: application/json
 
 {

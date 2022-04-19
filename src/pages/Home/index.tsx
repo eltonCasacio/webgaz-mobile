@@ -77,9 +77,9 @@ const Home: React.FC = ({navigation}: any) => {
           </S.CardPriceDateItem>
 
           <S.CardPriceDateItem>
-            <S.CardPriceDateHourLabel>dia/mes</S.CardPriceDateHourLabel>
+            <S.CardPriceDateHourLabel>dia</S.CardPriceDateHourLabel>
             <S.CardPriceDateHour>
-              {new Date().toDateString().slice(3, -4)}
+              {new Date().toDateString().slice(3, -4).substring(4)}
             </S.CardPriceDateHour>
           </S.CardPriceDateItem>
         </S.CardPriceDate>

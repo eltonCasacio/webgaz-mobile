@@ -1,17 +1,11 @@
 export function formatDate(date: any) {
   const dateFormated = new Date(date);
   const day = dateFormated.getDate();
-  const month = dateFormated.getMonth();
+  const month = dateFormated.getMonth() + 1;
   const year = dateFormated.getFullYear();
 
-  return `${day}/${month + 1}/${year}`;
-}
+  const formatedDay = day < 10 ? `0${day}` : `${day}`;
+  const formatedMonth = month < 10 ? `0${month}` : `${month}`;
 
-export function formatDateUs(date: any) {
-  const dateFormated = new Date(date);
-  const day = dateFormated.getDate();
-  const month = dateFormated.getMonth();
-  const year = dateFormated.getFullYear();
-
-  return `${year}-${month + 1}-${day}`;
+  return `${formatedDay}/${formatedMonth}/${year}`;
 }

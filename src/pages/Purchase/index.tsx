@@ -44,7 +44,7 @@ const Purchase: React.FC = ({navigation}: any) => {
 
   async function handleNextStep() {
     purchase.totalPrice = price;
-    purchase.deliveryDate = formatDate(purchase.deliveryDate);
+    purchase.deliveryDate;
     if (validate()) {
       const linkTo =
         purchase.deliveryType === ShippingEnum.RETIRADA
@@ -68,10 +68,13 @@ const Purchase: React.FC = ({navigation}: any) => {
   };
 
   async function updatePrice(params: GetPurchase) {
-    console.debug("updatePrice", params);
     let {price} = await loadPurchase(params);
     price = price || 0;
     setPrice(price * purchase?.qtdLiters);
+  }
+
+  function showDatePicker() {
+    setShow(true);
   }
 
   useEffect(() => {
@@ -146,7 +149,7 @@ const Purchase: React.FC = ({navigation}: any) => {
 
         <S.PaymentInputWrapper>
           <S.PaymentText>Data da Entrega</S.PaymentText>
-          <S.PaymentInputDate onPress={() => setShow(true)}>
+          <S.PaymentInputDate onPress={showDatePicker}>
             <S.PaymentDateText>
               {formatDate(new Date(purchase?.deliveryDate))}
             </S.PaymentDateText>
@@ -164,11 +167,7 @@ const Purchase: React.FC = ({navigation}: any) => {
           )}
         </S.PaymentInputWrapper>
       </S.Payment>
-        <Buttom
-          color="buttonDefault"
-          title="PROXIMO"
-          callback={handleNextStep}
-        />
+      <Buttom color="buttonDefault" title="PROXIMO" callback={handleNextStep} />
     </S.Wrapper>
   );
 };
