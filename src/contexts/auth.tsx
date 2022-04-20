@@ -6,7 +6,6 @@ import * as auth from '../service/auth';
 import api from '../service/api';
 import {User, SignInProps as SignInProps} from '../types/Auth';
 import {toast as ToastType} from '../types/Utils';
-import {Alert} from 'react-native';
 
 interface AuthContextData {
   signed: boolean;

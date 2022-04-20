@@ -96,13 +96,22 @@ const SignUp: React.FC = ({navigation}: any) => {
     if (!validateConfirm()) return;
 
     company.isNetwork = company.networkName ? 'SIM' : 'NÃO';
-    const res = await signup(company);
-    showToast({
-      type: res.url === 'SignIn' ? 'success' : 'error',
-      title: 'CADASTRAR EMPRESA',
-      message: res.message,
-    });
-    navigation.navigate(res.url);
+
+    try {
+      const res = await signup(company);
+      showToast({
+        type: res.url === 'SignIn' ? 'success' : 'error',
+        title: 'CADASTRAR EMPRESA',
+        message: res.message,
+      });
+      navigation.navigate(res.url);
+    } catch (error) {
+      showToast({
+        type: 'error',
+        title: 'CADASTRAR EMPRESA',
+        message: JSON.stringify(error),
+      });
+    }
   };
 
   function clearForm() {
@@ -121,11 +130,11 @@ const SignUp: React.FC = ({navigation}: any) => {
       fuelStationNumber: '',
       telephone: '',
       cnpj: '',
-      email:'',
+      email: '',
       flag: '',
     });
   }
-  
+
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       clearForm();
