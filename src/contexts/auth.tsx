@@ -24,24 +24,31 @@ export const AuthProvider: React.FC = ({children}) => {
   const [user, setUser] = useState<User>();
 
   async function signIn(params: SignInProps): Promise<User> {
-    const response = await auth.signIn(params);
+    try {
+      const response = await auth.signIn(params);
+      if (response?.token) {
+        api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
+        let {id, name, status} = {...response.fuelStation};
 
-    if (response?.token) {
-      api.defaults.headers['Authorizarion'] = `Bearer ${response.token}`;
-      let {id, name, status} = {...response.fuelStation};
-
-      await AsyncStorage.setItem(
-        '@webgaz:fullUser',
-        JSON.stringify(response.fuelStation),
-      );
-      await AsyncStorage.setItem('@webgaz:token', response.token);
-      await AsyncStorage.setItem(
-        '@webgaz:user',
-        JSON.stringify({id, name, status}),
-      );
-      return {id, name, status};
+        await AsyncStorage.setItem(
+          '@webgaz:fullUser',
+          JSON.stringify(response.fuelStation),
+        );
+        await AsyncStorage.setItem('@webgaz:token', response.token);
+        await AsyncStorage.setItem(
+          '@webgaz:user',
+          JSON.stringify({id, name, status}),
+        );
+        return {id, name, status};
+      }
+      return;
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: error?.message,
+        text2: error,
+      });
     }
-    return;
   }
 
   async function signOut() {

@@ -1,9 +1,9 @@
 
 ###
-GET  http://192.168.15.6:8080/api/health
+GET https://api.webgazapp.com/api/health
 
 ###
-POST http://192.168.15.6:8080/api/signup
+POST https://api.webgazapp.com/api/signup
 Content-Type: application/json
 
 {
@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 
-POST http://44.200.156.154:8080/api/signin
+POST https://api.webgazapp.com/api/signin
 Content-Type: application/json
 
 {

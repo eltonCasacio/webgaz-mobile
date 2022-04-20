@@ -3,13 +3,8 @@ import {ResponseSignup, SignInProps, ResponseSignIn} from '../types/Auth';
 import {UserProps} from '../types/User';
 
 export async function signIn(params: SignInProps): Promise<ResponseSignIn> {
-  try {
-    const {data} = await API.post('signin', params);
-    return data;
-  } catch (error) {
-    console.debug('SERVICE::SIGNIN::Erro', JSON.stringify(error));
-    return error;
-  }
+  const {data} = await API.post('signin', params);
+  return data;
 }
 
 export async function signup(params: UserProps): Promise<ResponseSignup> {
@@ -21,14 +16,14 @@ export async function signup(params: UserProps): Promise<ResponseSignup> {
     };
   } catch (error) {
     console.debug('Erro ao cadastrar empresa', JSON.stringify(error.response));
-    let message = ''
-    
-    if(error?.status === 400){
-      message = error.response.data.message
+    let message = '';
+
+    if (error?.status === 400) {
+      message = error.response.data.message;
     }
 
-    message =  'Erro no servidor';
-   
+    message = 'Erro no servidor';
+
     return {
       message,
       url: 'SignUp',

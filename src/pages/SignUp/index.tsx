@@ -109,7 +109,7 @@ const SignUp: React.FC = ({navigation}: any) => {
       showToast({
         type: 'error',
         title: 'CADASTRAR EMPRESA',
-        message: JSON.stringify(error),
+        message: error,
       });
     }
   };
